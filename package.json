@@ -1,12 +1,20 @@
 {
-  "name": "angular-template",
-  "version": "0.0.0",
+  "name": "keycloakify-starter-angular",
+  "version": "0.0.1",
+  "author": "",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && rimraf build/keycloak-resources",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-keycloak-theme": "ng build && keycloakify"
+  },
+  "keycloakify": {
+    "themeName": "keycloakify-starter",
+    "extraThemeProperties": [
+      "foo=bar"
+    ]
   },
   "private": true,
   "dependencies": {
@@ -18,21 +26,39 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "evt": "^2.5.7",
+    "keycloakify": "^9.6.1",
+    "oidc-spa": "^4.2.1",
+    "powerhooks": "^1.0.8",
     "rxjs": "~7.8.0",
+    "tsafe": "^1.6.6",
     "tslib": "^2.3.0",
+    "zod": "^3.22.4",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^17.0.2",
     "@angular-devkit/build-angular": "^17.3.0",
     "@angular/cli": "^17.3.0",
     "@angular/compiler-cli": "^17.3.0",
+    "@babel/core": "^7.24.4",
+    "@babel/plugin-proposal-decorators": "^7.24.1",
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-typescript": "^7.24.1",
     "@types/jasmine": "~5.1.0",
+    "@types/node": "^15.3.1",
+    "babel-loader": "^9.1.3",
+    "copy-webpack-plugin": "^12.0.2",
+    "html-loader": "^5.0.0",
+    "html-webpack-plugin": "^5.6.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "rimraf": "^5.0.5",
+    "style-loader": "^4.0.0",
     "typescript": "~5.4.2"
   }
 }

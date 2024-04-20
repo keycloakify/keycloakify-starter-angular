@@ -1,0 +1,13 @@
+<div *ngIf="isReady" [ngClass]="getClassName('kcLoginClass')">
+  <div id="kc-header" [ngClass]="getClassName('kcHeaderClass')">
+    <div id="kc-header-wrapper" [ngClass]="getClassName('kcHeaderWrapperClass')">
+      bla
+    </div>
+  </div>
+
+  <div [ngClass]="getClassName('kcFormCardClass')" [class.kcFormCardAccountClass]="displayWide">
+    <header [ngClass]="getClassName('kcFormHeaderClass')">
+      <!-- Hier geht der restliche HTML-Inhalt des Templates -->
+    </header>
+  </div>
+</div>

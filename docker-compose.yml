@@ -1,0 +1,17 @@
+version: '3.8'
+
+networks:
+  test-net:
+
+services:
+  keycloak-testing-container:
+    image: quay.io/keycloak/keycloak:23.0.6
+    command: start-dev --features=declarative-user-profile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./build_keycloak/target/keycloakify-starter-keycloak-theme-0.0.1.jar:/opt/keycloak/providers/keycloakify-starter-keycloak-theme-0.0.1.jar
+      - ./src/main/resources/theme/keycloakify-starter:/opt/keycloak/themes/keycloakify-starter:rw
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin

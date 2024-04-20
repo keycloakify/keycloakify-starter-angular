@@ -15,11 +15,27 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/angular_template",
+            "indexTransform": "./index-html-transform.js",
+            "customWebpackConfig": {
+              "path": "./extra-webpack.config.js",
+              "mergeRules": {
+                "output": "replace",
+                "entry": "replace",
+                "module.rules": "append",
+                "plugins": "append",
+                "optimization": "replace",
+                "devServer": "replace"
+              },
+              "optimization": {
+                "scripts": true,
+                "styles": false
+              }
+            },
+            "outputPath": "build/",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -35,31 +51,21 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "outputHashing": "all"
-            },
+
             "development": {
-              "optimization": false,
+              "optimization": true,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "outputHashing": "all"
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+
+          },
           "configurations": {
             "production": {
               "buildTarget": "angular_template:build:production"
@@ -97,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "554089c3-6fb7-4186-a06c-1b9f2e3be19c"
   }
 }

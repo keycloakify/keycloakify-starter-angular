@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { KcContext } from "../keycloak-theme/login/kcContext";
+import { KcAppComponent } from "../keycloak-theme/login/kc-app/kc-app.component";
+import { RouterModule, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular_template';
+  constructor(private router: Router, kcContext: KcContext) {
+    if (kcContext !== undefined) {
+      this.router.navigate(['/login']);
+    }
+  }
+
+
 }
