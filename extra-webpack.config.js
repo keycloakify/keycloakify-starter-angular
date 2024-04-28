@@ -11,6 +11,9 @@ module.exports = {
     clean:true,
 
   },
+  optimization: {
+    "runtimeChunk": false
+  },
 
   module: {
     rules: [
@@ -53,34 +56,4 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    before: function(app, server, compiler) {
-      console.log('Webpack DevServer is running');
-    },
-    static: {
-      directory: path.resolve(__dirname, 'build/static'),
-    },
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': '*',
-      'Access-Control-Allow-Headers': '*',
-    },
-    port: 3001,
-    hot: true,
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-
-      filename: '../css/[name].[contenthash].css',
-    }),
-    new webpack.DefinePlugin({
-      'process.env.PUBLIC_URL': JSON.stringify("/"),
-    }),
-
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'src/assets', to: '../media' },
-      ],
-    }),
-  ],
 };

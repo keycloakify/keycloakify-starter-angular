@@ -62,19 +62,10 @@
           "defaultConfiguration": "development"
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:browser",
-          "options": {
-
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "angular_template:build:production"
-            },
-            "development": {
-              "buildTarget": "angular_template:build:development"
+          "builder": "@angular-devkit/build-angular:dev-server",
+            "options": {
+              "browserTarget": "angular_template:build"
             }
-          },
-          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
