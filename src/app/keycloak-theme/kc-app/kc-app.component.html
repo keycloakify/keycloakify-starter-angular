@@ -1,0 +1,7 @@
+
+<ng-container [ngSwitch]="kcContext.pageId">
+  <app-login *ngSwitchCase="'login.ftl'"
+             [kcContext]="kcContext"
+             [doUseDefaultCss]=true
+             [classes]="classes"></app-login>
+  </ng-container>

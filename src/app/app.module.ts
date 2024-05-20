@@ -1,26 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
-import { AppComponent } from './app.component';
-import {KcAppComponent} from "../keycloak-theme/login/kc-app/kc-app.component";
-import {LoginComponent} from "../keycloak-theme/login/login/login.component";
-import {TemplateComponent} from "../keycloak-theme/login/Template";
 import { RouterModule } from '@angular/router';
+import {KcAppComponent} from "./keycloak-theme/kc-app/kc-app.component";
+import {KcContext} from "keycloakify/login/kcContext";
+import {APP_BASE_HREF} from "@angular/common";
+import { AppComponent } from './app.component';
+import {LoginComponent} from "./keycloak-theme/login/login.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     KcAppComponent,
     LoginComponent,
-    TemplateComponent
-    // Declare other Angular components for different pages
   ],
   imports: [
     BrowserModule,
-    RouterModule
   ],
-  providers: [],
+  providers: [
+    {provide: APP_BASE_HREF, useValue: '/'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

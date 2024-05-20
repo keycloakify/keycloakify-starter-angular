@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
+import { LoginComponent } from './keycloak-theme/login/login.component';
+import {PageProps} from "keycloakify/login";
+
+
+
 
 const routes: Routes = [
-  {
-    path: 'login',
-    loadChildren: () => import('../keycloak-theme/login/kc-app/kc-app.component').then(m => m.KcAppComponent)
-  },
-  // andere Routen...
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({
