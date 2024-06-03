@@ -1,4 +1,5 @@
 module.exports = (targetOptions, indexHtml) => {
+  //we need this because ng build is not generating the correct paths for the static files in index.html
   const scriptsToTransform = ['runtime', 'main'];
 
   scriptsToTransform.forEach(scriptName => {

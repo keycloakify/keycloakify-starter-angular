@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "kc",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
@@ -23,7 +23,6 @@
               "mergeRules": {
                 "output": "replace",
                 "entry": "replace",
-                "module.rules": "append",
                 "plugins": "append",
                 "optimization": "replace",
                 "devServer": "replace"
@@ -43,7 +42,16 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "src/login/assets",
+                "output": "/static/media"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/fonts",
+                "output": "/fonts/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -51,7 +59,6 @@
             "scripts": []
           },
           "configurations": {
-
             "development": {
               "optimization": true,
               "extractLicenses": false,
@@ -62,40 +69,24 @@
           "defaultConfiguration": "development"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-            "options": {
-              "browserTarget": "angular_template:build"
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "angular_template:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular_template:build:production"
+            },
+            "development": {
+              "browserTarget": "angular_template:build:development"
             }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "angular_template:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
-          }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }
   },
   "cli": {
-    "analytics": "554089c3-6fb7-4186-a06c-1b9f2e3be19c"
+    "analytics": false
   }
 }

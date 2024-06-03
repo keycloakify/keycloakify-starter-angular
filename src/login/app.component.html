@@ -1,0 +1,67 @@
+<!-- template.component.html -->
+<div class="root">
+  <div [class]="getClassName('kcLoginClass') ">
+    <div id="kc-header" [class]="getClassName('kcHeaderClass')">
+      <div
+        id="kc-header-wrapper"
+        [class]="getClassName('kcHeaderWrapperClass')"
+      >
+        <img src="{{PUBLIC_URL}}/static/media/keycloakify-logo.png" alt="Keycloakify logo" style="width: 50px;"/>
+      </div>
+    </div>
+
+    <div [class]="getClassName('kcFormCardClass')">
+      <header [class]="getClassName('kcFormHeaderClass')">
+        <!-- Locale switcher -->
+        <div id="kc-locale"
+             *ngIf="kcContext.realm.internationalizationEnabled && kcContext.locale.supported.length > 1">
+          <div id="kc-locale-wrapper" [class]="getClassName('kcLocaleWrapperClass')">
+            <div [class]="getClassName('kc-dropdown')" id="kc-locale-dropdown">
+              <a href="#" id="kc-current-locale-link">
+                <!-- {{ i18n.labelBySupportedLanguageTag[i18n?.currentLanguageTag] }} -->
+              </a>
+              <!--
+              <ul>
+                <li *ngFor="let lang of i18n.labelBySupportedLanguageTag" [class]="getClassName('kc-dropdown-item')">
+                  <a href="#" (click)="i18n.changeLocale(i18n.labelBySupportedLanguageTag)">
+                    {{ lang }}
+                  </a>
+                </li>
+              </ul>
+              -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Header content -->
+        <h1 id="kc-page-title">{{ kcContext.headerNode }}</h1>
+      </header>
+
+      <div id="kc-content">
+        <div id="kc-content-wrapper">
+          <!-- Message display -->
+          <div *ngIf="kcContext.displayMessage && kcContext.message"
+               [class]="['alert', 'alert-' + kcContext.message.type]">
+          <span
+            [class]="getClassName('kcFeedback' + kcContext.message.type.charAt(0).toUpperCase() + kcContext.message.type.slice(1) + 'Icon')"></span>
+            <span class="kc-feedback-text" [innerHTML]="kcContext.message.summary"></span>
+          </div>
+
+          <!-- Content -->
+          <ng-container [ngSwitch]="kcContext.pageId">
+            <kc-login *ngSwitchCase="'login.ftl'" [kcContext]="kcContext"></kc-login>
+          </ng-container>
+
+          <!-- Info display -->
+          <div id="kc-info" *ngIf="kcContext.displayInfo" [class]="getClassName('kcSignUpClass')">
+            <div id="kc-info-wrapper" [class]="getClassName('kcInfoAreaWrapperClass')">
+              <!-- Info content goes here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

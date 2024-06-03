@@ -6,7 +6,7 @@ networks:
 services:
   keycloak-testing-container:
     image: quay.io/keycloak/keycloak:23.0.6
-    command: start-dev --features=declarative-user-profile
+    command: start-dev --features=declarative-user-profile --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false --spi-theme-cache-templates=false
     ports:
       - "8080:8080"
     volumes:
