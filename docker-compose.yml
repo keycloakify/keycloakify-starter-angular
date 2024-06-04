@@ -11,7 +11,7 @@ services:
       - "8080:8080"
     volumes:
       - ./build_keycloak/target/keycloakify-starter-keycloak-theme-0.0.1.jar:/opt/keycloak/providers/keycloakify-starter-keycloak-theme-0.0.1.jar
-      - ./src/main/resources/theme/keycloakify-starter:/opt/keycloak/themes/keycloakify-starter:rw
+      - ./build_keycloak/src/main/resources/theme/keycloakify-starter:/opt/keycloak/themes/keycloakify-starter:rw
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
