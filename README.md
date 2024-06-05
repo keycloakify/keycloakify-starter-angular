@@ -15,9 +15,10 @@ The application is operational with the Login Page in development and assets fun
 - **Font Paths**: Unable to use BasePath for fonts, the paths have been set manually in `index.html`.
 - **KcContext**: It might make sense to make this an injectable service
 - **KC styles**: I would usually set the global styles in Angular json but I wasn't sure about the paths so I set it in runtime.
+- **I18n**: needs to be implemented
 ## Structure
 
 - The template component is not implemented; `app-component` is used instead.
 - Consider making login and related features as submodules, similar to the React starter project.
 
-
+![image](https://github.com/kathari00/keycloakify-starter-angular/assets/42547712/16a25fb9-383c-4692-b6a5-59386a93053e)
