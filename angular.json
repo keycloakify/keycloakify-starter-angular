@@ -55,33 +55,14 @@
             ],
             "styles": [
               "src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "development": {
-              "optimization": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "outputHashing": "all"
-            }
-          },
-          "defaultConfiguration": "development"
+            ]
+          }
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "angular_template:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "angular_template:build:production"
-            },
-            "development": {
-              "browserTarget": "angular_template:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
+          }
         }
       }
     }

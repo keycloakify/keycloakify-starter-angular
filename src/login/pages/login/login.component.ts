@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ClassNameService} from "../../service/class-name.service";
+import {ClassNameService} from "../../services/class-name.service";
 
 @Component({
   selector: 'kc-login',

@@ -1,27 +1,23 @@
-# AngularTemplate
+# Angular Keycloakify Starter Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+## Overview
 
-## Development server
+This repository is an Angular-based starter project tailored for Keycloakify integration. The Angular build process has been adjusted to ensure Keycloakify functions correctly within the framework.
+The application is operational with the Login Page in development and assets functioning correctly.
+## Key Adjustments
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Webpack Configuration**: A custom webpack config was necessary to accommodate Keycloakify.
+- **Angular.json Changes**: The build configuration in `angular.json` has been altered to align with Keycloakify's requirements.
+- **Index Transform**: Angular's relative path generation for `index.html` led to file path issues for main.js/runtime.js and style.css. That's why index transform (option of custom webpack builder) was used to manually adjust the path. There might be other ways to solve this.
+## Development Notes
 
-## Code scaffolding
+- **Service Mocks**: The `getClass` function is currently mocked under services due to unfamiliarity with the React hook concept.
+- **Font Paths**: Unable to use BasePath for fonts, the paths have been set manually in `index.html`.
+- **KcContext**: It might make sense to make this an injectable service
+- **KC styles**: I would usually set the global styles in Angular json but I wasn't sure about the paths so I set it in runtime.
+## Structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- The template component is not implemented; `app-component` is used instead.
+- Consider making login and related features as submodules, similar to the React starter project.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

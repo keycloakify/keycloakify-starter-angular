@@ -38,16 +38,12 @@
             type="checkbox"
             [checked]="kcContext.login.rememberMe === 'on'"
           />
-          Erinner mich Fotze
+          Login merken
         </label>
       </div>
-    </div>
-    <div [class]="getClassName('kcFormOptionsWrapperClass')">
-      <span *ngIf="kcContext.resetPasswordAllowed">
-        <a tabIndex="5" [href]="kcContext.url.loginResetCredentialsUrl">
-          passwort vergesnne
-        </a>
-      </span>
+      <div [class]="getClassName('kcFormOptionsWrapperClass')" *ngIf="kcContext.realm.resetPasswordAllowed ">
+        <span> <a tabIndex={5} [href]="kcContext.url.loginResetCredentialsUrl"> Passwort vergessen </a> </span>
+      </div>
     </div>
   </div>
   <div id="kc-form-buttons" [class]="getClassName('kcFormGroupClass')">
