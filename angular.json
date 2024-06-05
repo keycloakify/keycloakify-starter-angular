@@ -23,13 +23,7 @@
               "mergeRules": {
                 "output": "replace",
                 "entry": "replace",
-                "plugins": "append",
-                "optimization": "replace",
-                "devServer": "replace"
-              },
-              "optimization": {
-                "scripts": true,
-                "styles": false
+                "plugins": "append"
               }
             },
             "outputPath": "build/",
