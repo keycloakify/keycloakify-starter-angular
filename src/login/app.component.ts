@@ -15,8 +15,7 @@ import {ClassNameService} from "./services/class-name.service";
 })
 
 export class AppComponent implements OnInit {
-  kcContext: any;
-
+  protected readonly kcContext = kcContext;
   protected readonly PUBLIC_URL = PUBLIC_URL;
 
   // This is like adding classes to theme.properties
@@ -30,7 +29,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.kcContext = kcContext;
     if (this.kcContext) {
       this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`);
       this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`);
