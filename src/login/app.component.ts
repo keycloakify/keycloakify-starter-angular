@@ -8,13 +8,14 @@ import {DynamicStyleLoaderService} from "./services/dynamic-style-loader.service
 import {ClassNameService} from "./services/class-name.service";
 import { LoginComponent } from './pages/login/login.component';
 import { NgIf, NgSwitch } from '@angular/common';
+import { RegisterComponent } from './pages/register/register.component';
 
 @Component({
     selector: 'kc-app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     standalone: true,
-    imports: [LoginComponent],
+    imports: [LoginComponent, RegisterComponent],
     providers: [ClassNameService, DynamicStyleLoaderService],
 })
 
@@ -40,7 +41,6 @@ export class AppComponent implements OnInit {
       this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesPath}/css/login.css`);
     }
 
-    console.log("blaaaaaaa", kcContext);
   }
 
   getClassName(classKey: string): string {
