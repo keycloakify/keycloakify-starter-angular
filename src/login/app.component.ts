@@ -3,15 +3,19 @@ import {PageProps} from "keycloakify/login";
 import {PUBLIC_URL} from "keycloakify/PUBLIC_URL";
 
 //It would maybe make sense to make kcContext and i18n injectable services
-import {KcContext, kcContext} from "./services/kcContext";
-import {I18n, useI18n} from "./services/i18n";
+import { kcContext} from "./services/kcContext";
 import {DynamicStyleLoaderService} from "./services/dynamic-style-loader.service";
 import {ClassNameService} from "./services/class-name.service";
+import { LoginComponent } from './pages/login/login.component';
+import { NgIf, NgSwitch } from '@angular/common';
 
 @Component({
-  selector: 'kc-app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'kc-app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: true,
+    imports: [LoginComponent],
+    providers: [ClassNameService, DynamicStyleLoaderService],
 })
 
 export class AppComponent implements OnInit {
@@ -35,6 +39,8 @@ export class AppComponent implements OnInit {
       this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/lib/zocial/zocial.css`);
       this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesPath}/css/login.css`);
     }
+
+    console.log("blaaaaaaa", kcContext);
   }
 
   getClassName(classKey: string): string {

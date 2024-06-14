@@ -1,10 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ClassNameService} from "../../services/class-name.service";
+import {CommonModule} from '@angular/common';
 
 @Component({
-  selector: 'kc-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'kc-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: true,
+    imports: [CommonModule],
 })
 export class LoginComponent implements OnInit {
   @Input() kcContext: any;
@@ -16,11 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   getClassName(classKey: string): string {
-    console.log("getClassName", classKey, this.classNameService.getClassName(classKey));
     return this.classNameService.getClassName(classKey);
   }
 
-  onSubmit() {
-    console.log("submit")
-  }
 }

@@ -36,6 +36,8 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+/build_keycloak
+/build
 
 # System files
 .DS_Store
