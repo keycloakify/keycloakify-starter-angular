@@ -1,52 +1,44 @@
-import {Component, OnInit} from '@angular/core';
-import {PageProps} from "keycloakify/login";
+import {Component, Input, OnInit} from '@angular/core';
 import {PUBLIC_URL} from "keycloakify/PUBLIC_URL";
 
 //It would maybe make sense to make kcContext and i18n injectable services
-import { kcContext} from "./services/kcContext";
 import {DynamicStyleLoaderService} from "./services/dynamic-style-loader.service";
 import {ClassNameService} from "./services/class-name.service";
 import { LoginComponent } from './pages/login/login.component';
-import { NgIf, NgSwitch } from '@angular/common';
 import { RegisterComponent } from './pages/register/register.component';
-
+import { I18n, useI18n } from './services/i18n';
+import { KcContext } from './services/kcContext';
+import { DeepPartial } from 'keycloakify/tools/DeepPartial';
+import { KcContextService } from './services/kc-context.service';
 @Component({
     selector: 'kc-app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     standalone: true,
     imports: [LoginComponent, RegisterComponent],
-    providers: [ClassNameService, DynamicStyleLoaderService],
+    providers: [ClassNameService, DynamicStyleLoaderService, KcContextService],
 })
 
 export class AppComponent implements OnInit {
-  protected readonly kcContext = kcContext;
-  protected readonly PUBLIC_URL = PUBLIC_URL;
+  protected kcContext!: KcContext;
+  protected i18n!: I18n;
 
-  // This is like adding classes to theme.properties
-  // https://github.com/keycloak/keycloak/blob/11.0.3/themes/src/main/resources/theme/keycloak/login/theme.properties
-  classes: PageProps<any, any>["classes"] = {
-    // NOTE: The classes are defined in ./KcApp.css
-    "kcHeaderWrapperClass": "my-color my-font"
-  };
+  @Input() pageId!: KcContext['pageId'];
+  @Input() kcContextOverrides?: DeepPartial<KcContext>;
 
-  constructor(private dynamicStyleLoader: DynamicStyleLoaderService, private classNameService: ClassNameService) {
+
+
+  constructor(private dynamicStyleLoader: DynamicStyleLoaderService, private classNameService: ClassNameService, private kcContextService: KcContextService) {
   }
 
   ngOnInit() {
-    if (this.kcContext) {
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`);
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`);
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/lib/zocial/zocial.css`);
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesPath}/css/login.css`);
-    }
-
+    this.kcContext = this.kcContextService.getKcContext(this.pageId, this.kcContextOverrides);
+    console.log("blaaaaaaa", this.kcContext);
   }
 
-  getClassName(classKey: string): string {
-    return this.classNameService.getClassName(classKey);
-  }
-
+  getClassName(name: any) {
+    return this.classNameService.getClassName(name);
+  } 
 }
 
 
