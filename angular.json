@@ -41,7 +41,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "./src/login/assets",
+                "input": "./src/assets",
                 "output": "./static/media"
               }
             ],

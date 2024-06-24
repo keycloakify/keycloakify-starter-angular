@@ -1,0 +1,80 @@
+<div class="root">
+  <div [class]="('kcLoginClass' | kcClass)">
+    <div id="kc-header" [class]="('kcHeaderClass' | kcClass)">
+      <div id="kc-header-wrapper" [class]="('kcHeaderWrapperClass' | kcClass)">
+        <img src="{{publicUrl}}/static/media/keycloakify-logo.png" alt="Keycloakify logo" style="width: 50px;" />
+      </div>
+    </div>
+
+    @if(kcContext) {
+    <div [class]="('kcFormCardClass' | kcClass)">
+      <header [class]="('kcFormHeaderClass' | kcClass)">
+        <!-- Locale switcher -->
+        @if(kcContext.realm.internationalizationEnabled) {
+        <div id="kc-locale">
+          <div id="kc-locale-wrapper" [class]="('kcLocaleWrapperClass' | kcClass)">
+            <div [class]="('kc-dropdown' | kcClass)" id="kc-locale-dropdown">
+              <a href="#" id="kc-current-locale-link">
+                <!-- {{ i18n.labelBySupportedLanguageTag[i18n?.currentLanguageTag] }} -->
+              </a>
+              <!--
+                <ul>
+                  <li *ngFor="let lang of i18n.labelBySupportedLanguageTag" [class]="('kc-dropdown-item' | kcClass)">
+                    <a href="#" (click)="i18n.changeLocale(i18n.labelBySupportedLanguageTag)">
+                      {{ lang }}
+                    </a>
+                  </li>
+                </ul>
+                -->
+            </div>
+          </div>
+        </div>
+        }
+
+        <!-- Header content -->
+        @switch (kcContext.pageId) {
+        @case ('login.ftl') {
+        <h1 id="kc-page-title">Einloggen</h1>
+        }
+        @case ('register.ftl') {
+        <h1 id="kc-page-title">Registrieren</h1>
+        }
+        }
+      </header>
+
+      <div id="kc-content">
+        <div id="kc-content-wrapper">
+          <!-- Message display -->
+          @if(kcContext.message) {
+          <div [class]="['alert', 'alert-' + kcContext.message.type | kcClass]">
+            <span
+              [class]="('kcFeedback' + kcContext.message.type.charAt(0).toUpperCase() + kcContext.message.type.slice(1) + 'Icon' | kcClass)"></span>
+            <span class="kc-feedback-text" [innerHTML]="kcContext.message.summary"></span>
+          </div>
+          }
+
+          <!-- Content -->
+          <router-outlet name="login"></router-outlet>
+          <!-- Info display -->
+
+
+          <div id="kc-info" [class]="('kcSignUpClass' | kcClass)">
+            <div id="kc-info-wrapper" [class]="('kcInfoAreaWrapperClass' | kcClass)">
+              @switch (kcContext.pageId) {
+              @case ('login.ftl') {
+              <div id="kc-registration">
+                <span> Noch keinen Account?
+                  <a tabIndex={6} [href]="kcContext.url.registrationUrl">
+                    Jetzt Registrieren
+                  </a>
+                </span>
+              </div>
+              }
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
