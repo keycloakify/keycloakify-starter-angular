@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { TemplateComponent } from './template/template.component';
+import { TemplateComponent } from './template.component';
 
 export const LOGIN_ROUTES: Route[] = [
   {
@@ -7,7 +7,7 @@ export const LOGIN_ROUTES: Route[] = [
     component: TemplateComponent,
     children: [
       {
-        path: '',
+        path: 'login',
         outlet: "login",
         loadComponent: () =>
           import('./login/login.component').then((m) => m.LoginComponent),
@@ -18,6 +18,23 @@ export const LOGIN_ROUTES: Route[] = [
         loadComponent: () =>
           import('./register/register.component').then((m) => m.RegisterComponent),
       },
+      {
+        path: "terms",
+        outlet: "login",
+        loadComponent: () =>
+          import('./terms/terms.component').then((m) => m.TermsComponent),
+      },
+      {
+        path: "error",
+        outlet: "login",
+        loadComponent: () =>
+          import('./error/error.component').then((m) => m.ErrorComponent),
+      },
+      // Add more routes to ftls here
+      {
+        path: "**",
+        redirectTo: "error",
+      }
     ]
   }
 ];

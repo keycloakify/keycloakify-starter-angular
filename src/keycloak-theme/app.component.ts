@@ -21,13 +21,13 @@ export class AppComponent implements OnInit {
     let themeType: string = window.kcContext && window.kcContext.themeType || "";
     switch (themeType) {
       case "login":
-        this.router.navigate(['/login'], { skipLocationChange: true} );
+        this.router.navigate(['login', { outlets: { login: 'login' }, }], { skipLocationChange: true} );
         break;
       case "account":
-        this.router.navigate(['/account'], { skipLocationChange: true });
+        this.router.navigate(['account'], { skipLocationChange: true });
         break;
       default:
-        this.router.navigate(['']);
+        this.router.navigate(['error'], { skipLocationChange: true });
         break;
     }
   }

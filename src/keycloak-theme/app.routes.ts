@@ -13,9 +13,9 @@ import { Route } from '@angular/router';
             import('./account/template/template.component')
             .then((m) => m.TemplateComponent),
         },
-
         {
-          path: "**", redirectTo: "login"
+          path: "**",
+          redirectTo: "/login/error",
         }
     ];
       
