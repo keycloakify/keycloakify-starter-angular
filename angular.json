@@ -17,15 +17,7 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "indexTransform": "./index-html-transform.js",
-            "customWebpackConfig": {
-              "path": "./extra-webpack.config.js",
-              "mergeRules": {
-                "output": "replace",
-                "entry": "replace",
-                "plugins": "append"
-              }
-            },
+         
             "outputPath": "build/",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -47,14 +39,44 @@
             ],
             "styles": [
               "src/styles.css"
-            ]
-          }
+              ]
+            },
+          
+          "configurations": {
+            "production": {
+              "indexTransform": "./index-html-transform.js",
+              "customWebpackConfig": {
+                  "path": "./extra-webpack.config.js",
+                  "mergeRules": {
+                    "output": "replace",
+                    "entry": "replace",
+                    "plugins": "append"
+                  }
+                }
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "angular_template:build"
-          }
+            "buildTarget": "angular_template:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "angular_template:build:production"
+            },
+            "development": {
+              "buildTarget": "angular_template:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }

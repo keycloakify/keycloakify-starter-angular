@@ -1,0 +1,65 @@
+{
+    "themeVersion": "1.0.0",
+    "keycloakifyVersion": "0.0.1",
+    "themeType": "login",
+    "themeName": "MockTheme",
+    "pageId": null,
+    "url": {
+      "loginAction": "/login",
+      "resourcesPath": "",
+      "resourcesCommonPath": "",
+      "loginRestartFlowUrl": "/login-restart",
+      "loginUrl": "/login-url",
+      "ssoLoginInOtherTabsUrl": "/sso-login-other-tabs"
+    },
+    "realm": {
+      "name": "MockRealm",
+      "displayName": "Mock Realm Display Name",
+      "displayNameHtml": "<b>Mock Realm Display Name</b>",
+      "internationalizationEnabled": true,
+      "registrationEmailAsUsername": false
+    },
+    "locale": {
+      "supported": [
+        {
+          "url": "/locale/en",
+          "label": "English",
+          "languageTag": "en"
+        },
+        {
+          "url": "/locale/de",
+          "label": "Deutsch",
+          "languageTag": "de"
+        }
+      ],
+      "currentLanguageTag": "en"
+    },
+    "auth": {
+      "showUsername": true,
+      "showResetCredentials": false,
+      "showTryAnotherWayLink": true,
+      "attemptedUsername": "mockUser"
+    },
+    "message": {
+      "type": "info",
+      "summary": "This is a mock message."
+    },
+    "client": {
+      "clientId": "mockClientId",
+      "name": "Mock Client",
+      "description": "A mock client for testing purposes",
+      "attributes": {
+        "attr1": "value1",
+        "attr2": "value2"
+      }
+    },
+    "isAppInitiatedAction": true,
+    "messagesPerField": {
+      "printIfExists": null,
+      "existsError": null,
+      "get": null,
+      "exists": null,
+      "getFirstError": null
+    }
+  }
+  
