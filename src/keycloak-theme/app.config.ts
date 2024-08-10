@@ -4,8 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {
   PreloadAllModules,
   provideRouter,
-  withComponentInputBinding,
-  withDebugTracing,
   withPreloading
 } from '@angular/router';
 
@@ -16,8 +14,7 @@ export const appConfig: ApplicationConfig = {
     
     provideRouter(
       THEME_ROUTES, 
-      withPreloading(PreloadAllModules),
-      withDebugTracing(),
+      withPreloading(PreloadAllModules)
     ),
   ]
 };
