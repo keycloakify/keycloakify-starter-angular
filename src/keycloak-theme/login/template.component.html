@@ -1,44 +1,36 @@
-<div class="root">
+<div [class]="('kcHtmlClass' | kcClass)">
+<div [class]="('kcBodyClass' | kcClass)">
   <div [class]="('kcLoginClass' | kcClass)">
     <div id="kc-header" [class]="('kcHeaderClass' | kcClass)">
       <div id="kc-header-wrapper" [class]="('kcHeaderWrapperClass' | kcClass)">
-        <img src="{{publicUrl}}/static/media/keycloakify-logo.png" alt="Keycloakify logo" style="width: 50px;" />
+        <div [innerHTML]="kcContext.realm.displayNameHtml! | sanitizeHtml"></div>
       </div>
     </div>
-
     @if(kcContext) {
     <div [class]="('kcFormCardClass' | kcClass)">
       <header [class]="('kcFormHeaderClass' | kcClass)">
         <!-- Locale switcher -->
         @if(kcContext.realm.internationalizationEnabled) {
-        <div id="kc-locale">
+        <div id="kc-locale" [class]="('kcLocaleMainClass' | kcClass)">
           <div id="kc-locale-wrapper" [class]="('kcLocaleWrapperClass' | kcClass)">
-            <div [class]="('kc-dropdown' | kcClass)" id="kc-locale-dropdown">
-              <a href="#" id="kc-current-locale-link">
-                <!-- {{ i18n.labelBySupportedLanguageTag[i18n?.currentLanguageTag] }} -->
-              </a>
-              <!--
-                <ul>
-                  <li *ngFor="let lang of i18n.labelBySupportedLanguageTag" [class]="('kc-dropdown-item' | kcClass)">
-                    <a href="#" (click)="i18n.changeLocale(i18n.labelBySupportedLanguageTag)">
-                      {{ lang }}
-                    </a>
+            <div [class]="('kcLocaleDropDownClass' | kcClass) + 'menu-button-links'" id="kc-locale-dropdown">
+              <button tabindex="1" id="kc-current-locale-link" aria-label="Sprachen" aria-haspopup="true" aria-expanded="false" aria-controls="language-switch1">{{locale?.currentLanguageTag}}</button>
+              <ul role="menu" tabindex="-1" aria-labelledby="kc-current-locale-link" aria-activedescendant="" id="language-switch1" [class]="('kcLocaleListClass' | kcClass)">
+                @for(locale of kcContext.locale?.supported; track locale; let idx = $index) {
+                  <li [class]="('kcLocaleListItemClass' | kcClass)" role="none">
+                    <a role="menuitem" tabindex="-1" [href]="locale.url" [id]="'language-'+idx">{{locale.label}}</a>
                   </li>
-                </ul>
-                -->
+                }
+
+              </ul>
             </div>
           </div>
         </div>
         }
-
+        
         <!-- Header content -->
-        @switch (kcContext.pageId) {
-        @case ('login.ftl') {
-        <h1 id="kc-page-title">Einloggen</h1>
-        }
-        @case ('register.ftl') {
-        <h1 id="kc-page-title">Registrieren</h1>
-        }
+        @if(headerTemplate) {
+          <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
         }
       </header>
 
@@ -54,9 +46,8 @@
           }
 
           <!-- Content -->
-          <router-outlet name="login"></router-outlet>
+          <router-outlet (activate)="onRouterOutletActivate($event)" name="login"></router-outlet>
           <!-- Info display -->
-
 
           <div id="kc-info" [class]="('kcSignUpClass' | kcClass)">
             <div id="kc-info-wrapper" [class]="('kcInfoAreaWrapperClass' | kcClass)">
@@ -75,6 +66,8 @@
           </div>
         </div>
       </div>
+      
     </div>
     }
   </div>
+</div>

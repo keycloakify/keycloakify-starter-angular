@@ -1,7 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KcClassPipe } from '../../../pipes/classname-pipe';
-import { DynamicStyleLoaderService } from '../../../services/dynamic-style-loader.service';
+import { KcClassPipe } from '../../../pipes/classname.pipe';
 
 @Component({
     selector: 'kc-login',
@@ -9,10 +8,12 @@ import { DynamicStyleLoaderService } from '../../../services/dynamic-style-loade
     styleUrls: ['./login.component.scss'],
     standalone: true,
     imports: [KcClassPipe],
-    providers: [DynamicStyleLoaderService, CommonModule],
+    providers: [CommonModule],
 })
 export class LoginComponent {
 
+  
+  @ViewChild('header', { static: true }) headerTemplate!: TemplateRef<any>;
   kcContext: any;
   constructor() {
     this.kcContext = window.kcContext;

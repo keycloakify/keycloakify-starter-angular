@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { KcClassPipe } from '../../../pipes/classname-pipe';
+import { KcClassPipe } from '../../../pipes/classname.pipe';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
@@ -28,8 +28,6 @@ export class ErrorComponent {
       if (this.kcContext?.message?.summary) {
         this.errorMessage = this.kcContext.message.summary;
       }
-
-      console.log('kcContext: ', this.kcContext);
     });
   }
 }

@@ -19,12 +19,6 @@ export const LOGIN_ROUTES: Route[] = [
           import('./register/register.component').then((m) => m.RegisterComponent),
       },
       {
-        path: "terms",
-        outlet: "login",
-        loadComponent: () =>
-          import('./terms/terms.component').then((m) => m.TermsComponent),
-      },
-      {
         path: "error",
         outlet: "login",
         loadComponent: () =>

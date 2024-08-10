@@ -1,43 +1,63 @@
-<!-- login.component.html -->
-<form id="kc-form" [class]="('kcContentWrapperClass' | kcClass)" [action]="kcContext.url.loginAction" method="post">
-  <div id="kc-form-wrapper" [class]="('kcContentWrapperClass' | kcClass)">
-  <div [class]="('kcFormGroupClass' | kcClass)">
-    <label for="username" [class]="('kcLabelClass' | kcClass)">
-      Benutzername
-    </label>
-    <input tabIndex="1" id="username" name="username" [class]="('kcInputClass' | kcClass)" type="text" autofocus autocomplete="off" />
-  </div>  
-  <div [class]="('kcFormGroupClass' | kcClass)">
-      <label for="password" [class]="('kcLabelClass' | kcClass)">
-        Passwort
+<div id="kc-form">
+  <div id="kc-form-wrapper">
+    <ng-template #header>
+      <h1>This is the Header Content from Child Component</h1>
+    </ng-template>
+
+  <!-- login.component.html -->
+  @if(this.kcContext.realm.password) {
+    <form id="kc-form-login" (onSubmit)="kcContext.login.disabled" [action]="kcContext.url.loginAction" method="post">
+      @if(kcContext.usernameHidden) {
+      <div [class]="('kcFormGroupClass' | kcClass)">
+        <label for="username" [class]="('kcLabelClass' | kcClass)">
+          Benutzername
+        </label>
+        <input tabIndex="1" id="username" name="username" type="hidden" [value]="kcContext.auth?.selectedCredential" />
+      </div>
+      }
+    </form>
+  }
+
+
+  <form id="kc-form-login" [class]="('kcContentWrapperClass' | kcClass)" [action]="kcContext.url.loginAction" method="post">
+    <div id="kc-form-wrapper" [class]="('kcContentWrapperClass' | kcClass)">
+    <div [class]="('kcFormGroupClass' | kcClass)">
+      <label for="username" [class]="('kcLabelClass' | kcClass)">
+        Benutzername
       </label>
-      <input tabIndex="1" id="password" [class]="('kcInputClass' | kcClass)" name="password" type="password" autocomplete="off" />
-  </div>
-    
-    <div [class]="('kcFormGroupClass' | kcClass) + ' ' + ('kcFormSettingClass' | kcClass)">
-      <div id="kc-form-options">
-        @if (kcContext.realm.rememberMe && !kcContext.usernameHidden) {
-        <div class="checkbox">
-          <label>
-            <input tabIndex="3" id="rememberMe" name="rememberMe" type="checkbox" [checked]="kcContext.login.rememberMe === 'on'" />
-            Login merken
-          </label>
+      <input tabIndex="1" id="username" name="username" [class]="('kcInputClass' | kcClass)" type="text" autofocus autocomplete="off" />
+    </div>  
+    <div [class]="('kcFormGroupClass' | kcClass)">
+        <label for="password" [class]="('kcLabelClass' | kcClass)">
+          Passwort
+        </label>
+        <input tabIndex="1" id="password" [class]="('kcInputClass' | kcClass)" name="password" type="password" autocomplete="off" />
+    </div>
+      
+      <div [class]="('kcFormGroupClass' | kcClass) + ' ' + ('kcFormSettingClass' | kcClass)">
+        <div id="kc-form-options">
+          @if (kcContext.realm.rememberMe && !kcContext.usernameHidden) {
+          <div class="checkbox">
+            <label>
+              <input tabIndex="3" id="rememberMe" name="rememberMe" type="checkbox" [checked]="kcContext.login.rememberMe === 'on'" />
+              Login merken
+            </label>
+          </div>
+          }
+          @if (kcContext.realm.registrationAllowed) {
+          <div [class]="('kcFormOptionsWrapperClass' | kcClass)">
+            <span> <a tabIndex={5} [href]="kcContext.url.loginResetCredentialsUrl"> Passwort vergessen </a> </span>
+          </div>
+          }
         </div>
-        }
-        @if (kcContext.realm.registrationAllowed) {
-        <div [class]="('kcFormOptionsWrapperClass' | kcClass)">
-          <span> <a tabIndex={5} [href]="kcContext.url.loginResetCredentialsUrl"> Passwort vergessen </a> </span>
-        </div>
-        }
       </div>
     </div>
-  </div>
-    <div id="kc-form-buttons" [class]="('kcFormGroupClass' | kcClass)">
-      <input type="hidden" id="id-hidden-input" name="credentialId" [value]="kcContext.auth?.selectedCredential" />
-      <input tabIndex="4" 
-        [class]="('kcButtonClass' | kcClass) + ' ' + ('kcButtonPrimaryClass' | kcClass) + ' ' + ('kcButtonBlockClass' | kcClass) + ' ' + ('kcButtonLargeClass' | kcClass)" 
-        name="login" id="kc-login" type="submit" value="Einloggen" [disabled]="kcContext.isLoginButtonDisabled" />
-    </div>
-  
-  </form>
-  
+      <div id="kc-form-buttons" [class]="('kcFormGroupClass' | kcClass)">
+        <input type="hidden" id="id-hidden-input" name="credentialId" [value]="kcContext.auth?.selectedCredential" />
+        <input tabIndex="4" 
+          [class]="('kcButtonClass' | kcClass) + ' ' + ('kcButtonPrimaryClass' | kcClass) + ' ' + ('kcButtonBlockClass' | kcClass) + ' ' + ('kcButtonLargeClass' | kcClass)" 
+          name="login" id="kc-login" type="submit" value="Einloggen" [disabled]="kcContext.isLoginButtonDisabled" id="login"/>
+      </div>
+    
+    </form>
+    
