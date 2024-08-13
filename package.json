@@ -28,7 +28,6 @@
     "@angular/router": "^17.3.0",
     "evt": "^2.5.7",
     "keycloakify": "10.0.0-rc.131",
-    "patternfly": "3.59.5",
     "rxjs": "~7.8.0",
     "tsafe": "^1.6.6",
     "tslib": "^2.3.0",

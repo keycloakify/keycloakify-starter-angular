@@ -3,9 +3,10 @@ import { APP_INITIALIZER, Provider } from '@angular/core';
 import { isDevMode } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { createGetKcContextMock } from 'keycloakify/login/KcContext';
-import { KcContextExtension, KcContextExtensionPerPage } from '../KcContext';
+import { KcContextExtension, KcContextExtensionPerPage } from './login/KcContext';
 import { themeNames, kcEnvDefaults } from '../kc.gen';
 import type { LoginThemePageId } from 'keycloakify/bin/shared/constants';
+import { createGetI18n } from 'keycloakify/login/i18n/i18n';
 
 const kcContextExtension: KcContextExtension = {
   themeName: themeNames[0],
@@ -15,7 +16,6 @@ const kcContextExtension: KcContextExtension = {
 };
 
 const kcContextExtensionPerPage: KcContextExtensionPerPage = {};
-
 function initializeEnvironment(): () => void {
   return () => {
     (window as any).process = {
@@ -39,10 +39,11 @@ function initializeEnvironment(): () => void {
         overrides: {},
       });
     }
+
   };
 }
 
-export const environmentProvider: Provider = {
+export const kcContextMockProvider: Provider = {
   provide: APP_INITIALIZER,
   useFactory: initializeEnvironment,
   multi: true,

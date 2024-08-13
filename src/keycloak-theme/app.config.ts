@@ -8,11 +8,13 @@ import {
 } from '@angular/router';
 
 import { THEME_ROUTES } from './app.routes';
-import { environmentProvider } from './environment.provider';
+import { kcContextMockProvider } from './kcContextMock.provider';
+import { SharedService } from './login/service/shared.service';
 export const appConfig: ApplicationConfig = {
   providers: [     
-    environmentProvider,
+    kcContextMockProvider,
     importProvidersFrom(BrowserModule),
+    SharedService,
     provideRouter(
       THEME_ROUTES, 
       withPreloading(PreloadAllModules)

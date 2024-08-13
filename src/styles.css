@@ -1,13 +1,14 @@
 /* You can add globaal styles to this file, and also import other style files */
 @import "/node_modules/patternfly/dist/css/patternfly.min.css";
 @import "/node_modules/patternfly/dist/css/patternfly-additions.min.css";
-
 /* Patternfly CSS places a "bg-login.jpg" as the background on this ".login-pf" class.
    This clashes with the "keycloak-bg.png' background defined on the body below.
    Therefore the Patternfly background must be set to none. */
-   .login-pf {
+   
+.login-pf {
     background: none;
 }
+
 
 .login-pf body {
     background-size: cover;

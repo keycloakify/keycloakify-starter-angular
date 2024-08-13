@@ -1,73 +1,120 @@
-<div [class]="('kcHtmlClass' | kcClass)">
-<div [class]="('kcBodyClass' | kcClass)">
-  <div [class]="('kcLoginClass' | kcClass)">
-    <div id="kc-header" [class]="('kcHeaderClass' | kcClass)">
-      <div id="kc-header-wrapper" [class]="('kcHeaderWrapperClass' | kcClass)">
-        <div [innerHTML]="kcContext.realm.displayNameHtml! | sanitizeHtml"></div>
-      </div>
+@if(i18n$ | async; as i18n;) 
+{
+<div [class]="('kcLoginClass' | kcClass)">
+  <div id="kc-header" [class]="('kcHeaderClass' | kcClass)">
+    <div id="kc-header-wrapper" [class]="('kcHeaderWrapperClass' | kcClass)">
+      <div [innerHTML]="kcContext.realm.displayNameHtml! | sanitizeHtml"></div>
     </div>
-    @if(kcContext) {
-    <div [class]="('kcFormCardClass' | kcClass)">
-      <header [class]="('kcFormHeaderClass' | kcClass)">
-        <!-- Locale switcher -->
-        @if(kcContext.realm.internationalizationEnabled) {
-        <div id="kc-locale" [class]="('kcLocaleMainClass' | kcClass)">
-          <div id="kc-locale-wrapper" [class]="('kcLocaleWrapperClass' | kcClass)">
-            <div [class]="('kcLocaleDropDownClass' | kcClass) + 'menu-button-links'" id="kc-locale-dropdown">
-              <button tabindex="1" id="kc-current-locale-link" aria-label="Sprachen" aria-haspopup="true" aria-expanded="false" aria-controls="language-switch1">{{locale?.currentLanguageTag}}</button>
-              <ul role="menu" tabindex="-1" aria-labelledby="kc-current-locale-link" aria-activedescendant="" id="language-switch1" [class]="('kcLocaleListClass' | kcClass)">
-                @for(locale of kcContext.locale?.supported; track locale; let idx = $index) {
-                  <li [class]="('kcLocaleListItemClass' | kcClass)" role="none">
-                    <a role="menuitem" tabindex="-1" [href]="locale.url" [id]="'language-'+idx">{{locale.label}}</a>
-                  </li>
-                }
+  </div>
 
-              </ul>
-            </div>
+  <div [class]="('kcFormCardClass' | kcClass)">
+    <header [class]="('kcFormHeaderClass' | kcClass)">
+      <!-- Locale switcher -->
+      @if(kcContext.realm.internationalizationEnabled && kcContext.locale && kcContext.locale.supported.length > 1) {
+      <div id="kc-locale" [class]="('kcLocaleMainClass' | kcClass)">
+        <div id="kc-locale-wrapper" [class]="('kcLocaleWrapperClass' | kcClass)">
+          <div id="kc-locale-dropdown" [class]="'menu-button-links' + ('kcLocaleDropDownClass' | kcClass)">
+            <button tabindex="1" id="kc-current-locale-link" (aria-label)="i18n.msgStr('Sprache')" aria-haspopup="true"
+              aria-expanded="false" aria-controls="language-switch1">
+              {{i18n.labelBySupportedLanguageTag[i18n.currentLanguageTag]}}
+            </button>
+            <ul role="menu" tabindex="-1" aria-labelledby="kc-current-locale-link" aria-activedescendant=""
+              id="language-switch1" [class]="('kcLocaleListClass' | kcClass)">
+              @for(locale of kcContext.locale.supported; track locale; let idx = $index) {
+              <li [class]="('kcLocaleListItemClass' | kcClass)" role="none">
+                <a role="menuitem" tabindex="-1" [href]="i18n.getChangeLocaleUrl(locale.languageTag)"
+                  [class]="('kcLocaleItemClass' | kcClass)" [id]="'language-' + idx">
+                  {{locale.label}}
+                </a>
+              </li>
+              }
+            </ul>
           </div>
         </div>
-        }
-        
-        <!-- Header content -->
-        @if(headerTemplate) {
-          <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
-        }
-      </header>
-
-      <div id="kc-content">
-        <div id="kc-content-wrapper">
-          <!-- Message display -->
-          @if(kcContext.message) {
-          <div [class]="['alert', 'alert-' + kcContext.message.type | kcClass]">
-            <span
-              [class]="('kcFeedback' + kcContext.message.type.charAt(0).toUpperCase() + kcContext.message.type.slice(1) + 'Icon' | kcClass)"></span>
-            <span class="kc-feedback-text" [innerHTML]="kcContext.message.summary"></span>
-          </div>
+      </div>
+      }
+     
+     
+      <!-- Header content -->
+       <ng-template #node>
+        @if(kcContext.auth !== undefined && kcContext.auth.showUsername && !kcContext.auth.showResetCredentials) {
+          @if(headerNode) {
+            <ng-container *ngTemplateOutlet="headerNode"></ng-container>
           }
+          
+        }
+        @else {
+        <div id="kc-username" [class]="('kcFormGroupClass' | kcClass)">
+          <label id="kc-attempted-username">{{kcContext.auth?.attemptedUsername}}</label>
+          <a id="reset-login" [href]="kcContext.url.loginRestartFlowUrl" (aria-label)="i18n.msgStr('restartLoginTooltip')">
+          <div [class]="('kc-login-tooltip' | kcClass)">
+            <i [class]="('kcResetFlowIcon' | kcClass)"></i>
+            <span [class]="('kc-tooltip-text' | kcClass)">
+              {{i18n.msgStr("restartLoginTooltip")}}
+            </span>
+          </div>
+        </a>
+        </div>
+        }
+       </ng-template>
+   
+      
+      @if(displayRequiredFields) {
+        <div [class]="('kcContentWrapperClass' | kcClass)">
+          <div [class]="('kcLabelWrapperClass' | kcClass) + 'subtitle'">
+            <span class="subtitle"> 
+              <span class="required">*</span>
+              {{i18n.msgStr("requiredFields")}}
+            </span>
+          </div>
+          <div class="col-md-10">
+            
+          <ng-container *ngTemplateOutlet="node"></ng-container>
+          </div>
+        </div>
+      } 
+      @else {
+        <ng-container *ngTemplateOutlet="node"></ng-container>
+      }
 
-          <!-- Content -->
-          <router-outlet (activate)="onRouterOutletActivate($event)" name="login"></router-outlet>
-          <!-- Info display -->
+    </header>
 
-          <div id="kc-info" [class]="('kcSignUpClass' | kcClass)">
-            <div id="kc-info-wrapper" [class]="('kcInfoAreaWrapperClass' | kcClass)">
-              @switch (kcContext.pageId) {
-              @case ('login.ftl') {
-              <div id="kc-registration">
-                <span> Noch keinen Account?
-                  <a tabIndex={6} [href]="kcContext.url.registrationUrl">
-                    Jetzt Registrieren
-                  </a>
-                </span>
-              </div>
-              }
-              }
-            </div>
+    <div id="kc-content">
+      <div id="kc-content-wrapper">
+        <!-- Message display -->
+        @if(kcContext.message) {
+        <div [class]="('alert-' + kcContext.message.type | kcClass)" [class]="('kcAlertClass' | kcClass)"
+          [class]="'pf-m-' + (kcContext.message.type === 'error' ? 'danger' : kcContext.message.type)">
+          <div [class]="('pf-c-alert__icon' | kcClass)">
+            @if(kcContext.message.type === 'success') {
+            <span [class]="('kcFeedbackSuccessIcon' | kcClass)"></span>
+            }
+            @if(kcContext.message.type === 'warning') {
+            <span [class]="('kcFeedbackWarningIcon' | kcClass)"></span>
+            }
+            @if(kcContext.message.type === 'error') {
+            <span [class]="('kcFeedbackErrorIcon' | kcClass)"></span>
+            }
+            @if(kcContext.message.type === 'info') {
+            <span [class]="('kcFeedbackInfoIcon' | kcClass)"></span>
+            }
+          </div>
+          <span [class]="('kcAlertTitleClass' | kcClass)" [innerHTML]="kcContext.message.summary"></span>
+        </div>
+        }
+
+        <!-- Content -->
+        <router-outlet (activate)="onRouterOutletActivate($event)" name="login"></router-outlet>
+
+        <ng-container *ngTemplateOutlet="socialProvidersNode || null"></ng-container>
+        <!-- Info display -->
+        <div id="kc-info" [class]="('kcSignUpClass' | kcClass)">
+          <div id="kc-info-wrapper" [class]="('kcInfoAreaWrapperClass' | kcClass)">
+            <ng-container *ngTemplateOutlet="infoNode || null"></ng-container>
           </div>
         </div>
       </div>
-      
     </div>
-    }
   </div>
 </div>
+}
