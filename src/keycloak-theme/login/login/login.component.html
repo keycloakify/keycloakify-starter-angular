@@ -1,7 +1,7 @@
 @if(i18n$ | async; as i18n) {
 
 <ng-template #headerNode>
-  <h1>This is the Header Content from Child Component</h1>
+  {{i18n.msgStr("loginAccountTitle")}}
 </ng-template>
 
 <ng-template #infoNode>
@@ -9,7 +9,7 @@
     <div id="kc-registration">
       <span>
         {{i18n.msgStr("noAccount")}}
-        <a tabIndex={8} href={url.registrationUrl}>
+        <a tabindex="{8}" href="{url.registrationUrl}">
           {{i18n.msgStr("doRegister")}}
         </a>
       </span>
@@ -20,16 +20,37 @@
 <ng-template #socialProvidersNode>
   @if(kcContext.realm.password && kcContext.social.providers?.length) {
 
-  <div id="kc-social-providers" [class]="('kcFormSocialAccountSectionClass' | kcClass)">
+  <div
+    id="kc-social-providers"
+    [class]="('kcFormSocialAccountSectionClass' | kcClass)"
+  >
     <hr />
     <h2>{{i18n.msgStr("identity-provider-login-label")}}</h2>
     <ul
-      [class]="('kcFormSocialAccountListClass' | kcClass) && kcContext.social.providers.length > 3 ? ('kcFormSocialAccountListClass' | kcClass) : ''">
-      @for(provider of kcContext.social.providers; track provider; let idx = $index) {
+      [class]="('kcFormSocialAccountListClass' | kcClass) + (kcContext.social.providers.length > 3) ? ('kcFormSocialAccountListGridClass' | kcClass) : ''"
+    >
+      @for(provider of kcContext.social.providers; track provider; let idx =
+      $index) {
       <li (key)="provider.alias">
-        <a [id]="provider.alias"
+        <a
+          [id]="provider.alias"
           [class]="('kcFormSocialAccountListButtonClass' | kcClass) && kcContext.social.providers.length > 3 ? ('kcFormSocialAccountGridItem' | kcClass) : ''"
-          type="button" [href]="provider.loginUrl"></a>
+          type="button"
+          [href]="provider.loginUrl"
+        >
+          @if(provider.iconClasses) {
+          <i
+            [class]="('kcFormSocialAccountNameClass' | kcClass) +  provider.iconClasses"
+            aria-hidden="true"
+          ></i>
+          }
+          <span
+            [class]="('kcCommonLogoIdP' | kcClass) + provider.iconClasses ? 'kc-social-icon-text': ''"
+            [innerHTML]="provider.displayName | sanitizeHtml"
+          >
+            ></span
+          >
+        </a>
       </li>
       }
     </ul>
@@ -37,31 +58,43 @@
   }
 </ng-template>
 
-
 <div id="kc-form">
   <div id="kc-form-wrapper">
     <!-- login.component.html -->
     @if(this.kcContext.realm.password) {
-    <form id="kc-form-login" (onSubmit)="kcContext.login.disabled" [action]="kcContext.url.loginAction" method="post">
+    <form
+      id="kc-form-login"
+      (onSubmit)="kcContext.setIsButtonDisabled(true);"
+      [action]="kcContext.url.loginAction"
+      method="post"
+    >
       @if(!kcContext.usernameHidden) {
       <div [class]="('kcFormGroupClass' | kcClass)">
         <label for="username" [class]="('kcLabelClass' | kcClass)">
           @if(!kcContext.realm.loginWithEmailAllowed) {
-          {{i18n.msgStr("username")}}
-          }
+          {{i18n.msgStr("username")}} } 
           @else if(!kcContext.realm.registrationEmailAsUsername) {
-          {{i18n.msgStr("usernameOrEmail")}}
-          }
-          @else {
-          {{i18n.msgStr("email")}}
+          {{i18n.msgStr("usernameOrEmail")}} } @else { {{i18n.msgStr("email")}}
           }
         </label>
-        <input tabIndex="2" id="username" [class]="('kcLabelClass' | kcClass)" name="username" type="text" autofocus
-          [value]="kcContext.login.username"
-          (aria-invalid)="kcContext.messagesPerField.existsError('username', 'password')" />
+        <input
+          tabindex="{2}"
+          id="username"
+          [class]="('kcInputClass' | kcClass)"
+          name="username"
+          type="text"
+          autofocus
+          [value]="kcContext.login.username || ''"
+          (aria-invalid)="kcContext.messagesPerField.existsError('username', 'password')"
+        />
         @if(kcContext.messagesPerField.existsError('username', 'password')) {
-        <span id="input-error" [class]="('kcInputErrorMessageClass' | kcClass)" aria-live="polite"
-          [innerHTML]="kcContext.messagesPerField.getFirstError('username', 'password') | sanitizeHtml"></span>
+        <span
+          id="input-error"
+          [class]="('kcInputErrorMessageClass' | kcClass)"
+          aria-live="polite"
+          [innerHTML]="kcContext.messagesPerField.getFirstError('username', 'password') | sanitizeHtml"
+        >
+        </span>
         }
       </div>
       }
@@ -70,44 +103,76 @@
         <label for="password" [class]="('kcLabelClass' | kcClass)">
           {{i18n.msgStr("password")}}
         </label>
-        <input tabIndex="3" id="password" [class]="('kcInputClass' | kcClass)" name="password" type="password"
-          autocomplete="off" />
+        <!--What is Password Wrapper-->
+        <input
+          tabindex="{3}"
+          id="password"
+          [class]="('kcInputClass' | kcClass)"
+          name="password"
+          type="password"
+          autocomplete="off"
+        />
         @if(kcContext.messagesPerField.existsError('username', 'password')) {
-        <span id="input-error" [class]="('kcInputErrorMessageClass' | kcClass)" aria-live="polite"
-          [innerHTML]="kcContext.messagesPerField.getFirstError('username', 'password') | sanitizeHtml"></span>
+        <span
+          id="input-error"
+          [class]="('kcInputErrorMessageClass' | kcClass)"
+          aria-live="polite"
+          [innerHTML]="kcContext.messagesPerField.getFirstError('username', 'password') | sanitizeHtml"
+        >
+        </span>
         }
       </div>
 
-      <div [class]="('kcFormGroupClass' | kcClass) + ' ' + ('kcFormSettingClass' | kcClass)">
+      <div
+        [class]="('kcFormGroupClass' | kcClass) + ' ' + ('kcFormSettingClass' | kcClass)"
+      >
         <div id="kc-form-options">
-          @if (kcContext.realm.rememberMe && !kcContext.usernameHidden) {
+          @if(kcContext.realm.rememberMe && !kcContext.usernameHidden) {
           <div class="checkbox">
             <label>
-              <input tabIndex="3" id="rememberMe" name="rememberMe" type="checkbox"
-                [checked]="kcContext.login.rememberMe === 'on'" />
-              Login merken
+              <input
+                tabindex="{5}"
+                id="rememberMe"
+                name="rememberMe"
+                type="checkbox"
+                [checked]="kcContext.login.rememberMe === 'on'"
+              />
+              {{i18n.msgStr("rememberMe")}}
             </label>
           </div>
           }
-          @if (kcContext.realm.registrationAllowed) {
-          <div [class]="('kcFormOptionsWrapperClass' | kcClass)">
-            <span>
-              <a tabIndex="5" [href]="kcContext.url.loginResetCredentialsUrl">Passwort vergessen</a>
-            </span>
-          </div>
+        </div>
+
+        <div [class]="('kcFormOptionsWrapperClass' | kcClass)">
+          @if (kcContext.realm.resetPasswordAllowed){
+          <span>
+            <a tabindex="{6}" [href]="kcContext.url.loginResetCredentialsUrl"
+              >{{i18n.msgStr("doForgotPassword")}}</a
+            >
+          </span>
           }
         </div>
       </div>
       <div id="kc-form-buttons" [class]="('kcFormGroupClass' | kcClass)">
-        <input type="hidden" id="id-hidden-input" name="credentialId" [value]="kcContext.auth?.selectedCredential" />
-        <input tabIndex="4"
+        <input
+          type="hidden"
+          id="id-hidden-input"
+          name="credentialId"
+          [value]="kcContext.auth?.selectedCredential"
+        />
+        <input
+          tabindex="{7}"
           [class]="('kcButtonClass' | kcClass) + ' ' + ('kcButtonPrimaryClass' | kcClass) + ' ' + ('kcButtonBlockClass' | kcClass) + ' ' + ('kcButtonLargeClass' | kcClass)"
-          name="login" id="kc-login" type="submit" value="Einloggen" [disabled]="kcContext.isLoginButtonDisabled" />
+          name="login"
+          id="kc-login"
+          type="submit"
+          [value]="i18n.msgStr('doLogIn')"
+          [disabled]="kcContext.isLoginButtonDisabled"
+        />
       </div>
     </form>
     }
-
-
   </div>
 </div>
+
 }

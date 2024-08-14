@@ -1,0 +1,8 @@
+node_modules/
+/dist/
+/CHANGELOG.md
+/.angular/
+/build/
+/src/tools/types/
+/build_keycloak/
+/.vscode/

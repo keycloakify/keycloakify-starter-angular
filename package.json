@@ -7,7 +7,9 @@
     "build": "ng build && rimraf build/keycloak-resources",
     "test": "ng test",
     "serve": "ng serve",
-    "build-keycloak-theme": "ng build && keycloakify build"
+    "build-keycloak-theme": "ng build && keycloakify build",
+    "_format": "prettier '**/*.{ts,json,html}'",
+    "format": "npm run _format --write"
   },
   "keycloakify": {
     "projectBuildDirPath": "build",
@@ -41,6 +43,7 @@
     "@angular/compiler-cli": "^17.3.0",
     "@types/node": "^15.3.1",
     "rimraf": "^5.0.7",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "prettier": "^3.2.5"
   }
 }
