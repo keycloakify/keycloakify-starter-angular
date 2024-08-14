@@ -40,8 +40,7 @@
         @if(kcContext.auth !== undefined && kcContext.auth.showUsername && !kcContext.auth.showResetCredentials) {
           @if(headerNode) {
             <ng-container *ngTemplateOutlet="headerNode"></ng-container>
-          }
-          
+          }  
         }
         @else {
         <div id="kc-username" [class]="('kcFormGroupClass' | kcClass)">
@@ -68,8 +67,7 @@
             </span>
           </div>
           <div class="col-md-10">
-            
-          <ng-container *ngTemplateOutlet="node"></ng-container>
+            <ng-container *ngTemplateOutlet="node"></ng-container>
           </div>
         </div>
       } 

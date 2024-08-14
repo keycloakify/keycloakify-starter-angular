@@ -9,9 +9,6 @@ import { SanitizeHtmlPipe } from "../../pipes/sanitize-html.pipe";
 import { createGetI18n, GenericI18n_noJsx } from 'keycloakify/login/i18n/i18n';
 import { SharedService } from './service/shared.service';
 import { Observable } from 'rxjs';
-import { RedirectService } from './service/redirectHandler.service';
-import { DynamicStyleLoaderService } from './service/dynamicStyleLoader.service';
-
 export const{ getI18n } = createGetI18n({})
 @Component({
   selector: 'kc-login-template',
@@ -40,7 +37,7 @@ export class TemplateComponent implements OnInit {
 
   i18n$: Observable<GenericI18n_noJsx<string>>
 
-  constructor(private router: Router, private cdref: ChangeDetectorRef, private sharedService: SharedService, private dynamicStyleLoader: DynamicStyleLoaderService) {
+  constructor(private router: Router, private cdref: ChangeDetectorRef, private sharedService: SharedService, private kcClassPipe: KcClassPipe) {
 
     this.i18n$ = this.sharedService.getI18n();
   }
@@ -48,12 +45,19 @@ export class TemplateComponent implements OnInit {
   ngOnInit() {
     
     this.locale = this.kcContext.locale;
-      this.locale = this.kcContext.locale;
       this.router.navigate(['login', { outlets: { login: this.trimPageIdSuffix(this.kcContext.pageId) }}], { skipLocationChange: true });
 
       setTimeout(() => {
         this.sharedService.updateI18n();
       }, 300)
+
+      const kcBodyClass = this.kcClassPipe.transform("kcBodyClass")
+      const kcHtmlClass = this.kcClassPipe.transform("kcHtmlClass")
+      const kcHtmlClasses = kcHtmlClass.split(" ");
+
+      document.body.classList.add(kcBodyClass)
+      document.documentElement.classList.add(... kcHtmlClasses);
+
     }
 
     trimPageIdSuffix(pageId: string): string {
