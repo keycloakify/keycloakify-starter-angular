@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component,  OnInit,  TemplateRef} from '@angular/core';
+import { ChangeDetectorRef, Component,  isDevMode,  OnInit,  TemplateRef} from '@angular/core';
 import { PUBLIC_URL } from "keycloakify/PUBLIC_URL";
 import { KcClassPipe } from '../../pipes/classname.pipe';
 import {  Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -85,14 +85,17 @@ private trimPageIdSuffix(pageId: string): string {
   }
 
   loadStyles() {
+    if(!isDevMode()) {
     this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/@patternfly/patternfly/patternfly.min.css`);
     this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`);
     this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`);
     this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/lib/pficon/pficon.css`)
     this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesPath}/css/login.css`);
-    this.stylesheetsLoaded = true;
+    }
+    console.log("Resource path: ", this.kcContext.url.resourcesPath);
   }
 
+  
   tryAnotherWay() { 
     document.forms["kc-select-try-another-way-form" as never].submit();
   }

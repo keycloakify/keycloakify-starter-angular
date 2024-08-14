@@ -14,7 +14,7 @@
   "keycloakify": {
     "projectBuildDirPath": "build",
     "staticDirPathInProjectBuildDirPath": "static",
-    "publicDirPath": "assets",
+    "publicDirPath": "src/assets",
     "accountThemeImplementation": "none"
   
   },

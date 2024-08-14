@@ -1,0 +1,5 @@
+@import './assets/keycloak-resources/login/resources/resources-common/node_modules/@patternfly/patternfly/patternfly.min.css';
+@import './assets/keycloak-resources/login/resources/resources-common/node_modules/patternfly/dist/css/patternfly.min.css';
+@import './assets/keycloak-resources/login/resources/resources-common/node_modules/patternfly/dist/css/patternfly-additions.min.css';
+@import './assets/keycloak-resources/login/resources/resources-common/lib/pficon/pficon.css';
+@import './assets/keycloak-resources/login/resources/css/login.css';
