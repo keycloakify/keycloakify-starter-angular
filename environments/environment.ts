@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  mockPageId: 'login.ftl',
+  mockPageId: 'login-reset-password.ftl',
   PUBLIC_URL: '/'
 };
 

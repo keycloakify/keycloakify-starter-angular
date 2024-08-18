@@ -1,6 +1,4 @@
-@if(i18n$ | async; as i18n;) { @if(!i18n.isFetchingTranslations ||
-stylesheetsLoaded){
-
+@if(i18n && stylesheetsLoaded) {
 <div [class]="'kcLoginClass' | kcClass">
   <div id="kc-header" [class]="'kcHeaderClass' | kcClass">
     <div id="kc-header-wrapper" [class]="'kcHeaderWrapperClass' | kcClass">
@@ -176,4 +174,4 @@ stylesheetsLoaded){
     </div>
   </div>
 </div>
-} }
+}

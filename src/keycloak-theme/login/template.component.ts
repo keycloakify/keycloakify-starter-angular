@@ -1,82 +1,101 @@
-import { ChangeDetectorRef, Component,  isDevMode,  OnInit,  TemplateRef} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  isDevMode,
+  OnInit,
+  TemplateRef,
+} from "@angular/core";
+import { CommonModule } from "@angular/common";
+import {
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from "@angular/router";
+import { forkJoin, Observable } from "rxjs";
 import { PUBLIC_URL } from "keycloakify/PUBLIC_URL";
-import { KcClassPipe } from '../../pipes/classname.pipe';
-import {  Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { KcContext } from 'keycloakify/login/KcContext/KcContext';
-import { SanitizeHtmlPipe } from "../../pipes/sanitize-html.pipe";
+import { KcContext } from "keycloakify/login/KcContext/KcContext";
+import { GenericI18n_noJsx } from "keycloakify/login/i18n/i18n";
+import { KcClassPipe } from "./common/pipes/classname.pipe";
+import { SanitizeHtmlPipe } from "./common/pipes/sanitize-html.pipe";
+import { DynamicStyleLoader } from "./common/services/dynamicStyleLoader.service";
+import { I18nService } from "./common/services/i18n.service";
 
-import { createGetI18n, GenericI18n_noJsx } from 'keycloakify/login/i18n/i18n';
-import { SharedService } from './service/shared.service';
-import { Observable } from 'rxjs';
-import { DynamicStyleLoaderService } from './service/dynamicStyleLoader.service';
-export const{ getI18n } = createGetI18n({})
 @Component({
-  selector: 'kc-login-template',
-  templateUrl: './template.component.html',
-  styleUrls: ['./template.component.scss'],
+  selector: "kc-login-template",
+  templateUrl: "./template.component.html",
+  styleUrls: ["./template.component.scss"],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, RouterOutlet, KcClassPipe, SanitizeHtmlPipe],
-  providers: [KcClassPipe]
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    CommonModule,
+    RouterOutlet,
+    KcClassPipe,
+    SanitizeHtmlPipe,
+  ],
+  providers: [KcClassPipe, I18nService],
 })
-
 export class TemplateComponent implements OnInit {
+  stylesheetsLoaded?: boolean = false;
   kcContext: KcContext = window.kcContext;
   displayRequiredFields = false;
-  
+  i18n$?: Observable<GenericI18n_noJsx<any> | null>;
+  i18n?: GenericI18n_noJsx<any> | null;
+
+  // Child data
   displayInfo?: boolean = false;
   headerNode?: TemplateRef<any>;
-  infoNode?: TemplateRef<any>
-  socialProvidersNode?: TemplateRef<any>
+  infoNode?: TemplateRef<any>;
+  socialProvidersNode?: TemplateRef<any>;
 
-  stylesheetsLoaded = false;
-  locale?: {
-    supported: {
-        url: string;
-        label: string;
-        languageTag: string;
-    }[];
-    currentLanguageTag: string;
-  };
-
-  i18n$?: Observable<GenericI18n_noJsx<string>>
-
-  constructor(private cdref: ChangeDetectorRef, private sharedService: SharedService, private kcClassPipe: KcClassPipe, private dynamicStyleLoader: DynamicStyleLoaderService, private router: Router) {}
+  constructor(
+    private cdref: ChangeDetectorRef,
+    public i18nService: I18nService,
+    private kcClassPipe: KcClassPipe,
+    private dynamicStyleLoader: DynamicStyleLoader,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.setNavigationToPageId();
     this.loadStyles();
+    this.setNavigationToPageId();
     this.applyKcIndexClasses();
-    this.i18n$ = this.sharedService.getI18n();
-    setTimeout(() => {
-      this.sharedService.updateI18n();
-    }, 300);
+    this.i18nService.i18n$.subscribe((i18n) => {
+      this.i18n = i18n;
+    });
   }
 
-  onRouterOutletActivate(event : any) {
+  onRouterOutletActivate(event: any) {
     this.cdref.detectChanges();
-    //here you can set Nodes from children like headerNode
+    // Here you can set Nodes from children like headerNode
     this.headerNode = event.headerNode;
     this.infoNode = event.infoNode;
-    this.socialProvidersNode = event.socialProvidersNode;      
+    this.socialProvidersNode = event.socialProvidersNode;
     this.displayInfo = event.displayInfo;
-  }  
+  }
 
-  public setNavigationToPageId() {
-    this.router.navigate(['login', { outlets: { login: this.trimPageIdSuffix(window.kcContext.pageId) }}], { skipLocationChange: true });
-}
+  private setNavigationToPageId() {
+    this.router.navigate(
+      [
+        "login",
+        { outlets: { login: this.trimPageIdSuffix(window.kcContext.pageId) } },
+      ],
+      { skipLocationChange: true }
+    );
+  }
 
-private trimPageIdSuffix(pageId: string): string {
+  private trimPageIdSuffix(pageId: string): string {
     if (pageId.length > 4) {
-        return pageId.substring(0, pageId.length - 4);
+      return pageId.substring(0, pageId.length - 4);
     }
     return pageId;
-}
+  }
 
-  applyKcIndexClasses() {
+  private applyKcIndexClasses() {
     const kcBodyClass = this.kcClassPipe.transform("kcBodyClass");
     const kcHtmlClass = this.kcClassPipe.transform("kcHtmlClass");
-    
+
     const kcBodyClasses = kcBodyClass.split(" ");
     const kcHtmlClasses = kcHtmlClass.split(" ");
 
@@ -84,18 +103,33 @@ private trimPageIdSuffix(pageId: string): string {
     document.documentElement.classList.add(...kcHtmlClasses);
   }
 
-  loadStyles() {
-    if(!isDevMode()) {
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/@patternfly/patternfly/patternfly.min.css`);
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`);
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`);
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesCommonPath}/lib/pficon/pficon.css`)
-      this.dynamicStyleLoader.loadStyle(`${this.kcContext.url.resourcesPath}/css/login.css`);
+  private loadStyles(): void {
+    if (isDevMode()) {
+      this.stylesheetsLoaded = true;
+      return;
     }
+
+    const stylesheets = [
+      `${this.kcContext.url.resourcesCommonPath}/node_modules/@patternfly/patternfly/patternfly.min.css`,
+      `${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`,
+      `${this.kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`,
+      `${this.kcContext.url.resourcesCommonPath}/lib/pficon/pficon.css`,
+      `${this.kcContext.url.resourcesPath}/css/login.css`,
+    ];
+
+    forkJoin(
+      stylesheets.map((url) => this.dynamicStyleLoader.loadStyle(url))
+    ).subscribe({
+      next: () => {
+        this.stylesheetsLoaded = true;
+      },
+      error: (error) => {
+        console.error("Error loading styles:", error);
+      },
+    });
   }
 
-  
-  tryAnotherWay() { 
+  tryAnotherWay() {
     document.forms["kc-select-try-another-way-form" as never].submit();
   }
 

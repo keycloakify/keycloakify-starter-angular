@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
   selector: 'kc-terms',
   standalone: true,
   imports: [],
-  templateUrl: './terms.component.html',
-  styleUrl: './terms.component.scss'
+  templateUrl: './terms.component.html'
 })
 export class TermsComponent {
 

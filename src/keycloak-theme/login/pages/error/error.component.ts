@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { KcClassPipe } from '../../../pipes/classname.pipe';
+import { KcClassPipe } from '../../common/pipes/classname.pipe';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
   imports: [KcClassPipe, CommonModule],
   providers: [ActivatedRoute],
   templateUrl: './error.component.html',
-  styleUrl: './error.component.scss'
 })
 export class ErrorComponent {
   errorMessage?: string;

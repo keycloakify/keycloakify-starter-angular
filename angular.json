@@ -7,7 +7,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+           "path": "src/keycloak-theme/login"
         }
       },
       "root": "",
@@ -33,7 +34,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "./src/assets",
+                "input": "./src/keycloak-theme/assets",
                 "output": "./static/media"
               }
             ],

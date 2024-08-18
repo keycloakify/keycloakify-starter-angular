@@ -1,34 +1,31 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KcClassPipe } from '../../../pipes/classname.pipe';
+import { KcClassPipe } from '../../common/pipes/classname.pipe';
+import { SanitizeHtmlPipe } from "../../common/pipes/sanitize-html.pipe";
+import { PasswordWrapperComponent } from '../../common/components/password-wrapper/password-wrapper.component';
+import { ActivatedRoute} from '@angular/router';
 import { GenericI18n_noJsx } from 'keycloakify/login/i18n/i18n';
-import { SharedService } from '../service/shared.service';
-import { Observable } from 'rxjs';
-import { SanitizeHtmlPipe } from "../../../pipes/sanitize-html.pipe";
-import { KcContext } from '../KcContext';
 
 @Component({
     selector: 'kc-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
     standalone: true,
-    imports: [KcClassPipe, CommonModule, SanitizeHtmlPipe]
+    imports: [KcClassPipe, CommonModule, SanitizeHtmlPipe, PasswordWrapperComponent]
 })
 export class LoginComponent implements OnInit  {
-  i18n$?: Observable<GenericI18n_noJsx<any>>;
-  i18n?: GenericI18n_noJsx<any>;
-  
   @ViewChild('headerNode') headerNode?: TemplateRef<any>;
   @ViewChild('infoNode') infoNode?: TemplateRef<any>;
   @ViewChild('socialProvidersNode') socialProvidersNode?: TemplateRef<any>;
   @ViewChild('displayInfo') displayInfo?: boolean;
 
   kcContext: any = window.kcContext;
-  constructor(private sharedService: SharedService){}
+  i18n: GenericI18n_noJsx<any> | null = null;
+  constructor( public router: ActivatedRoute){}
 
   ngOnInit(){
-    this.i18n$ = this.sharedService.getI18n();
+    this.router.data.subscribe(data => {
+      this.i18n = data['i18n'];
+    });
     this.displayInfo = this.kcContext.realm.password && this.kcContext.realm?.registrationAllowed && !this.kcContext.registrationDisabled;
   }
-
 }

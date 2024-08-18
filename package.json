@@ -10,18 +10,17 @@
     "serve": "ng serve",
     "build-keycloak-theme": "ng build && keycloakify build",
     "_format": "prettier '**/*.{ts,json,html}'",
-    "format": "npm run _format --write"
+    "format": "npm run _format --write",
+    "lint": "ng lint"
   },
   "keycloakify": {
     "projectBuildDirPath": "build",
     "staticDirPathInProjectBuildDirPath": "static",
     "publicDirPath": "src/assets",
     "accountThemeImplementation": "none"
-  
   },
   "private": true,
   "dependencies": {
-    
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3",

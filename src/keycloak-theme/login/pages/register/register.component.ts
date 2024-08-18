@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { KcClassPipe } from "../../../pipes/classname.pipe";
+import { KcClassPipe } from "../../common/pipes/classname.pipe";
 
 @Component({
     selector: 'kc-register',

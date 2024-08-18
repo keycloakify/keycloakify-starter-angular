@@ -1,5 +1,4 @@
-@if(i18n$ | async; as i18n) {
-
+@if(i18n) {
 <ng-template #headerNode>
   {{i18n.msgStr("loginAccountTitle")}}
 </ng-template>
@@ -103,15 +102,17 @@
         <label for="password" [class]="('kcLabelClass' | kcClass)">
           {{i18n.msgStr("password")}}
         </label>
-        <!--What is Password Wrapper-->
-        <input
-          tabindex="{3}"
-          id="password"
-          [class]="('kcInputClass' | kcClass)"
-          name="password"
-          type="password"
-          autocomplete="off"
-        />
+
+        <kc-password-wrapper [passwordInputId]="'password'" [i18n]="i18n">
+          <input
+            tabindex="{3}"
+            id="password"
+            [class]="('kcInputClass' | kcClass)"
+            name="password"
+            type="password"
+            autocomplete="off"
+          />
+        </kc-password-wrapper>
         @if(kcContext.messagesPerField.existsError('username', 'password')) {
         <span
           id="input-error"
@@ -174,5 +175,4 @@
     }
   </div>
 </div>
-
 }

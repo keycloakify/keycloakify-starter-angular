@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { getKcClsx } from 'keycloakify/login/lib/kcClsx';
-import * as classData from '../assets/theme.properties.json';
+import * as classData from '../../../assets/theme.properties.json';
 
 @Pipe({
   name: 'kcClass',

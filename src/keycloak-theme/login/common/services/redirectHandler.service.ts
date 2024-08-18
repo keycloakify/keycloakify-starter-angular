@@ -1,6 +1,5 @@
 import { DOCUMENT } from "@angular/common";
 import { Inject, Injectable } from "@angular/core";
-import { SharedService } from "./shared.service";
 
 @Injectable({
   providedIn: "root"
@@ -8,8 +7,7 @@ import { SharedService } from "./shared.service";
 export class RedirectService {
   constructor(
     @Inject(DOCUMENT)
-    private document: Document,
-    public sharedService: SharedService
+    private document: Document
   ) {}
 
   public postRedirect(params: any, url:string) {
