@@ -8,6 +8,7 @@ import {
 } from '@angular/router';
 
 import { THEME_ROUTES } from './app.routes';
+import { kcContextMockProvider } from './login/common/kc-context-mock.provider';
 export const appConfig: ApplicationConfig = {
   providers: [     
     importProvidersFrom(BrowserModule),
@@ -15,6 +16,6 @@ export const appConfig: ApplicationConfig = {
       THEME_ROUTES, 
       withPreloading(PreloadAllModules)
     ),
-    
+    kcContextMockProvider
   ]
 };

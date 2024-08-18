@@ -24,7 +24,6 @@ import { I18nService } from "./common/services/i18n.service";
 @Component({
   selector: "kc-login-template",
   templateUrl: "./template.component.html",
-  styleUrls: ["./template.component.scss"],
   standalone: true,
   imports: [
     RouterLink,
@@ -44,7 +43,7 @@ export class TemplateComponent implements OnInit {
   i18n?: GenericI18n_noJsx<any> | null;
 
   // Child data
-  displayInfo?: boolean = false;
+  displayInfo?: boolean = true;
   headerNode?: TemplateRef<any>;
   infoNode?: TemplateRef<any>;
   socialProvidersNode?: TemplateRef<any>;
@@ -72,6 +71,7 @@ export class TemplateComponent implements OnInit {
     this.headerNode = event.headerNode;
     this.infoNode = event.infoNode;
     this.socialProvidersNode = event.socialProvidersNode;
+    console.log(event);
     this.displayInfo = event.displayInfo;
   }
 

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { KcClassPipe } from '../../common/pipes/classname.pipe';
 import { CommonModule } from '@angular/common';
 import { SanitizeHtmlPipe } from '../../common/pipes/sanitize-html.pipe';
+import { ActivatedRoute } from '@angular/router';
 export const{ getI18n } = createGetI18n({})
 
 @Component({
@@ -13,18 +14,18 @@ export const{ getI18n } = createGetI18n({})
   templateUrl: './login-reset-password.component.html'
 })
 export class LoginResetPasswordComponent {
-  i18n$?: Observable<GenericI18n_noJsx<any>>;
-  i18n?: GenericI18n_noJsx<any>;
-  
   @ViewChild('headerNode') headerNode?: TemplateRef<any>;
   @ViewChild('infoNode') infoNode?: TemplateRef<any>;
   @ViewChild('socialProvidersNode') socialProvidersNode?: TemplateRef<any>;
-  @ViewChild('displayInfo') displayInfo?: boolean;
+  displayInfo?: boolean = true;
 
   kcContext: any = window.kcContext;
-  constructor(){}
+  i18n: GenericI18n_noJsx<any> | null = null;
+  constructor( public router: ActivatedRoute){}
 
   ngOnInit(){
-    this.displayInfo = this.kcContext.realm.password && this.kcContext.realm?.registrationAllowed && !this.kcContext.registrationDisabled;
+    this.router.data.subscribe(data => {
+      this.i18n = data['i18n'];
+    });
   }
 }

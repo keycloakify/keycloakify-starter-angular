@@ -4,7 +4,7 @@ import { isDevMode } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { createGetKcContextMock } from 'keycloakify/login/KcContext';
 import { KcContextExtension, KcContextExtensionPerPage } from './models/KcContext';
-import { themeNames, kcEnvDefaults } from '../../kc.gen';
+import { themeNames, kcEnvDefaults } from './models/kc.gen';
 import type { LoginThemePageId } from 'keycloakify/bin/shared/constants';
 const kcContextExtension: KcContextExtension = {
   themeName: themeNames[0],
