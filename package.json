@@ -21,28 +21,27 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^18.2.0",
+    "@angular/common": "^18.2.0",
+    "@angular/compiler": "^18.2.0",
+    "@angular/core": "^18.2.0",
+    "@angular/forms": "^18.2.0",
+    "@angular/platform-browser": "^18.2.0",
+    "@angular/router": "^18.2.0",
+    "keycloakify": "10.0.0-rc.131",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.14.3",
-    "@angular/core": "^17.3.0",
-    "@angular/forms": "^17.3.0",
-    "@angular/common": "^17.3.0",
-    "@angular/router": "^17.3.0",
-    "@angular/compiler": "^17.3.0",
-    "@angular/animations": "^17.3.0",
-    "@angular/platform-browser": "^17.3.0",
-    "keycloakify": "10.0.0-rc.131"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^17.0.2",
-    "@angular-devkit/build-angular": "^17.3.0",
-    "@angular/cli": "^17.3.0",
-    "@angular/compiler-cli": "^17.3.0",
+    "@angular-builders/custom-webpack": "^18.0.0",
+    "@angular-devkit/build-angular": "^18.2.0",
+    "@angular/cli": "^18.2.0",
+    "@angular/compiler-cli": "^18.2.0",
     "@types/node": "^15.3.1",
-    "rimraf": "^5.0.7",
-    "typescript": "~5.4.2",
     "codelyzer": "^6.0.0",
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.7",
     "tslint": "~6.1.0",
-    "prettier": "^3.2.5"
+    "typescript": "~5.4.2"
   }
 }
