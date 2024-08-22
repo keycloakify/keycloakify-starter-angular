@@ -1,4 +1,4 @@
-@if(i18n) {
+@if(i18nService.i18n$ | async; as i18n) {
 <ng-template #headerNode>
   {{i18n.msgStr("loginAccountTitle")}}
 </ng-template>
@@ -103,7 +103,7 @@
           {{i18n.msgStr("password")}}
         </label>
 
-        <kc-password-wrapper [passwordInputId]="'password'" [i18n]="i18n">
+        <kc-password-wrapper passwordInputId="password-new" (i18n)="i18n">
           <input
             tabindex="{3}"
             id="password"

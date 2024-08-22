@@ -5,7 +5,7 @@ import {
   OnInit,
   TemplateRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, NgTemplateOutlet } from "@angular/common";
 import {
   Router,
   RouterLink,
@@ -33,7 +33,7 @@ import { I18nService } from "./common/services/i18n.service";
     KcClassPipe,
     SanitizeHtmlPipe,
   ],
-  providers: [KcClassPipe, I18nService],
+  providers: [KcClassPipe, I18nService, CommonModule],
 })
 export class TemplateComponent implements OnInit {
   stylesheetsLoaded?: boolean = false;
@@ -71,7 +71,6 @@ export class TemplateComponent implements OnInit {
     this.headerNode = event.headerNode;
     this.infoNode = event.infoNode;
     this.socialProvidersNode = event.socialProvidersNode;
-    console.log(event);
     this.displayInfo = event.displayInfo;
   }
 

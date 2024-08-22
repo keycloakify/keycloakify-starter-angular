@@ -1,10 +1,11 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KcClassPipe } from '../../common/pipes/classname.pipe';
 import { SanitizeHtmlPipe } from "../../common/pipes/sanitize-html.pipe";
 import { PasswordWrapperComponent } from '../../common/components/password-wrapper/password-wrapper.component';
 import { ActivatedRoute} from '@angular/router';
-import { GenericI18n_noJsx } from 'keycloakify/login/i18n/i18n';
+import { I18nService } from '../../common/services/i18n.service';
+import { KcContext } from 'keycloakify/login/KcContext';
 
 @Component({
     selector: 'kc-login',
@@ -12,20 +13,16 @@ import { GenericI18n_noJsx } from 'keycloakify/login/i18n/i18n';
     standalone: true,
     imports: [KcClassPipe, CommonModule, SanitizeHtmlPipe, PasswordWrapperComponent]
 })
-export class LoginComponent implements OnInit  {
+export class LoginComponent{
+  
+  kcContext: any= window.kcContext;
+
   @ViewChild('headerNode') headerNode?: TemplateRef<any>;
   @ViewChild('infoNode') infoNode?: TemplateRef<any>;
   @ViewChild('socialProvidersNode') socialProvidersNode?: TemplateRef<any>;
-  @ViewChild('displayInfo') displayInfo?: boolean;
+  displayInfo: boolean = this.kcContext.realm.password && this.kcContext.realm?.registrationAllowed && !this.kcContext.registrationDisabled;
+  displayMessage: boolean = !this.kcContext.messagesPerField.existsError("username", "password");
 
-  kcContext: any = window.kcContext;
-  i18n: GenericI18n_noJsx<any> | null = null;
-  constructor( public router: ActivatedRoute){}
+  constructor(public i18nService: I18nService){}
 
-  ngOnInit(){
-    this.router.data.subscribe(data => {
-      this.i18n = data['i18n'];
-    });
-    this.displayInfo = this.kcContext.realm.password && this.kcContext.realm?.registrationAllowed && !this.kcContext.registrationDisabled;
-  }
 }

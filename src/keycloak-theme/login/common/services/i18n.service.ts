@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { GenericI18n_noJsx } from "keycloakify/login/i18n/i18n";
+import { createGetI18n, GenericI18n_noJsx } from "keycloakify/login/i18n/i18n";
 import { BehaviorSubject, filter, interval, of, Subject, switchMap, takeUntil, tap } from "rxjs";
-import { getI18n } from "../../pages/login-reset-password/login-reset-password.component";
 
+export const{ getI18n } = createGetI18n({})
 @Injectable({ providedIn: 'root' })
 export class I18nService {
 
