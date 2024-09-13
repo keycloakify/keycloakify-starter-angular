@@ -1,19 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { KcClassPipe } from "../../pipes/classname.pipe";
+import { I18nService } from '../../services/i18n.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'kc-password-wrapper',
   standalone: true,
-  imports: [KcClassPipe],
-  templateUrl: './password-wrapper.component.html',
-  styleUrl: './password-wrapper.component.scss'
+  imports: [KcClassPipe, CommonModule],
+  templateUrl: './password-wrapper.component.html'
 })
 export class PasswordWrapperComponent implements OnInit {
   @Input() passwordInputId?: string;
-  @Input() i18n: any;
 
   isPasswordRevealed: boolean = false;
 
+  constructor(public i18nService: I18nService) { }
   ngOnInit(): void {
     this.setPasswordInputType();
   }

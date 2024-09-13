@@ -3,6 +3,7 @@ import { KcClassPipe } from '../../common/pipes/classname.pipe';
 import { CommonModule } from '@angular/common';
 import { SanitizeHtmlPipe } from '../../common/pipes/sanitize-html.pipe';
 import { I18nService } from '../../common/services/i18n.service';
+import { KcContext } from 'keycloakify/login/KcContext';
 
 @Component({
   selector: 'kc-login-reset-password',
@@ -11,7 +12,7 @@ import { I18nService } from '../../common/services/i18n.service';
   templateUrl: './login-reset-password.component.html'
 })
 export class LoginResetPasswordComponent {
-  kcContext: any = window.kcContext;
+  kcContext = window.kcContext as KcContext.LoginResetPassword;
 
   @ViewChild('headerNode') headerNode?: TemplateRef<any>;
   @ViewChild('infoNode') infoNode?: TemplateRef<any>;

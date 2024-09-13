@@ -32,8 +32,9 @@ import { I18nService } from "./common/services/i18n.service";
     RouterOutlet,
     KcClassPipe,
     SanitizeHtmlPipe,
-  ],
-  providers: [KcClassPipe, I18nService, CommonModule],
+    KcClassPipe
+],
+  providers: [CommonModule, KcClassPipe],
 })
 export class TemplateComponent implements OnInit {
   stylesheetsLoaded?: boolean = false;

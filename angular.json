@@ -42,6 +42,7 @@
           "configurations": {
             "production": {
               "indexTransform": "./index-html-transform.js",
+              "sourceMap": false,
               "customWebpackConfig": {
                   "path": "./extra-webpack.config.js",
                   "mergeRules": {
