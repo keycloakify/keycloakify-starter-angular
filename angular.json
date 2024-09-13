@@ -54,6 +54,7 @@
           },
           "configurations": {
             "production": {
+              "plugins": ["./extra-esbuild.config.js"],
               "indexHtmlTransformer": "./index-html-transform.js",
               "fileReplacements": [
                 {
