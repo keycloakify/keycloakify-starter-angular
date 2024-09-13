@@ -1,5 +1,5 @@
 
-import { ApplicationConfig, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, ɵprovideZonelessChangeDetection as provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   PreloadAllModules,
@@ -13,7 +13,6 @@ import { I18nService } from './login/common/services/i18n.service';
 export const appConfig: ApplicationConfig = {
   providers: [     
     importProvidersFrom(BrowserModule),
-    provideExperimentalZonelessChangeDetection(),
     provideRouter(
       THEME_ROUTES, 
       withPreloading(PreloadAllModules)
