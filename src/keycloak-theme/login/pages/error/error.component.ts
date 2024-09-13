@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { map, Observable, Unsubscribable } from "rxjs";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
@@ -11,6 +11,7 @@ import { KcClassPipe } from "../../common/pipes/classname.pipe";
   standalone: true,
   imports: [KcClassPipe, AsyncPipe],
   providers: [ActivatedRoute],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./error.component.html"
 })
 export class ErrorComponent {

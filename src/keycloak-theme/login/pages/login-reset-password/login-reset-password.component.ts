@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { KcContext } from "../../../models/KcContext";
 import { KcClassPipe } from "../../common/pipes/classname.pipe";
 import { SanitizeHtmlPipe } from "../../common/pipes/sanitize-html.pipe";
@@ -10,6 +10,7 @@ import { KC_CONTEXT } from "../../../keycloak-context.provider";
 @Component({
   selector: "kc-login-reset-password",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [KcClassPipe, AsyncPipe, SanitizeHtmlPipe, TemplateComponent],
   templateUrl: "./login-reset-password.component.html"
 })

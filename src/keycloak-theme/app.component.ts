@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/core";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { KcContext } from "keycloakify/login/KcContext";
@@ -8,6 +8,7 @@ import { KC_CONTEXT } from "./keycloak-context.provider";
   selector: "kc-app-root",
   template: "<router-outlet></router-outlet>",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule]
 })
 export class AppComponent implements OnInit {

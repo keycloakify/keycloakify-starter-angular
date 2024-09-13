@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { KcContext } from "../../../models/KcContext";
 import { KcClassPipe } from "../../common/pipes/classname.pipe";
 import { I18nService } from "../../common/services/i18n.service";
@@ -9,6 +9,7 @@ import { KC_CONTEXT } from "../../../keycloak-context.provider";
   selector: "kc-register",
   standalone: true,
   templateUrl: "./register.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [KcClassPipe, AsyncPipe]
 })
 export class RegisterComponent {

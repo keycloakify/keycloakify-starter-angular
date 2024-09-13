@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
 import { KcContext } from "../../../models/KcContext";
 import { LogoutOtherSessionsComponent } from "../../common/components/logout-other-sessions/logout-other-sessions.component";
@@ -11,6 +11,7 @@ import { I18nService } from "../../common/services/i18n.service";
 @Component({
   selector: "kc-login-update-password",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     KcClassPipe,
     PasswordWrapperComponent,

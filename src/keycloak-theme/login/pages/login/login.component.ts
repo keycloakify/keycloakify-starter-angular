@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass } from "@angular/common";
-import { Component, inject, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
 import { KcContext } from "../../../models/KcContext";
 import { PasswordWrapperComponent } from "../../common/components/password-wrapper/password-wrapper.component";
@@ -12,6 +12,7 @@ import { TemplateComponent } from "../../template.component";
   selector: "kc-login",
   templateUrl: "./login.component.html",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     KcClassPipe,
     AsyncPipe,

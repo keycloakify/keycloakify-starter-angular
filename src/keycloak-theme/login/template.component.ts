@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, inject, input, isDevMode, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, input, isDevMode, OnDestroy, OnInit } from "@angular/core";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { PUBLIC_URL } from "keycloakify/PUBLIC_URL";
 import { KcContext } from "keycloakify/login/KcContext/KcContext";
@@ -15,6 +15,7 @@ import { I18nService } from "./common/services/i18n.service";
   templateUrl: "./template.component.html",
   standalone: true,
   imports: [RouterLink, RouterLinkActive, AsyncPipe, KcClassPipe, SanitizeHtmlPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [KcClassPipe]
 })
 export class TemplateComponent implements OnInit, OnDestroy {
