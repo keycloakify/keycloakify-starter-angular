@@ -55,7 +55,6 @@
           "configurations": {
             "production": {
               "indexHtmlTransformer": "./index-html-transform.js",
-
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -76,7 +75,7 @@
               ]
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-builders/custom-esbuild:dev-server",
