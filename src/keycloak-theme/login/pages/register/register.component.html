@@ -1,6 +1,6 @@
 @let i18n = i18nService.i18n$ | async;
 @if (i18n) {
-    <!-- TODO: use template -->
+  <!-- TODO: use template -->
   <form
     id="kc-register-form"
     [class]="'kcFormClass' | kcClass"
@@ -153,13 +153,12 @@
         </div>
       </div>
       <div id="kc-form-buttons" [class]="'kcFormGroupClass' | kcClass">
-        <!-- <input
+        <input
           type="hidden"
           id="id-hidden-input"
           name="credentialId"
-          [value]="kcContext.auth?.selectedCredential"
-        /> -->
-        <!-- selectedCredential is not defined in register.ftl -->
+          [value]="kcContext.auth?.showResetCredentials"
+        />
         <input
           tabIndex="4"
           [class]="
@@ -175,7 +174,7 @@
           id="kc-login"
           type="submit"
           value="Registrieren"
-          [disabled]="kcContext['isRegisterButtonDisabled']"
+          [disabled]=""
         />
       </div>
     </div>
