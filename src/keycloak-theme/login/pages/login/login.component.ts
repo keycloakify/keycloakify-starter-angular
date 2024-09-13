@@ -1,7 +1,7 @@
 import { AsyncPipe, NgClass } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
-import { KcContext } from "../../../models/KcContext";
+import { KcContext } from "../../models/KcContext";
 import { PasswordWrapperComponent } from "../../common/components/password-wrapper/password-wrapper.component";
 import { KcClassPipe } from "../../common/pipes/classname.pipe";
 import { SanitizeHtmlPipe } from "../../common/pipes/sanitize-html.pipe";

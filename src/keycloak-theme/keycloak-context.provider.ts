@@ -7,12 +7,12 @@ import {
 import type { LoginThemePageId } from "keycloakify/bin/shared/constants";
 import { createGetKcContextMock } from "keycloakify/login/KcContext";
 import { environment } from "../environments/environment";
-import { kcEnvDefaults, themeNames } from "./models/kc.gen";
+import { kcEnvDefaults, themeNames } from "./login/models/kc.gen";
 import {
   KcContext,
   KcContextExtension,
   KcContextExtensionPerPage
-} from "./models/KcContext";
+} from "./login/models/KcContext";
 
 const kcContextExtension: KcContextExtension = {
   themeName: themeNames[0],

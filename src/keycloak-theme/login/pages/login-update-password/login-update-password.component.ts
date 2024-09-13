@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
-import { KcContext } from "../../../models/KcContext";
+import { KcContext } from "../../models/KcContext";
 import { LogoutOtherSessionsComponent } from "../../common/components/logout-other-sessions/logout-other-sessions.component";
 import { PasswordWrapperComponent } from "../../common/components/password-wrapper/password-wrapper.component";
 import { KcClassPipe } from "../../common/pipes/classname.pipe";

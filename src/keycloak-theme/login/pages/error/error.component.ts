@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { map, Observable, Unsubscribable } from "rxjs";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
-import { KcContext } from "../../../models/KcContext";
+import { KcContext } from "../../models/KcContext";
 import { KcClassPipe } from "../../common/pipes/classname.pipe";
 
 @Component({

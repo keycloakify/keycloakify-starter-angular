@@ -1,6 +1,6 @@
 import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { KcContext } from "../../../models/KcContext";
+import { KcContext } from "../../models/KcContext";
 import { KcClassPipe } from "../../common/pipes/classname.pipe";
 import { I18nService } from "../../common/services/i18n.service";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
