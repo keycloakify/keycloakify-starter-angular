@@ -7,7 +7,21 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "changeDetection": "OnPush",
+          "style": "css",
+          "standalone": true
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        },
+        "@schematics/angular:directive": {
+          "standalone": true
+        },
+        "@schematics/angular:pipe": {
+          "standalone": true
+        },
+        "@schematics/angular:service": {
+          "flat": false
         }
       },
       "root": "",
@@ -15,12 +29,14 @@
       "prefix": "kc",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-builders/custom-esbuild:application",
           "options": {
-         
-            "outputPath": "build/",
+            "outputPath": {
+              "base": "build",
+              "browser": ""
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -34,25 +50,20 @@
                 "output": "./static/media"
               }
             ],
-            "styles": [
-              "src/styles.css"
-              ]
-            },
-          
+            "styles": ["src/styles.css"]
+          },
           "configurations": {
             "production": {
-              "indexTransform": "./index-html-transform.js",
-              "customWebpackConfig": {
-                  "path": "./extra-webpack.config.js",
-                  "mergeRules": {
-                    "output": "replace",
-                    "entry": "replace",
-                    "plugins": "append"
-                  }
+              "indexHtmlTransformer": "./index-html-transform.js",
+
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
+              ]
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
               "sourceMap": true,
               "namedChunks": true,
@@ -68,7 +79,7 @@
           "defaultConfiguration": "development"
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular-builders/custom-esbuild:dev-server",
           "options": {
             "buildTarget": "angular_template:build"
           },
@@ -81,11 +92,18 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

@@ -1,74 +1,183 @@
-<!-- register.component.html -->
-<form id="kc-register-form" [class]="('kcFormClass' | kcClass)" [action]="kcContext.url.registrationAction" method="post">
-    <div [class]="('kcFormGroupClass' | kcClass) + ' ' + (kcContext.messagesPerField.printIfExists('firstName', ('kcFormGroupErrorClass')) | kcClass)">
-        <div [class]="('kcLabelWrapperClass' | kcClass)">
-            <label for="firstName" [class]="('kcLabelClass' | kcClass)">Vorname</label>
-        </div>
-        <div [class]="('kcInputWrapperClass' | kcClass)">
-            <input type="text" id="firstName" [class]="('kcInputClass' | kcClass)" name="firstName" formControlName="firstName" />
-        </div>
+@let i18n = i18nService.i18n$ | async;
+@if (i18n) {
+    <!-- TODO: use template -->
+  <form
+    id="kc-register-form"
+    [class]="'kcFormClass' | kcClass"
+    [action]="kcContext.url.registrationAction"
+    method="post"
+  >
+    <div
+      [class]="
+        ('kcFormGroupClass' | kcClass) +
+        ' ' +
+        (kcContext.messagesPerField.printIfExists('firstName', 'kcFormGroupErrorClass')
+          | kcClass)
+      "
+    >
+      <div [class]="'kcLabelWrapperClass' | kcClass">
+        <label for="firstName" [class]="'kcLabelClass' | kcClass">Vorname</label>
+      </div>
+      <div [class]="'kcInputWrapperClass' | kcClass">
+        <input
+          type="text"
+          id="firstName"
+          [class]="'kcInputClass' | kcClass"
+          name="firstName"
+          formControlName="firstName"
+        />
+      </div>
     </div>
 
-    <div [class]="('kcFormGroupClass' | kcClass) + ' ' + (kcContext.messagesPerField.printIfExists('lastName', ('kcFormGroupErrorClass')) | kcClass)">
-        <div [class]="('kcLabelWrapperClass' | kcClass)">
-            <label for="lastName" [class]="('kcLabelClass' | kcClass)">Nachname</label>
-        </div>
-        <div [class]="('kcInputWrapperClass' | kcClass)">
-            <input type="text" id="lastName" [class]="('kcInputClass' | kcClass)" name="lastName" formControlName="lastName" />
-        </div>
+    <div
+      [class]="
+        ('kcFormGroupClass' | kcClass) +
+        ' ' +
+        (kcContext.messagesPerField.printIfExists('lastName', 'kcFormGroupErrorClass')
+          | kcClass)
+      "
+    >
+      <div [class]="'kcLabelWrapperClass' | kcClass">
+        <label for="lastName" [class]="'kcLabelClass' | kcClass">Nachname</label>
+      </div>
+      <div [class]="'kcInputWrapperClass' | kcClass">
+        <input
+          type="text"
+          id="lastName"
+          [class]="'kcInputClass' | kcClass"
+          name="lastName"
+          formControlName="lastName"
+        />
+      </div>
     </div>
 
-    <div [class]="('kcFormGroupClass' | kcClass) + ' ' + (kcContext.messagesPerField.printIfExists('email', ('kcFormGroupErrorClass')) | kcClass)">
-        <div [class]="('kcLabelWrapperClass' | kcClass)">
-            <label for="email" [class]="('kcLabelClass' | kcClass)">E-Mail</label>
-        </div>
-        <div [class]="('kcInputWrapperClass' | kcClass)">
-            <input type="text" id="email" [class]="('kcInputClass' | kcClass)" name="email" formControlName="email" />
-        </div>
+    <div
+      [class]="
+        ('kcFormGroupClass' | kcClass) +
+        ' ' +
+        (kcContext.messagesPerField.printIfExists('email', 'kcFormGroupErrorClass')
+          | kcClass)
+      "
+    >
+      <div [class]="'kcLabelWrapperClass' | kcClass">
+        <label for="email" [class]="'kcLabelClass' | kcClass">E-Mail</label>
+      </div>
+      <div [class]="'kcInputWrapperClass' | kcClass">
+        <input
+          type="text"
+          id="email"
+          [class]="'kcInputClass' | kcClass"
+          name="email"
+          formControlName="email"
+        />
+      </div>
     </div>
 
-    @if(!kcContext.realm.registrationEmailAsUsername) {
-    <div [class]="('kcFormGroupClass' | kcClass) + ' ' + (kcContext.messagesPerField.printIfExists('username', ('kcFormGroupErrorClass')) | kcClass)">
-        <div [class]="('kcLabelWrapperClass' | kcClass)">
-            <label for="username" [class]="('kcLabelClass' | kcClass)">Benutzername</label>
+    @if (!kcContext.realm.registrationEmailAsUsername) {
+      <div
+        [class]="
+          ('kcFormGroupClass' | kcClass) +
+          ' ' +
+          (kcContext.messagesPerField.printIfExists('username', 'kcFormGroupErrorClass')
+            | kcClass)
+        "
+      >
+        <div [class]="'kcLabelWrapperClass' | kcClass">
+          <label for="username" [class]="'kcLabelClass' | kcClass">Benutzername</label>
         </div>
-        <div [class]="('kcInputWrapperClass' | kcClass)">
-            <input type="text" id="username" [class]="('kcInputClass' | kcClass)" name="username" formControlName="username" />
+        <div [class]="'kcInputWrapperClass' | kcClass">
+          <input
+            type="text"
+            id="username"
+            [class]="'kcInputClass' | kcClass"
+            name="username"
+            formControlName="username"
+          />
         </div>
-    </div>
+      </div>
     }
 
-    @if(kcContext.passwordRequired) {
-    <div [class]="('kcFormGroupClass' | kcClass) + ' ' + (kcContext.messagesPerField.printIfExists('password', ('kcFormGroupErrorClass')) | kcClass)">
-        <div [class]="('kcLabelWrapperClass' | kcClass)">
-            <label for="password" [class]="('kcLabelClass' | kcClass)">Passwort</label>
+    @if (kcContext.passwordRequired) {
+      <div
+        [class]="
+          ('kcFormGroupClass' | kcClass) +
+          ' ' +
+          (kcContext.messagesPerField.printIfExists('password', 'kcFormGroupErrorClass')
+            | kcClass)
+        "
+      >
+        <div [class]="'kcLabelWrapperClass' | kcClass">
+          <label for="password" [class]="'kcLabelClass' | kcClass">Passwort</label>
         </div>
-        <div [class]="('kcInputWrapperClass' | kcClass)">
-            <input type="password" id="password" [class]="('kcInputClass' | kcClass)" name="password" autoComplete="new-password" />
+        <div [class]="'kcInputWrapperClass' | kcClass">
+          <input
+            type="password"
+            id="password"
+            [class]="'kcInputClass' | kcClass"
+            name="password"
+            autoComplete="new-password"
+          />
         </div>
-    </div>
+      </div>
 
-    <div [class]="('kcFormGroupClass' | kcClass) + ' ' + (kcContext.messagesPerField.printIfExists('password-confirm', ('kcFormGroupErrorClass')) | kcClass)">
-        <div [class]="('kcLabelWrapperClass' | kcClass)">
-            <label for="password-confirm" [class]="('kcLabelClass' | kcClass)">Passwort bestätigen</label>
+      <div
+        [class]="
+          ('kcFormGroupClass' | kcClass) +
+          ' ' +
+          (kcContext.messagesPerField.printIfExists(
+            'password-confirm',
+            'kcFormGroupErrorClass'
+          ) | kcClass)
+        "
+      >
+        <div [class]="'kcLabelWrapperClass' | kcClass">
+          <label for="password-confirm" [class]="'kcLabelClass' | kcClass"
+            >Passwort bestätigen</label
+          >
         </div>
-        <div [class]="('kcInputWrapperClass' | kcClass)">
-            <input type="password" id="password-confirm" [class]="('kcInputClass' | kcClass)" name="password-confirm" />
+        <div [class]="'kcInputWrapperClass' | kcClass">
+          <input
+            type="password"
+            id="password-confirm"
+            [class]="'kcInputClass' | kcClass"
+            name="password-confirm"
+          />
         </div>
-    </div>
+      </div>
     }
 
-    <div [class]="('kcFormGroupClass' | kcClass)">
-        <div id="kc-form-options" [class]="('kcFormOptionsClass' | kcClass)">
-            <div [class]="('kcFormOptionsWrapperClass' | kcClass)">
-                <span><a [href]="kcContext.url.loginUrl">Zurück zum Login</a></span>
-            </div>
+    <div [class]="'kcFormGroupClass' | kcClass">
+      <div id="kc-form-options" [class]="'kcFormOptionsClass' | kcClass">
+        <div [class]="'kcFormOptionsWrapperClass' | kcClass">
+          <span><a [href]="kcContext.url.loginUrl">Zurück zum Login</a></span>
         </div>
-        <div id="kc-form-buttons" [class]="('kcFormGroupClass' | kcClass)">
-            <input type="hidden" id="id-hidden-input" name="credentialId" [value]="kcContext.auth?.selectedCredential" />
-            <input tabIndex="4"
-              [class]="('kcButtonClass' | kcClass) + ' ' + ('kcButtonPrimaryClass' | kcClass) + ' ' + ('kcButtonBlockClass' | kcClass) + ' ' + ('kcButtonLargeClass' | kcClass)"
-              name="login" id="kc-login" type="submit" value="Registrieren" [disabled]="kcContext.isRegisterButtonDisabled" />
-        </div>
+      </div>
+      <div id="kc-form-buttons" [class]="'kcFormGroupClass' | kcClass">
+        <!-- <input
+          type="hidden"
+          id="id-hidden-input"
+          name="credentialId"
+          [value]="kcContext.auth?.selectedCredential"
+        /> -->
+        <!-- selectedCredential is not defined in register.ftl -->
+        <input
+          tabIndex="4"
+          [class]="
+            ('kcButtonClass' | kcClass) +
+            ' ' +
+            ('kcButtonPrimaryClass' | kcClass) +
+            ' ' +
+            ('kcButtonBlockClass' | kcClass) +
+            ' ' +
+            ('kcButtonLargeClass' | kcClass)
+          "
+          name="login"
+          id="kc-login"
+          type="submit"
+          value="Registrieren"
+          [disabled]="kcContext['isRegisterButtonDisabled']"
+        />
+      </div>
     </div>
-</form>
+  </form>
+}

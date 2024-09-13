@@ -1,10 +1,9 @@
 <div id="kc-error-message">
-    <p [class]="('instruction' | kcClass)">{{errorMessage}}</p>
-    @if(kcContext && kcContext.client && kcContext.client.baseUrl) {
-        <p>
-            <a id="backToApplication" [href]=kcContext.client.baseUrl>
-                Zum Login
-            </a>
-        </p>
-    }
+  <!-- [class]="'instruction' | kcClass" instruction doesn't exist in ClassKey -->
+  <p class="instruction">{{ errorMessage | async }}</p>
+  @if (kcContext.client.baseUrl) {
+    <p>
+      <a id="backToApplication" [href]="kcContext.client.baseUrl"> Zum Login </a>
+    </p>
+  }
 </div>

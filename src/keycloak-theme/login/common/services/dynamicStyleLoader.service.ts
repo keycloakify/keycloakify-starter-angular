@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DynamicStyleLoader {
-  constructor() {}
 
   loadStyle(url: string): Observable<void> {
     return new Observable<void>((observer) => {

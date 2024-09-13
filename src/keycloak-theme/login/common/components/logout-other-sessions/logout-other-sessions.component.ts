@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { KcClassPipe } from "../../pipes/classname.pipe";
+import { Component, input } from '@angular/core';
 import { GenericI18n_noJsx } from 'keycloakify/login/i18n/i18n';
+import { KcClassPipe } from "../../pipes/classname.pipe";
 
 @Component({
   selector: 'kc-logout-other-sessions',
@@ -9,5 +9,5 @@ import { GenericI18n_noJsx } from 'keycloakify/login/i18n/i18n';
   templateUrl: './logout-other-sessions.component.html',
 })
 export class LogoutOtherSessionsComponent {
-  @Input() i18n?: GenericI18n_noJsx<any>;
+  i18n = input<GenericI18n_noJsx<string>>();
 }

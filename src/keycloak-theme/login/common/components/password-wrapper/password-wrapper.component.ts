@@ -1,16 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, input, OnInit } from "@angular/core";
+import { GenericI18n_noJsx } from "keycloakify/login/i18n/i18n";
 import { KcClassPipe } from "../../pipes/classname.pipe";
 
 @Component({
-  selector: 'kc-password-wrapper',
+  selector: "kc-password-wrapper",
   standalone: true,
   imports: [KcClassPipe],
-  templateUrl: './password-wrapper.component.html',
-  styleUrl: './password-wrapper.component.scss'
+  templateUrl: "./password-wrapper.component.html",
+  styleUrl: "./password-wrapper.component.scss"
 })
 export class PasswordWrapperComponent implements OnInit {
-  @Input() passwordInputId?: string;
-  @Input() i18n: any;
+  passwordInputId = input<string>();
+  i18n = input<GenericI18n_noJsx<string>>();
 
   isPasswordRevealed: boolean = false;
 
@@ -24,12 +25,15 @@ export class PasswordWrapperComponent implements OnInit {
   }
 
   private setPasswordInputType(): void {
-    if (!this.passwordInputId) {
-      return
+    const passwordInputId = this.passwordInputId();
+    if (!passwordInputId) {
+      return;
     }
-    const passwordInputElement = document.getElementById(this.passwordInputId) as HTMLInputElement;
+    const passwordInputElement = document.getElementById(
+      passwordInputId
+    ) as HTMLInputElement;
     if (passwordInputElement) {
-      passwordInputElement.type = this.isPasswordRevealed ? 'text' : 'password';
+      passwordInputElement.type = this.isPasswordRevealed ? "text" : "password";
     }
   }
 }

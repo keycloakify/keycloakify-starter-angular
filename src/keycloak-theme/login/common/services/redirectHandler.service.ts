@@ -1,22 +1,20 @@
 import { DOCUMENT } from "@angular/common";
 import { Inject, Injectable } from "@angular/core";
+import { Params } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
 })
 export class RedirectService {
-  constructor(
-    @Inject(DOCUMENT)
-    private document: Document
-  ) {}
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  public postRedirect(params: any, url:string) {
-    console.log("params: ", params)
+  public postRedirect(params: Params, url: string) {
+    console.log("params: ", params);
     const form = this.document.createElement("form");
     form.method = "POST";
     form.action = url;
     form.target = "_top";
-    for (let prop in params) {
+    for (const prop in params) {
       const input = this.document.createElement("input");
       input.type = "hidden";
       input.name = prop;
@@ -28,8 +26,6 @@ export class RedirectService {
   }
 
   public getRedirect(url: string) {
-    
     this.document.location.href = url;
-
   }
 }
