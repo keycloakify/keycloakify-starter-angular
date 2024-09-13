@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, input, OnInit } from "@angular/core
 import { GenericI18n_noJsx } from "keycloakify/login/i18n/i18n";
 import { KcClassPipe } from "../../pipes/classname.pipe";
 import { I18nService } from '../../services/i18n.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: "kc-password-wrapper",
@@ -10,7 +9,6 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [KcClassPipe],
   templateUrl: "./password-wrapper.component.html",
-  styleUrl: "./password-wrapper.component.scss"
 })
 export class PasswordWrapperComponent implements OnInit {
   passwordInputId = input<string>();
