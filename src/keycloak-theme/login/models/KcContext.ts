@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import type { ExtendKcContext } from "keycloakify/login";
 import type { KcEnvName, ThemeName } from "./kc.gen";
 
@@ -7,6 +6,6 @@ export type KcContextExtension = {
     properties: Record<KcEnvName, string> & {};
 };
 
-export type KcContextExtensionPerPage = {};
+export type KcContextExtensionPerPage = Record<string, Record<string, unknown>>;
 
 export type KcContext = ExtendKcContext<KcContextExtension, KcContextExtensionPerPage>;

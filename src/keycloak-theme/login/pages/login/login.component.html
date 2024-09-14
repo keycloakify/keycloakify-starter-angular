@@ -1,177 +1,257 @@
-@if(i18nService.i18n$ | async; as i18n) {
-  <ng-template #headerNode>
-    {{i18n.msgStr("loginAccountTitle")}}
-  </ng-template>
-  
-  <ng-template #infoNode>
-    <div id="kc-registration-container">
-      <div id="kc-registration">
-        <span>
-          {{i18n.msgStr("noAccount")}}
-          <a tabindex="{8}" href="{url.registrationUrl}">
-            {{i18n.msgStr("doRegister")}}
-          </a>
-        </span>
-      </div>
-    </div>
-  </ng-template>
-  
-  <ng-template #socialProvidersNode>
-    @if(kcContext.realm.password && kcContext.social.providers?.length) {
-  
-    <div
-      id="kc-social-providers"
-      [class]="('kcFormSocialAccountSectionClass' | kcClass)"
-    >
-      <hr />
-      <h2>{{i18n.msgStr("identity-provider-login-label")}}</h2>
-      <ul
-        [class]="('kcFormSocialAccountListClass' | kcClass)"
-      >
-        @for(provider of kcContext.social.providers; track provider; let idx =
-        $index) {
-        <li (key)="provider.alias">
-          <a
-            [id]="provider.alias"
-            [class]="('kcFormSocialAccountListButtonClass' | kcClass)"
-            type="button"
-            [href]="provider.loginUrl"
-          >
-            @if(provider.iconClasses) {
-            <i
-              [class]="('kcFormSocialAccountNameClass' | kcClass) +  provider.iconClasses"
-              aria-hidden="true"
-            ></i>
-            }
-            <span
-              [class]="('kcCommonLogoIdP' | kcClass) + provider.iconClasses ? 'kc-social-icon-text': ''"
-              [innerHTML]="provider.displayName | sanitizeHtml"
-            >
-              ></span
-            >
-          </a>
-        </li>
-        }
-      </ul>
-    </div>
-    }
-  </ng-template>
-  
-  <div id="kc-form">
-    <div id="kc-form-wrapper">
-      @if(this.kcContext.realm.password) {
-      <form
-        id="kc-form-login"
-        [action]="kcContext.url.loginAction"
-        method="post"
-      >
-        @if(!kcContext.usernameHidden) {
-        <div [class]="('kcFormGroupClass' | kcClass)">
-          <label for="username" [class]="('kcLabelClass' | kcClass)">
-            @if(!kcContext.realm.loginWithEmailAllowed) {
-            {{i18n.msgStr("username")}} } 
-            @else if(!kcContext.realm.registrationEmailAsUsername) {
-            {{i18n.msgStr("usernameOrEmail")}} } @else { {{i18n.msgStr("email")}}
-            }
-          </label>
-          <input
-            tabindex="{2}"
-            id="username"
-            [class]="('kcInputClass' | kcClass)"
-            name="username"
-            type="text"
-            autofocus
-            [value]="kcContext.login.username || ''"
-            (aria-invalid)="kcContext.messagesPerField.existsError('username', 'password')"
-          />
-          @if(kcContext.messagesPerField.existsError('username', 'password')) {
-          <span
-            id="input-error"
-            [class]="('kcInputErrorMessageClass' | kcClass)"
-            aria-live="polite"
-            [innerHTML]="kcContext.messagesPerField.getFirstError('username', 'password') | sanitizeHtml"
-          >
-          </span>
-          }
-        </div>
-        }
-  
-        <div [class]="'kcFormGroupClass' | kcClass">
-          <label for="password" [class]="('kcLabelClass' | kcClass)">
-            {{i18n.msgStr("password")}}
-          </label>
-  
-          <kc-password-wrapper passwordInputId="password-new" (i18n)="i18n">
-            <input
-              tabindex="{3}"
-              id="password"
-              [class]="('kcInputClass' | kcClass)"
-              name="password"
-              type="password"
-              autocomplete="off"
-            />
-          </kc-password-wrapper>
-          @if(kcContext.messagesPerField.existsError('username', 'password')) {
-          <span
-            id="input-error"
-            [class]="('kcInputErrorMessageClass' | kcClass)"
-            aria-live="polite"
-            [innerHTML]="kcContext.messagesPerField.getFirstError('username', 'password') | sanitizeHtml"
-          >
-          </span>
-          }
-        </div>
-  
-        <div
-          [class]="('kcFormGroupClass' | kcClass) + ' ' + ('kcFormSettingClass' | kcClass)"
-        >
-          <div id="kc-form-options">
-            @if(kcContext.realm.rememberMe && !kcContext.usernameHidden) {
-            <div class="checkbox">
-              <label>
-                <input
-                  tabindex="{5}"
-                  id="rememberMe"
-                  name="rememberMe"
-                  type="checkbox"
-                  [checked]="kcContext.login.rememberMe === 'on'"
-                />
-                {{i18n.msgStr("rememberMe")}}
-              </label>
+@let i18n = i18nService.i18n$ | async;
+@if (i18n) {
+    <kc-login-template [displayInfo]="displayInfo" [displayMessage]="displayMessage">
+        <ng-container headerNode>
+            {{ i18n.msgStr("loginAccountTitle") }}
+        </ng-container>
+        <ng-container infoNode>
+            <div id="kc-registration-container">
+                <div id="kc-registration">
+                    <span>
+                        {{ i18n.msgStr("noAccount") }}
+                        <a tabindex="8" [href]="kcContext.url.registrationUrl">
+                            {{ i18n.msgStr("doRegister") }}
+                        </a>
+                    </span>
+                </div>
             </div>
+        </ng-container>
+        <ng-container socialProvidersNode>
+            @if (!!kcContext.realm.password && !!kcContext.social?.providers?.length) {
+                <div
+                    id="kc-social-providers"
+                    [class]="'kcFormSocialAccountSectionClass' | kcClass"
+                >
+                    <hr />
+                    <h2>{{ i18n.msgStr("identity-provider-login-label") }}</h2>
+                    <ul
+                        [class]="
+                            ('kcFormSocialAccountListClass' | kcClass) +
+                            ((kcContext.social?.providers?.length ?? 0) > 3)
+                                ? ('kcFormSocialAccountListGridClass' | kcClass)
+                                : ''
+                        "
+                    >
+                        @for (
+                            provider of kcContext.social?.providers;
+                            track provider;
+                            let idx = $index
+                        ) {
+                            <li (key)="(provider.alias)">
+                                <a
+                                    [id]="provider.alias"
+                                    [class]="
+                                        'kcFormSocialAccountListButtonClass' | kcClass
+                                    "
+                                    [ngClass]="
+                                        (kcContext.social?.providers?.length ?? 0) > 3
+                                            ? ('kcFormSocialAccountGridItem' | kcClass)
+                                            : ''
+                                    "
+                                    type="button"
+                                    [href]="provider.loginUrl"
+                                >
+                                    @if (provider.iconClasses) {
+                                        <i
+                                            [ngClass]="provider.iconClasses"
+                                            [class]="
+                                                'kcFormSocialAccountNameClass' | kcClass
+                                            "
+                                            aria-hidden="true"
+                                        ></i>
+                                    }
+                                    <span
+                                        [ngClass]="{
+                                            'kc-social-icon-text': provider.iconClasses
+                                        }"
+                                        [class]="'kcCommonLogoIdP' | kcClass"
+                                        [innerHTML]="provider.displayName | sanitizeHtml"
+                                    >
+                                        ></span
+                                    >
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
             }
-          </div>
-  
-          <div [class]="('kcFormOptionsWrapperClass' | kcClass)">
-            @if (kcContext.realm.resetPasswordAllowed){
-            <span>
-              <a tabindex="{6}" [href]="kcContext.url.loginResetCredentialsUrl"
-                >{{i18n.msgStr("doForgotPassword")}}</a
-              >
-            </span>
-            }
-          </div>
-        </div>
-        <div id="kc-form-buttons" [class]="('kcFormGroupClass' | kcClass)">
-          <input
-            type="hidden"
-            id="id-hidden-input"
-            name="credentialId"
-            [value]="kcContext.auth.selectedCredential"
-          />
-          <input
-            tabindex="{7}"
-            [class]="('kcButtonClass' | kcClass) + ' ' + ('kcButtonPrimaryClass' | kcClass) + ' ' + ('kcButtonBlockClass' | kcClass) + ' ' + ('kcButtonLargeClass' | kcClass)"
-            name="login"
-            id="kc-login"
-            type="submit"
-            [value]="i18n.msgStr('doLogIn')"
-            (click)="isLoginButtonDisabled = true"
-            [disabled]="isLoginButtonDisabled"
-          />
-        </div>
-      </form>
-      }
-    </div>
-  </div>
-  }
+        </ng-container>
+        <ng-container content>
+            <div id="kc-form">
+                <div id="kc-form-wrapper">
+                    <!-- login.component.html -->
+                    @if (kcContext.realm.password) {
+                        <form
+                            id="kc-form-login"
+                            (onSubmit)="isLoginButtonDisabled.set(true)"
+                            [action]="kcContext.url.loginAction"
+                            method="post"
+                        >
+                            @if (!kcContext.usernameHidden) {
+                                <div [class]="'kcFormGroupClass' | kcClass">
+                                    <label
+                                        for="username"
+                                        [class]="'kcLabelClass' | kcClass"
+                                    >
+                                        @if (!kcContext.realm.loginWithEmailAllowed) {
+                                            {{ i18n.msgStr("username") }}
+                                        } @else if (
+                                            !kcContext.realm.registrationEmailAsUsername
+                                        ) {
+                                            {{ i18n.msgStr("usernameOrEmail") }}
+                                        } @else {
+                                            {{ i18n.msgStr("email") }}
+                                        }
+                                    </label>
+                                    <input
+                                        tabindex="2"
+                                        id="username"
+                                        [class]="'kcInputClass' | kcClass"
+                                        name="username"
+                                        type="text"
+                                        autofocus
+                                        [value]="kcContext.login.username || ''"
+                                        (aria-invalid)="
+                                            kcContext.messagesPerField.existsError(
+                                                'username',
+                                                'password'
+                                            )
+                                        "
+                                    />
+                                    @if (
+                                        kcContext.messagesPerField.existsError(
+                                            "username",
+                                            "password"
+                                        )
+                                    ) {
+                                        <span
+                                            id="input-error"
+                                            [class]="'kcInputErrorMessageClass' | kcClass"
+                                            aria-live="polite"
+                                            [innerHTML]="
+                                                kcContext.messagesPerField.getFirstError(
+                                                    'username',
+                                                    'password'
+                                                ) | sanitizeHtml
+                                            "
+                                        >
+                                        </span>
+                                    }
+                                </div>
+                            }
+
+                            <div [class]="'kcFormGroupClass' | kcClass">
+                                <label for="password" [class]="'kcLabelClass' | kcClass">
+                                    {{ i18n.msgStr("password") }}
+                                </label>
+
+                                <kc-password-wrapper passwordInputId="password-new">
+                                    <input
+                                        tabindex="3"
+                                        id="password"
+                                        [class]="'kcInputClass' | kcClass"
+                                        name="password"
+                                        type="password"
+                                        autocomplete="off"
+                                    />
+                                </kc-password-wrapper>
+                                @if (
+                                    kcContext.messagesPerField.existsError(
+                                        "username",
+                                        "password"
+                                    )
+                                ) {
+                                    <span
+                                        id="input-error"
+                                        [class]="'kcInputErrorMessageClass' | kcClass"
+                                        aria-live="polite"
+                                        [innerHTML]="
+                                            kcContext.messagesPerField.getFirstError(
+                                                'username',
+                                                'password'
+                                            ) | sanitizeHtml
+                                        "
+                                    >
+                                    </span>
+                                }
+                            </div>
+
+                            <div
+                                [class]="
+                                    ('kcFormGroupClass' | kcClass) +
+                                    ' ' +
+                                    ('kcFormSettingClass' | kcClass)
+                                "
+                            >
+                                <div id="kc-form-options">
+                                    @if (
+                                        kcContext.realm.rememberMe &&
+                                        !kcContext.usernameHidden
+                                    ) {
+                                        <div class="checkbox">
+                                            <label>
+                                                <input
+                                                    tabindex="5"
+                                                    id="rememberMe"
+                                                    name="rememberMe"
+                                                    type="checkbox"
+                                                    [checked]="
+                                                        kcContext.login.rememberMe ===
+                                                        'on'
+                                                    "
+                                                />
+                                                {{ i18n.msgStr("rememberMe") }}
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div [class]="'kcFormOptionsWrapperClass' | kcClass">
+                                    @if (kcContext.realm.resetPasswordAllowed) {
+                                        <span>
+                                            <a
+                                                tabindex="6"
+                                                [href]="
+                                                    kcContext.url.loginResetCredentialsUrl
+                                                "
+                                                >{{ i18n.msgStr("doForgotPassword") }}</a
+                                            >
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                            <div
+                                id="kc-form-buttons"
+                                [class]="'kcFormGroupClass' | kcClass"
+                            >
+                                <input
+                                    type="hidden"
+                                    id="id-hidden-input"
+                                    name="credentialId"
+                                    [value]="kcContext.auth.selectedCredential"
+                                />
+                                <input
+                                    tabindex="7"
+                                    [class]="
+                                        ('kcButtonClass' | kcClass) +
+                                        ' ' +
+                                        ('kcButtonPrimaryClass' | kcClass) +
+                                        ' ' +
+                                        ('kcButtonBlockClass' | kcClass) +
+                                        ' ' +
+                                        ('kcButtonLargeClass' | kcClass)
+                                    "
+                                    name="login"
+                                    id="kc-login"
+                                    type="submit"
+                                    [value]="i18n.msgStr('doLogIn')"
+                                    [disabled]="isLoginButtonDisabled()"
+                                />
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </ng-container>
+    </kc-login-template>
+}
