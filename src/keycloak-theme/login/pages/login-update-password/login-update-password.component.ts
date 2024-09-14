@@ -22,8 +22,8 @@ import { I18nService } from "../../common/services/i18n.service";
   templateUrl: "./login-update-password.component.html"
 })
 export class LoginUpdatePasswordComponent {
-  kcContext: KcContext<"login-update.ftl"> =
-    inject<KcContext<"login-update.ftl">>(KC_CONTEXT);
+  kcContext =
+    inject<Extract<KcContext, { pageId: "login-update-password.ftl" }>>(KC_CONTEXT);
   i18nService: I18nService = inject(I18nService);
   displayInfo = false;
   displayMessage: boolean = !this.kcContext?.messagesPerField?.existsError("username");

@@ -23,7 +23,7 @@ import { TemplateComponent } from "../../template.component";
   ]
 })
 export class LoginComponent {
-  kcContext: KcContext<"login.ftl"> = inject<KcContext<"login.ftl">>(KC_CONTEXT);
+  kcContext = inject<Extract<KcContext, { pageId: "login.ftl" }>>(KC_CONTEXT);
   isLoginButtonDisabled = signal(false);
   i18nService = inject(I18nService);
   displayInfo: boolean =

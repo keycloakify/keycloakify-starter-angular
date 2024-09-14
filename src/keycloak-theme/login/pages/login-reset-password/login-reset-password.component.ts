@@ -15,7 +15,8 @@ import { KC_CONTEXT } from "../../../keycloak-context.provider";
   templateUrl: "./login-reset-password.component.html"
 })
 export class LoginResetPasswordComponent {
-  kcContext: KcContext<"login-reset-password.ftl"> = inject<KcContext<"login-reset-password.ftl">>(KC_CONTEXT);
+  kcContext =
+    inject<Extract<KcContext, { pageId: "login-reset-password.ftl" }>>(KC_CONTEXT);
   i18nService: I18nService = inject(I18nService);
   displayInfo = false;
   displayMessage: boolean = !this.kcContext?.messagesPerField?.existsError("username");

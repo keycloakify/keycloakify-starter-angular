@@ -15,7 +15,7 @@ import { KcClassPipe } from "../../common/pipes/classname.pipe";
   templateUrl: "./error.component.html"
 })
 export class ErrorComponent {
-  kcContext: KcContext<"error.ftl"> = inject<KcContext<"error.ftl">>(KC_CONTEXT);
+  kcContext = inject<Extract<KcContext, { pageId: "error.ftl" }>>(KC_CONTEXT);
   subscription: Unsubscribable | undefined;
   private route = inject(ActivatedRoute);
   errorMessage: Observable<string | undefined> = this.route.data.pipe(

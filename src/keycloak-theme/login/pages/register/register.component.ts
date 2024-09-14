@@ -13,6 +13,6 @@ import { KC_CONTEXT } from "../../../keycloak-context.provider";
   imports: [KcClassPipe, AsyncPipe]
 })
 export class RegisterComponent {
-  kcContext: KcContext<"register.ftl"> = inject<KcContext<"register.ftl">>(KC_CONTEXT);
+  kcContext = inject<Extract<KcContext, { pageId: "register.ftl" }>>(KC_CONTEXT);
   i18nService = inject(I18nService);
 }
