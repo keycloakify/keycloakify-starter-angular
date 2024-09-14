@@ -1,27 +1,26 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: "root"
 })
 export class DynamicStyleLoader {
+    loadStyle(url: string): Observable<void> {
+        return new Observable<void>(observer => {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = url;
 
-  loadStyle(url: string): Observable<void> {
-    return new Observable<void>((observer) => {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = url;
+            link.onload = () => {
+                observer.next();
+                observer.complete();
+            };
 
-      link.onload = () => {
-        observer.next();
-        observer.complete();
-      };
+            link.onerror = () => {
+                observer.error(new Error(`Failed to load stylesheet: ${url}`));
+            };
 
-      link.onerror = () => {
-        observer.error(new Error(`Failed to load stylesheet: ${url}`));
-      };
-
-      document.head.appendChild(link);
-    });
-  }
+            document.head.appendChild(link);
+        });
+    }
 }

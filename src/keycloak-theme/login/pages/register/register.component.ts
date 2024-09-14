@@ -6,13 +6,13 @@ import { I18nService } from "../../common/services/i18n.service";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
 
 @Component({
-  selector: "kc-register",
-  standalone: true,
-  templateUrl: "./register.component.html",
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [KcClassPipe, AsyncPipe]
+    selector: "kc-register",
+    standalone: true,
+    templateUrl: "./register.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [KcClassPipe, AsyncPipe]
 })
 export class RegisterComponent {
-  kcContext = inject<Extract<KcContext, { pageId: "register.ftl" }>>(KC_CONTEXT);
-  i18nService = inject(I18nService);
+    kcContext = inject<Extract<KcContext, { pageId: "register.ftl" }>>(KC_CONTEXT);
+    i18nService = inject(I18nService);
 }

@@ -8,6 +8,6 @@ import { environment } from "./environments/environment";
  * in dev mode we provide a context mock
  */
 
-if (!environment.production || (typeof window !== 'undefined' && window.kcContext)) {
-  bootstrapApplication(AppComponent, appConfig).catch(err => console.error(err));
+if (!environment.production || (typeof window !== "undefined" && window.kcContext)) {
+    bootstrapApplication(AppComponent, appConfig).catch(err => console.error(err));
 }

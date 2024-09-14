@@ -5,40 +5,43 @@ import { KcContext } from "keycloakify/login/KcContext";
 import { KC_CONTEXT } from "./keycloak-context.provider";
 
 @Component({
-  selector: "kc-app-root",
-  template: "<router-outlet></router-outlet>",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule]
+    selector: "kc-app-root",
+    template: "<router-outlet></router-outlet>",
+    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule]
 })
 export class AppComponent implements OnInit {
-  kcContext: KcContext = inject(KC_CONTEXT);
-  private router = inject(Router);
+    kcContext: KcContext = inject(KC_CONTEXT);
+    private router = inject(Router);
 
-  ngOnInit() {
-    this.navigateToThemeType();
-  }
+    ngOnInit() {
+        this.navigateToThemeType();
+    }
 
-  private trimPageIdSuffix(pageId: string): string {
-    if (pageId.length > 4) {
-      return pageId.substring(0, pageId.length - 4);
+    private trimPageIdSuffix(pageId: string): string {
+        if (pageId.length > 4) {
+            return pageId.substring(0, pageId.length - 4);
+        }
+        return pageId;
     }
-    return pageId;
-  }
-  navigateToThemeType() {
-    const themeType: string = this.kcContext.themeType || "";
-    switch (themeType) {
-      case "login":
-        this.router.navigate(["login", this.trimPageIdSuffix(this.kcContext.pageId)], {
-          skipLocationChange: true
-        });
-        break;
-      case "account":
-        this.router.navigate(["account"], { skipLocationChange: true });
-        break;
-      default:
-        this.router.navigate(["error"], { skipLocationChange: true });
-        break;
+    navigateToThemeType() {
+        const themeType: string = this.kcContext.themeType || "";
+        switch (themeType) {
+            case "login":
+                this.router.navigate(
+                    ["login", this.trimPageIdSuffix(this.kcContext.pageId)],
+                    {
+                        skipLocationChange: true
+                    }
+                );
+                break;
+            case "account":
+                this.router.navigate(["account"], { skipLocationChange: true });
+                break;
+            default:
+                this.router.navigate(["error"], { skipLocationChange: true });
+                break;
+        }
     }
-  }
 }

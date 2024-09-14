@@ -8,16 +8,16 @@ import { TemplateComponent } from "../../template.component";
 import { KC_CONTEXT } from "../../../keycloak-context.provider";
 
 @Component({
-  selector: "kc-login-reset-password",
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [KcClassPipe, AsyncPipe, SanitizeHtmlPipe, TemplateComponent],
-  templateUrl: "./login-reset-password.component.html"
+    selector: "kc-login-reset-password",
+    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [KcClassPipe, AsyncPipe, SanitizeHtmlPipe, TemplateComponent],
+    templateUrl: "./login-reset-password.component.html"
 })
 export class LoginResetPasswordComponent {
-  kcContext =
-    inject<Extract<KcContext, { pageId: "login-reset-password.ftl" }>>(KC_CONTEXT);
-  i18nService: I18nService = inject(I18nService);
-  displayInfo = false;
-  displayMessage: boolean = !this.kcContext?.messagesPerField?.existsError("username");
+    kcContext =
+        inject<Extract<KcContext, { pageId: "login-reset-password.ftl" }>>(KC_CONTEXT);
+    i18nService: I18nService = inject(I18nService);
+    displayInfo = false;
+    displayMessage: boolean = !this.kcContext?.messagesPerField?.existsError("username");
 }
