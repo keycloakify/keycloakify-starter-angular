@@ -1,8 +1,8 @@
+import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/core";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import { CommonModule } from "@angular/common";
 import { KcContext } from "keycloakify/login/KcContext";
-import { KC_CONTEXT } from "./keycloak-context.provider";
+import { KC_CONTEXT } from "./login/common/providers/keycloak-context.provider";
 
 @Component({
     selector: "kc-app-root",

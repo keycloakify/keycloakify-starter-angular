@@ -21,10 +21,10 @@ import {
     switchMap,
     Unsubscribable
 } from "rxjs";
-import { KC_CONTEXT } from "../keycloak-context.provider";
 import { KcClassPipe } from "./common/pipes/classname.pipe";
 import { SanitizeHtmlPipe } from "./common/pipes/sanitize-html.pipe";
-import { DynamicStyleLoader } from "./common/services/dynamicStyleLoader.service";
+import { KC_CONTEXT } from "./common/providers/keycloak-context.provider";
+import { DynamicStyleLoader } from "./common/services/dynamic-style-loader.service";
 import { I18nService } from "./common/services/i18n.service";
 
 @Component({

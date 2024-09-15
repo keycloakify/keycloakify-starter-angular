@@ -10,7 +10,6 @@ export class RedirectService {
     private document: Document = inject(DOCUMENT);
 
     public postRedirect(params: Params, url: string) {
-        console.log("params: ", params);
         const form = this.document.createElement("form");
         form.method = "POST";
         form.action = url;

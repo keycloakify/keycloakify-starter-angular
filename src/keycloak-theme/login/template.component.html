@@ -94,7 +94,6 @@
                     ) {
                         <h1 id="kc-page-title">
                             <ng-content select="[headerNode]"></ng-content>
-                            <!-- <ng-container *ngTemplateOutlet="headerNode || null"></ng-container> -->
                         </h1>
                     } @else {
                         <div id="kc-username" [class]="'kcFormGroupClass' | kcClass">
@@ -106,10 +105,8 @@
                                 [href]="kcContext.url.loginRestartFlowUrl"
                                 (aria-label)="i18n.msgStr('restartLoginTooltip')"
                             >
-                                <!-- [class]="'kc-login-tooltip' | kcClass" kc-login-tooltip doesn't exist in ClassKey -->
                                 <div class="kc-login-tooltip">
                                     <i [class]="'kcResetFlowIcon' | kcClass"></i>
-                                    <!-- [class]="'kc-tooltip-text' | kcClass" kc-tooltip-text doesn't exist in ClassKey -->
                                     <span class="kc-tooltip-text">
                                         {{ i18n.msgStr("restartLoginTooltip") }}
                                     </span>
@@ -139,7 +136,6 @@
             <div id="kc-content">
                 <div id="kc-content-wrapper">
                     <!-- Message display -->
-
                     @if (
                         displayMessage() &&
                         kcContext.message !== undefined &&
@@ -184,11 +180,6 @@
                     }
                     <!-- Content -->
                     <ng-content select="[content]"></ng-content>
-                    <!-- <router-outlet
-            (activate)="onRouterOutletActivate($event)"
-            name="login"
-          ></router-outlet> -->
-
                     @if (!!kcContext.auth && kcContext.auth.showTryAnotherWayLink) {
                         <form
                             id="kc-select-try-another-way-form"
@@ -211,8 +202,6 @@
                     }
 
                     <ng-content select="[socialProvidersNode]"></ng-content>
-                    <!-- <ng-container *ngTemplateOutlet="socialProvidersNode || null"></ng-container> -->
-
                     <!-- Info display -->
                     @if (displayInfo()) {
                         <div id="kc-info" [class]="'kcSignUpClass' | kcClass">
@@ -221,7 +210,6 @@
                                 [class]="'kcInfoAreaWrapperClass' | kcClass"
                             >
                                 <ng-content select="[infoNode]"></ng-content>
-                                <!-- <ng-container *ngTemplateOutlet="infoNode || null"></ng-container> -->
                             </div>
                         </div>
                     }
