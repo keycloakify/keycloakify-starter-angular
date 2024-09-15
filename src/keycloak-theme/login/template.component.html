@@ -94,7 +94,6 @@
                     ) {
                         <h1 id="kc-page-title">
                             <ng-content select="[headerNode]"></ng-content>
-                            <!-- <ng-container *ngTemplateOutlet="headerNode || null"></ng-container> -->
                         </h1>
                     } @else {
                         <div id="kc-username" [class]="'kcFormGroupClass' | kcClass">
@@ -184,11 +183,6 @@
                     }
                     <!-- Content -->
                     <ng-content select="[content]"></ng-content>
-                    <!-- <router-outlet
-            (activate)="onRouterOutletActivate($event)"
-            name="login"
-          ></router-outlet> -->
-
                     @if (!!kcContext.auth && kcContext.auth.showTryAnotherWayLink) {
                         <form
                             id="kc-select-try-another-way-form"
@@ -211,8 +205,6 @@
                     }
 
                     <ng-content select="[socialProvidersNode]"></ng-content>
-                    <!-- <ng-container *ngTemplateOutlet="socialProvidersNode || null"></ng-container> -->
-
                     <!-- Info display -->
                     @if (displayInfo()) {
                         <div id="kc-info" [class]="'kcSignUpClass' | kcClass">
@@ -221,7 +213,6 @@
                                 [class]="'kcInfoAreaWrapperClass' | kcClass"
                             >
                                 <ng-content select="[infoNode]"></ng-content>
-                                <!-- <ng-container *ngTemplateOutlet="infoNode || null"></ng-container> -->
                             </div>
                         </div>
                     }

@@ -6,13 +6,13 @@ import {
 } from "@angular/core";
 import type { LoginThemePageId } from "keycloakify/bin/shared/constants";
 import { createGetKcContextMock } from "keycloakify/login/KcContext";
-import { environment } from "../environments/environment";
-import { kcEnvDefaults, themeNames } from "./login/models/kc.gen";
+import { environment } from "../../../../environments/environment";
+import { kcEnvDefaults, themeNames } from "../../models/kc.gen";
 import {
     KcContext,
     KcContextExtension,
     KcContextExtensionPerPage
-} from "./login/models/KcContext";
+} from "../../models/KcContext";
 
 const kcContextExtension: KcContextExtension = {
     themeName: themeNames[0],
@@ -23,6 +23,7 @@ const kcContextExtension: KcContextExtension = {
 
 const kcContextExtensionPerPage: KcContextExtensionPerPage =
     {} as KcContextExtensionPerPage;
+
 const initializeEnvironment = (): KcContext => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).process = {

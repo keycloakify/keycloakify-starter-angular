@@ -5,7 +5,6 @@ import {
 } from "@angular/core";
 
 const themeDefinedMessages: Record<string, object> = {
-    // write your messages
     en: {
         hello: "Hello"
     },
