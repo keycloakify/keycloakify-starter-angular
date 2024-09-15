@@ -1,4 +1,3 @@
-// app-routing.module.ts
 import { Route } from "@angular/router";
 export const THEME_ROUTES: Route[] = [
     {

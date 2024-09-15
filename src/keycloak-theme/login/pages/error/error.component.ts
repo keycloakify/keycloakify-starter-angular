@@ -2,9 +2,9 @@ import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { map, Observable, Unsubscribable } from "rxjs";
+import { KcContext } from "../../common/models/KcContext";
 import { KcClassPipe } from "../../common/pipes/classname.pipe";
 import { KC_CONTEXT } from "../../common/providers/keycloak-context.provider";
-import { KcContext } from "../../models/KcContext";
 
 @Component({
     selector: "kc-error",
