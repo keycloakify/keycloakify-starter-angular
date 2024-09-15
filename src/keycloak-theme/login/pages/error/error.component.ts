@@ -1,32 +1,35 @@
-import { Component, Input } from '@angular/core';
-import { KcClassPipe } from '../../common/pipes/classname.pipe';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { map, Observable, Unsubscribable } from "rxjs";
+import { KC_CONTEXT } from "../../../keycloak-context.provider";
+import { KcContext } from "../../models/KcContext";
+import { KcClassPipe } from "../../common/pipes/classname.pipe";
 
 @Component({
-  selector: 'kc-error',
-  standalone: true,
-  imports: [KcClassPipe, CommonModule],
-  providers: [ActivatedRoute],
-  templateUrl: './error.component.html',
+    selector: "kc-error",
+    standalone: true,
+    imports: [KcClassPipe, AsyncPipe],
+    providers: [ActivatedRoute],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: "./error.component.html"
 })
 export class ErrorComponent {
-  errorMessage?: string;
-  kcContext: any;
-  constructor(private route: ActivatedRoute) {}
+    kcContext = inject<Extract<KcContext, { pageId: "error.ftl" }>>(KC_CONTEXT);
+    subscription: Unsubscribable | undefined;
+    private route = inject(ActivatedRoute);
+    errorMessage: Observable<string | undefined> = this.route.data.pipe(
+        map(data => {
+            const routerErrorMessage = data["errorMessage"];
 
-  ngOnInit(): void {
-    this.route.data.subscribe((data) => {
-      const routerErrorMessage = data['errorMessage'];
-      this.kcContext = window.kcContext;
+            if (!this.kcContext?.message) {
+                return routerErrorMessage || "An error occurred. Please try again later.";
+            }
 
-      if (!this.errorMessage && !this.kcContext?.message) {
-        this.errorMessage = routerErrorMessage || 'An error occurred. Please try again later.';
-      }
-
-      if (this.kcContext?.message?.summary) {
-        this.errorMessage = this.kcContext.message.summary;
-      }
-    });
-  }
+            if (this.kcContext?.message?.summary) {
+                return this.kcContext.message.summary;
+            }
+            return;
+        })
+    );
 }

@@ -1,9 +1,10 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-module.exports = {
+import path from 'node:path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+export default {
   entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, 'build/static/js/'),
+    path: path.resolve(import.meta.dirname, 'build/static/js/'),
     publicPath: 'auto',
   },
   

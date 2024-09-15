@@ -1,49 +1,22 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { createGetI18n, GenericI18n_noJsx } from "keycloakify/login/i18n/i18n";
-import { BehaviorSubject, filter, interval, of, Subject, switchMap, takeUntil, tap } from "rxjs";
+import { from, Observable, of } from "rxjs";
+import { I18N_THEME_DEFINED_MESSAGES } from "../../../i18n-theme-defined-messages.provider";
+import { KC_CONTEXT } from "../../../keycloak-context.provider";
 
-export const{ getI18n } = createGetI18n({})
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class I18nService {
+    private kcContext = inject(KC_CONTEXT);
+    private i18nThemeDefinedMessages = inject(I18N_THEME_DEFINED_MESSAGES);
+    private getI18n = createGetI18n(this.i18nThemeDefinedMessages).getI18n;
 
-  private readonly checkInterval = 100;
-  private readonly i18nSubject = new BehaviorSubject<GenericI18n_noJsx<any>>({} as GenericI18n_noJsx<any>);
-  private destroy$ = new Subject<void>();
-
-  constructor() {
-    this.initializeI18n();
-  }
-
-  private initializeI18n(): void {
-    this.i18nSubject.next(getI18n({ kcContext: window.kcContext }).i18n as GenericI18n_noJsx<any>);
-  
-    interval(this.checkInterval)
-      .pipe(
-        takeUntil(this.destroy$),
-        switchMap(() => {
-          const i18n = getI18n({ kcContext: window.kcContext }).i18n as GenericI18n_noJsx<any>;
-          if (i18n.isFetchingTranslations === false) {
-            this.i18nSubject.next(i18n);
-          }
-          return of();
-        })
-      )
-      .subscribe();
-  }
-
-  get i18n$() {
-    return this.i18nSubject.asObservable().pipe(
-      filter(i18n => i18n?.isFetchingTranslations === false)
-    );
-  }
-
-  public updateI18n(): void {
-    const newI18n = getI18n({ kcContext: window.kcContext }).i18n as GenericI18n_noJsx<any>;
-    this.i18nSubject.next(newI18n);
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+    public get i18n$(): Observable<GenericI18n_noJsx<string>> {
+        const { i18n, prI18n_currentLanguage } = this.getI18n({
+            kcContext: this.kcContext
+        });
+        if (prI18n_currentLanguage) {
+            return from(prI18n_currentLanguage as Promise<GenericI18n_noJsx<string>>);
+        }
+        return of(i18n as GenericI18n_noJsx<string>);
+    }
 }

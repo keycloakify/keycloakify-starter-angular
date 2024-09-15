@@ -1,24 +1,18 @@
-import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
+import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { KcContext } from "../../models/KcContext";
 import { KcClassPipe } from "../../common/pipes/classname.pipe";
-import { KcContext } from 'keycloakify/login/KcContext';
+import { I18nService } from "../../common/services/i18n.service";
+import { KC_CONTEXT } from "../../../keycloak-context.provider";
 
 @Component({
-    selector: 'kc-register',
+    selector: "kc-register",
     standalone: true,
-    templateUrl: './register.component.html',
-    imports: [KcClassPipe]
+    templateUrl: "./register.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [KcClassPipe, AsyncPipe]
 })
 export class RegisterComponent {
-
-  kcContext = window.kcContext as KcContext.Register;
-
-  @ViewChild('headerNode') headerNode?: TemplateRef<any>;
-  @ViewChild('infoNode') infoNode?: TemplateRef<any>;
-  @ViewChild('socialProvidersNode') socialProvidersNode?: TemplateRef<any>;
-  displayInfo?: boolean;
-  displayMessage: boolean = !this.kcContext.messagesPerField.existsError("username");
-  constructor() {
-   }
-
-
+    kcContext = inject<Extract<KcContext, { pageId: "register.ftl" }>>(KC_CONTEXT);
+    i18nService = inject(I18nService);
 }
