@@ -8,6 +8,7 @@ import { I18nService } from "../../services/i18n.service";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [KcClassPipe, AsyncPipe],
+    providers: [KcClassPipe],
     templateUrl: "./password-wrapper.component.html"
 })
 export class PasswordWrapperComponent implements OnInit {

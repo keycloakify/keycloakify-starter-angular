@@ -19,6 +19,7 @@ import { I18nService } from "../../common/services/i18n.service";
         CommonModule,
         LogoutOtherSessionsComponent
     ],
+    providers: [KcClassPipe],
     templateUrl: "./login-update-password.component.html"
 })
 export class LoginUpdatePasswordComponent {

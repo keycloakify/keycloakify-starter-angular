@@ -20,7 +20,8 @@ import { TemplateComponent } from "../../template.component";
         PasswordWrapperComponent,
         NgClass,
         TemplateComponent
-    ]
+    ],
+    providers: [KcClassPipe]
 })
 export class LoginComponent {
     kcContext = inject<Extract<KcContext, { pageId: "login.ftl" }>>(KC_CONTEXT);

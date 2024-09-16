@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { ClassKey, getKcClsx } from "keycloakify/login/lib/kcClsx";
-import * as classData from "../../../assets/theme.properties.json";
 import { CxArg } from "keycloakify/tools/clsx_withTransform";
+import * as classData from "../../../assets/theme.properties.json";
 
 @Pipe({
     name: "kcClass",
@@ -10,13 +11,15 @@ import { CxArg } from "keycloakify/tools/clsx_withTransform";
 export class KcClassPipe implements PipeTransform {
     private kcClsx?: (...args: CxArg<ClassKey>[]) => string;
 
-    constructor() {
-        this.loadClasses();
+    constructor(private route: ActivatedRoute) {
+        const doUseDefaultCss: boolean =
+            this.route.snapshot.data["doUseDefaultCss"] ?? true;
+        this.loadClasses(doUseDefaultCss);
     }
 
-    private loadClasses(): void {
+    private loadClasses(doUseDefaultCss = true): void {
         const params = {
-            doUseDefaultCss: true,
+            doUseDefaultCss,
             classes: classData
         };
         this.kcClsx = getKcClsx(params).kcClsx;

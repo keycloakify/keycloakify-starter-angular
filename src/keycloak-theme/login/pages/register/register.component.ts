@@ -10,7 +10,8 @@ import { I18nService } from "../../common/services/i18n.service";
     standalone: true,
     templateUrl: "./register.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [KcClassPipe, AsyncPipe]
+    imports: [KcClassPipe, AsyncPipe],
+    providers: [KcClassPipe]
 })
 export class RegisterComponent {
     kcContext = inject<Extract<KcContext, { pageId: "register.ftl" }>>(KC_CONTEXT);
