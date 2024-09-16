@@ -1,4 +1,4 @@
-import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {
     ApplicationConfig,
     importProvidersFrom,
@@ -17,6 +17,6 @@ export const appConfig: ApplicationConfig = {
         provideRouter(THEME_ROUTES, withPreloading(PreloadAllModules)),
         provideI18nThemeDefinedMessages(),
         provideKcContext(),
-        provideHttpClient()
+        provideHttpClient(withInterceptorsFromDi())
     ]
 };
