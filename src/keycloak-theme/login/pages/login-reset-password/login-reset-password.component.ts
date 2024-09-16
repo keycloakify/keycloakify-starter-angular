@@ -12,6 +12,7 @@ import { TemplateComponent } from "../../template.component";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [KcClassPipe, AsyncPipe, SanitizeHtmlPipe, TemplateComponent],
+    providers: [KcClassPipe],
     templateUrl: "./login-reset-password.component.html"
 })
 export class LoginResetPasswordComponent {

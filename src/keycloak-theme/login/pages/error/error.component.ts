@@ -10,7 +10,7 @@ import { KC_CONTEXT } from "../../common/providers/keycloak-context.provider";
     selector: "kc-error",
     standalone: true,
     imports: [KcClassPipe, AsyncPipe],
-    providers: [ActivatedRoute],
+    providers: [KcClassPipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./error.component.html"
 })

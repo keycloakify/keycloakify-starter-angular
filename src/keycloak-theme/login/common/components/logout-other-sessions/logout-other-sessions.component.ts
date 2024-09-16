@@ -6,6 +6,7 @@ import { KcClassPipe } from "../../pipes/classname.pipe";
     selector: "kc-logout-other-sessions",
     standalone: true,
     imports: [KcClassPipe],
+    providers: [KcClassPipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./logout-other-sessions.component.html"
 })

@@ -74,14 +74,7 @@
                             "buildOptimizer": false,
                             "optimization": false,
                             "sourceMap": true,
-                            "namedChunks": true,
-                            "styles": [
-                                "src/keycloak-theme/assets/.keycloakify/login/resources-common/node_modules/@patternfly/patternfly/patternfly.min.css",
-                                "src/keycloak-theme/assets/.keycloakify/login/resources-common/node_modules/patternfly/dist/css/patternfly.min.css",
-                                "src/keycloak-theme/assets/.keycloakify/login/resources-common/node_modules/patternfly/dist/css/patternfly-additions.min.css",
-                                "src/keycloak-theme/assets/.keycloakify/login/css/login.css",
-                                "src/keycloak-theme/assets/.keycloakify/login/resources-common/lib/pficon/pficon.css"
-                            ]
+                            "namedChunks": true
                         }
                     },
                     "defaultConfiguration": "production"

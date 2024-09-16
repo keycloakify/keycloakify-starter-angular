@@ -1,7 +1,6 @@
 @let i18n = i18nService.i18n$ | async;
-@let stylesheetsLoaded = stylesheetsLoaded$ | async;
 
-@if (i18n && stylesheetsLoaded) {
+@if (i18n) {
     <div [class]="'kcLoginClass' | kcClass">
         <div id="kc-header" [class]="'kcHeaderClass' | kcClass">
             <div id="kc-header-wrapper" [class]="'kcHeaderWrapperClass' | kcClass">
