@@ -4,9 +4,11 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "preng": "keycloakify update-kc-gen && keycloakify copy-keycloak-resources-to-public",
     "ng": "ng",
+    "prebuild": "keycloakify update-kc-gen",
     "build": "ng build",
-    "postbuild": "rimraf build/keycloak-resources",
+    "postbuild": "rimraf build/keycloakify-dev-resources",
     "test": "ng test",
     "serve": "ng serve",
     "build-keycloak-theme": "ng build && keycloakify build",
@@ -29,7 +31,7 @@
     "@angular/forms": "^18.2.0",
     "@angular/platform-browser": "^18.2.0",
     "@angular/router": "^18.2.0",
-    "keycloakify": "^10.1.4",
+    "keycloakify": "^11.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

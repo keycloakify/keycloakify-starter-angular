@@ -1,12 +1,13 @@
-import { createGetI18n } from "keycloakify/login/i18n/i18n";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { i18nBuilder } from "keycloakify/login/i18n/noJsx";
+import { ThemeName } from "../kc.gen";
 
-export const { getI18n } = createGetI18n({
-    en: {
-        hello: "Hello"
-    },
-    de: {
-        hello: "Hallo"
-    }
-});
+const { getI18n, ofTypeI18n } = i18nBuilder
+    .withThemeName<ThemeName>() // See: https://docs.keycloakify.dev/theme-variants#different-text-for-each-of-your-theme-variants
+    .withExtraLanguages({}) // See: https://docs.keycloakify.dev/i18n/adding-support-for-extra-languages
+    .withCustomTranslations({}) // See: https://docs.keycloakify.dev/i18n/adding-new-translation-messages-or-changing-the-default-ones
+    .build();
 
-export type I18n = ReturnType<typeof getI18n>["i18n"];
+type I18n = typeof ofTypeI18n;
+
+export { getI18n, type I18n };
