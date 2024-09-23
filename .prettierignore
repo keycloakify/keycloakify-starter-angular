@@ -6,3 +6,4 @@ node_modules/
 /src/tools/types/
 /build_keycloak/
 /.vscode/
+keycloakify-dev-resources/

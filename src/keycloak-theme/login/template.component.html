@@ -11,11 +11,7 @@
         <div [class]="'kcFormCardClass' | kcClass">
             <header [class]="'kcFormHeaderClass' | kcClass">
                 <!-- Locale switcher -->
-                @if (
-                    kcContext.realm.internationalizationEnabled &&
-                    kcContext.locale &&
-                    kcContext.locale.supported.length > 1
-                ) {
+                @if (i18n.enabledLanguages.length > 1) {
                     <div id="kc-locale" [class]="'kcLocaleMainClass' | kcClass">
                         <div
                             id="kc-locale-wrapper"
@@ -31,16 +27,12 @@
                                 <button
                                     tabindex="1"
                                     id="kc-current-locale-link"
-                                    (aria-label)="i18n.msgStr('Sprache')"
+                                    (aria-label)="i18n.msgStr('languages')"
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                     aria-controls="language-switch1"
                                 >
-                                    {{
-                                        i18n.labelBySupportedLanguageTag[
-                                            i18n.currentLanguageTag
-                                        ]
-                                    }}
+                                    {{ i18n.currentLanguage.label }}
                                 </button>
                                 <ul
                                     role="menu"
@@ -51,8 +43,8 @@
                                     [class]="'kcLocaleListClass' | kcClass"
                                 >
                                     @for (
-                                        locale of kcContext.locale.supported;
-                                        track locale;
+                                        entry of i18n.enabledLanguages;
+                                        track entry;
                                         let idx = $index
                                     ) {
                                         <li
@@ -62,19 +54,11 @@
                                             <a
                                                 role="menuitem"
                                                 tabindex="-1"
-                                                [href]="
-                                                    i18n.getChangeLocaleUrl(
-                                                        locale.languageTag
-                                                    )
-                                                "
+                                                [href]="entry.href"
                                                 [class]="'kcLocaleItemClass' | kcClass"
                                                 [id]="'language-' + idx"
                                             >
-                                                {{
-                                                    i18n.labelBySupportedLanguageTag[
-                                                        locale.languageTag
-                                                    ]
-                                                }}
+                                                {{ entry.label }}
                                             </a>
                                         </li>
                                     }

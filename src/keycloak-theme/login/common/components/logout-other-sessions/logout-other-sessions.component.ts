@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from "@angular/core";
-import { GenericI18n_noJsx } from "keycloakify/login/i18n/i18n";
+import type { I18n } from "../../../i18n";
 import { KcClassPipe } from "../../pipes/classname.pipe";
 
 @Component({
@@ -11,5 +11,5 @@ import { KcClassPipe } from "../../pipes/classname.pipe";
     templateUrl: "./logout-other-sessions.component.html"
 })
 export class LogoutOtherSessionsComponent {
-    i18n = input<GenericI18n_noJsx<string>>();
+    i18n = input<I18n>();
 }
