@@ -9,7 +9,12 @@ const KcPage = async (pageId: LoginThemePageId) => {
     const doMakeUserConfirmPassword = true;
     switch (pageId) {
         default:
-            return DefaultPage(pageId, doMakeUserConfirmPassword, doUseDefaultCss, classes);
+            return DefaultPage(
+                pageId,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes,
+            );
     }
 };
 

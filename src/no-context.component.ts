@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'kc-no-context',
     template: `<h1>No Keycloak Context</h1>`,
 })
-export class NoContextComponent { }
+export class NoContextComponent {}
