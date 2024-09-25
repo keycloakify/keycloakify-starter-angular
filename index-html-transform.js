@@ -2,7 +2,7 @@ export default (targetOptions, indexHtml) => {
   //we need this because ng build is not generating the correct paths for the static files in index.html
   const scriptsToTransform = ['runtime', 'main'];
 
-  scriptsToTransform.forEach(scriptName => {
+  scriptsToTransform.forEach((scriptName) => {
     const scriptTag = `src="${scriptName}`;
     const index = indexHtml.indexOf(scriptTag);
     if (index !== -1) {
@@ -12,7 +12,7 @@ export default (targetOptions, indexHtml) => {
   });
 
   const styleRegex = /href="..\/css\/styles\.[a-f0-9]{16}\.css"/g;
-  indexHtml = indexHtml.replace(styleRegex, match => {
+  indexHtml = indexHtml.replace(styleRegex, (match) => {
     return match.replace('../css/', '/static/css/');
   });
 

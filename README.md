@@ -1,4 +1,3 @@
-
 ## Overview
 
 This is an Angular-based starter project specifically tailored for integrating Keycloakify.
@@ -13,7 +12,7 @@ This is an Angular-based starter project specifically tailored for integrating K
 - **CSS Classes**: Use `theme.properties` (located in `assets`) to add custom CSS classes.
 - **Class Name Handling**: Edit class name parameters in `classname.pipe`.
 - **Post Requests & Forms**: Utilize `redirectHandler` for handling post requests and Angular Material forms.
-- **Local Development**: Use `kc-context-mock.provider.ts` to define a custom `KcContext`. Use `npx keycloakify copy-keycloak-resources-to-public` to get locale default stylesheets 
+- **Local Development**: Use `kc-context-mock.provider.ts` to define a custom `KcContext`. Use `npx keycloakify copy-keycloak-resources-to-public` to get locale default stylesheets
 - **Routing**: Add routes using login routes; the other route distinguishes between account and login.
 - **Stylesheet Changes**: Add new stylesheets to `assets` for local development and configure URLs in the template for the server environment (stylesheets are loaded dynamically). To get local default Keycloak resources call npx keycloakify copy-keycloak-resources-to-public
 - **Page Structure**: Maintain the existing structure (e.g., passing `socialProviderNode`, `infoNode`, etc.) when implementing custom components.

@@ -5,21 +5,21 @@
 const config = {
   printWidth: 120,
   singleQuote: true,
-  trailingComma: "all",
+  trailingComma: 'all',
   tabWidth: 2,
   useTabs: false,
   semi: true,
   bracketSpacing: true,
-  arrowParens: "always",
+  arrowParens: 'always',
   singleAttributePerLine: true,
   overrides: [
     {
-      files: "*.html",
+      files: '*.html',
       options: {
-        parser: "angular"
-      }
-    }
-  ]
+        parser: 'angular',
+      },
+    },
+  ],
 };
 
 export default config;

@@ -17,10 +17,10 @@
     "lint": "ng lint --fix"
   },
   "keycloakify": {
+    "accountThemeImplementation": "none",
     "projectBuildDirPath": "build",
     "staticDirPathInProjectBuildDirPath": "static",
-    "publicDirPath": "src/keycloak-theme/assets",
-    "accountThemeImplementation": "none"
+    "publicDirPath": "public"
   },
   "private": true,
   "dependencies": {
@@ -40,13 +40,23 @@
     "@angular-devkit/build-angular": "^18.2.0",
     "@angular/cli": "^18.2.0",
     "@angular/compiler-cli": "^18.2.0",
+    "@eslint/compat": "^1.1.1",
     "@types/node": "^20.0.0",
+    "@typescript-eslint/types": "^8.6.0",
+    "@typescript-eslint/utils": "^8.6.0",
     "angular-eslint": "^18.3.1",
     "eslint": "^9.9.1",
     "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-storybook": "^0.8.0",
     "prettier": "^3.3.3",
     "rimraf": "^5.0.7",
     "typescript": "~5.4.2",
     "typescript-eslint": "^8.2.0"
+  },
+  "overrides": {
+    "@typescript-eslint/utils": "^8.6.0"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
   }
 }

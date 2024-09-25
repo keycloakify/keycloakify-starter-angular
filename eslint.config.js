@@ -13,7 +13,7 @@ const storybook = fixupPluginRules({
 });
 
 export default tseslint.config(
-  {ignores: ['dist', 'node_modules/**', 'dist_keycloak']},
+  { ignores: ['dist', 'node_modules/**', 'dist_keycloak'] },
   {
     files: ['*.stories.@(ts|tsx|js|jsx|mjs|cjs)', '*.story.@(ts|tsx|js|jsx|mjs|cjs)'],
     plugins: {

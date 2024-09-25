@@ -8,7 +8,6 @@ export default {
     path: path.resolve(import.meta.dirname, 'build/static/js/'),
     publicPath: 'auto',
   },
-  
 
   plugins: [
     new MiniCssExtractPlugin({
