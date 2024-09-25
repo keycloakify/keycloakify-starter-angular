@@ -24,7 +24,6 @@
       "ES2022",
       "dom"
     ],
-    "typeRoots": ["src/@types", "node_modules/@types"],
   },
   "angularCompilerOptions": {
     "strictTemplates": true

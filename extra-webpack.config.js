@@ -1,6 +1,7 @@
 import path from 'node:path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+/** @type {import('webpack').Configuration} */
 export default {
   entry: './src/main.ts',
   output: {
