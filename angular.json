@@ -29,9 +29,9 @@
       "prefix": "kc",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+        "builder": "@angular-devkit/build-angular:browser-esbuild",    
           "options": {
-            "outputPath": "build/",
+            "outputPath": "/dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
@@ -54,19 +54,10 @@
           "configurations": {
             "production": {
               "optimization": true,
-              "indexTransform": "./index-html-transform.js",
-              "sourceMap": false,
-              "customWebpackConfig": {
-                "path": "./extra-webpack.config.js",
-                "mergeRules": {
-                  "output": "replace",
-                  "entry": "replace",
-                  "plugins": "append"
-                }
-              }
+              "sourceMap": false
+                
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
               "sourceMap": true,
               "namedChunks": true,
@@ -75,11 +66,6 @@
                   "glob": "**/*",
                   "input": "src/favicon.ico",
                   "output": "./static/media/"
-                },
-                {
-                  "glob": "**/*",
-                  "input": "./src/keycloak-theme/assets",
-                  "output": "./static/media"
                 },
                 {
                   "glob": "**/*",
@@ -92,7 +78,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "buildTarget": "angular_template:build"
           },
