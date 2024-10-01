@@ -32,23 +32,15 @@
         "builder": "@angular-devkit/build-angular:browser-esbuild",    
           "options": {
             "outputPath": "/dist",
-            "index": "src/index.html",
+            "index": "index.html",
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "preserveSymlinks": true,
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/favicon.ico",
-                "output": "./static/media/"
-              },
-              {
-                "glob": "**/*",
-                "input": "./src/keycloak-theme/assets",
-                "output": "./static/media"
+                "input": "public"
               }
-            ],
-            "styles": ["src/styles.css"]
+            ]
           },
 
           "configurations": {
@@ -62,11 +54,6 @@
               "sourceMap": true,
               "namedChunks": true,
               "assets": [
-                {
-                  "glob": "**/*",
-                  "input": "src/favicon.ico",
-                  "output": "./static/media/"
-                },
                 {
                   "glob": "**/*",
                   "input": "./public",
