@@ -15,6 +15,12 @@
     "test": "ng test"
   },
   "private": true,
+  "keycloakify": {
+    "accountThemeImplementation": "none",
+    "projectBuildDirPath": "build",
+    "staticDirPathInProjectBuildDirPath": "static",
+    "publicDirPath": "public"
+  },
   "dependencies": {
     "@angular/animations": "^18.2.6",
     "@angular/common": "^18.2.6",
