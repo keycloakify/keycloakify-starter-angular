@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
-"description": "Angular 18 Starter for Keycloakify",
+  "description": "Angular 18 Starter for Keycloakify",
   "scripts": {
     "ng": "ng",
+    "prebuild": "keycloakify update-kc-gen",
     "build": "ng build",
+    "postbuild": "rimraf build/keycloakify-dev-resources",
+    "preserve": "keycloakify update-kc-gen && keycloakify copy-keycloak-resources-to-public",
     "serve": "ng serve",
     "build-keycloak-theme": "ng build && keycloakify build",
     "_format": "prettier '**/*.{ts,json,html}'",
@@ -14,13 +17,13 @@
     "lint": "ng lint --fix",
     "test": "ng test"
   },
-  "private": true,
   "keycloakify": {
     "accountThemeImplementation": "none",
     "projectBuildDirPath": "build",
     "staticDirPathInProjectBuildDirPath": "static",
     "publicDirPath": "public"
   },
+  "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.6",
     "@angular/common": "^18.2.6",
