@@ -2,9 +2,11 @@ import '@angular/compiler';
 
 import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideKeycloakifyAngularAccount } from '@keycloakify/angular/account/providers/keycloakify-angular.providers';
-import { UserProfileFormFieldsComponent } from '@keycloakify/angular/login/components/user-profile-form-fields/user-profile-form-fields.component';
-import { provideKeycloakifyAngularLogin } from '@keycloakify/angular/login/providers/keycloakify-angular.providers';
+import { TemplateComponent as AccountTemplate } from '@keycloakify/angular/account/containers/template';
+import { provideKeycloakifyAngularAccount } from '@keycloakify/angular/account/providers/keycloakify-angular';
+import { UserProfileFormFieldsComponent } from '@keycloakify/angular/login/components/user-profile-form-fields';
+import { TemplateComponent as LoginTemplate } from '@keycloakify/angular/login/containers/template';
+import { provideKeycloakifyAngularLogin } from '@keycloakify/angular/login/providers/keycloakify-angular';
 import { KcPage } from './kc.gen-angular';
 
 // The following block can be uncommented to test a specific page with `yarn dev`
@@ -15,21 +17,21 @@ window.kcContext = getKcContextMock({
   pageId: 'login.ftl',
   overrides: {},
 });
-
 if (!window.kcContext) {
   const NoContextComponentPromise = import('./no-context.component').then((c) => c.NoContextComponent);
   NoContextComponentPromise.then((NoContextComponent) =>
-    bootstrapApplication(NoContextComponent, { providers: [provideExperimentalZonelessChangeDetection()] }),
+    bootstrapApplication(NoContextComponent, {
+      providers: [provideExperimentalZonelessChangeDetection()],
+    }),
   );
 } else {
   const { Page, getI18n } = KcPage(window.kcContext)!;
   Promise.all([Page, getI18n]).then(
     ([{ ComponentBootstrap, doMakeUserConfirmPassword, doUseDefaultCss, classes }, getI18n]) => {
-      bootstrapApplication(ComponentBootstrap, {
+      bootstrapApplication(window.kcContext?.themeType === 'account' ? AccountTemplate : LoginTemplate, {
         providers: [
           provideExperimentalZonelessChangeDetection(),
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (window.kcContext as any).themeType === 'account'
+          window.kcContext?.themeType === 'account'
             ? provideKeycloakifyAngularAccount({
                 classes,
                 doUseDefaultCss,
@@ -44,6 +46,9 @@ if (!window.kcContext) {
         ],
       }).then((appRef) => {
         appRef.components.forEach((componentRef) => {
+          if ('page' in componentRef.instance) {
+            componentRef.setInput('page', ComponentBootstrap);
+          }
           if ('userProfileFormFields' in componentRef.instance) {
             componentRef.setInput('userProfileFormFields', UserProfileFormFieldsComponent);
           }
