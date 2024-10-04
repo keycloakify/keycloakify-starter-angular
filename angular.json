@@ -36,16 +36,16 @@
                 "main": "src/main.ts",
                 "tsConfig": "tsconfig.app.json",
                 "assets": [
-                    {
-                        "glob": "**/*",
-                        "input": "src/favicon.ico",
-                        "output": "./static/media/"
-                    },
-                    {
-                        "glob": "**/*",
-                        "input": "./src/keycloak-theme/assets",
-                        "output": "./static/media"
-                    }
+                  {
+                    "glob": "favicon-32x32.png",
+                    "input": "./",
+                    "output": "./static/media/"
+                  },
+                  {
+                    "glob": "**/*",
+                    "input": "./public",
+                    "output": "./static/media"
+                  }
                 ]
             },
 
@@ -64,6 +64,18 @@
                   }
               },
               "development": {
+                "assets": [
+                  {
+                    "glob": "favicon-32x32.png",
+                    "input": "./",  
+                    "output": "./"
+                  },
+                  {
+                    "glob": "**/*",
+                    "input": "./public",
+                    "output": "./"
+                  }
+                ],
                   "buildOptimizer": false,
                   "optimization": false,
                   "sourceMap": true,
