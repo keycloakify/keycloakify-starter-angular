@@ -3,50 +3,67 @@
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
+  "description": "Angular 18 Starter for Keycloakify",
   "scripts": {
-    "preng": "keycloakify update-kc-gen && keycloakify copy-keycloak-resources-to-public",
     "ng": "ng",
     "prebuild": "keycloakify update-kc-gen",
     "build": "ng build",
-    "postbuild": "rimraf build/keycloakify-dev-resources",
-    "test": "ng test",
+    "preserve": "keycloakify update-kc-gen && keycloakify copy-keycloak-resources-to-public",
     "serve": "ng serve",
     "build-keycloak-theme": "ng build && keycloakify build",
     "_format": "prettier '**/*.{ts,json,html}'",
     "format": "npm run _format --write",
-    "lint": "ng lint --fix"
+    "lint": "ng lint --fix",
+    "test": "ng test"
   },
   "keycloakify": {
+    "accountThemeImplementation": "Multi-Page",
     "projectBuildDirPath": "build",
     "staticDirPathInProjectBuildDirPath": "static",
-    "publicDirPath": "src/keycloak-theme/assets",
-    "accountThemeImplementation": "none"
+    "publicDirPath": "public"
   },
+  "keywords": [
+    "angular",
+    "keyclaokify",
+    "keycloak",
+    "webpack"
+  ],
   "private": true,
   "dependencies": {
-    "@angular/animations": "^18.2.0",
-    "@angular/common": "^18.2.0",
-    "@angular/compiler": "^18.2.0",
-    "@angular/core": "^18.2.0",
-    "@angular/forms": "^18.2.0",
-    "@angular/platform-browser": "^18.2.0",
-    "@angular/router": "^18.2.0",
-    "keycloakify": "^11.0.0",
+    "@angular/animations": "^18.2.6",
+    "@angular/common": "^18.2.6",
+    "@angular/compiler": "^18.2.6",
+    "@angular/core": "^18.2.6",
+    "@angular/forms": "^18.2.6",
+    "@angular/platform-browser": "^18.2.6",
+    "@angular/router": "^18.2.6",
+    "keycloakify": "^11.2.2",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.7.0",
+    "@keycloakify/angular": "0.0.1-rc.19"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^18.0.0",
     "@angular-devkit/build-angular": "^18.2.0",
     "@angular/cli": "^18.2.0",
-    "@angular/compiler-cli": "^18.2.0",
+    "@angular/compiler-cli": "^18.2.6",
+    "@eslint/compat": "^1.1.1",
     "@types/node": "^20.0.0",
+    "@typescript-eslint/types": "^8.7.0",
+    "@typescript-eslint/utils": "^8.7.0",
     "angular-eslint": "^18.3.1",
-    "eslint": "^9.9.1",
+    "eslint": "^9.11.1",
     "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-storybook": "^0.9.0",
     "prettier": "^3.3.3",
     "rimraf": "^5.0.7",
     "typescript": "~5.4.2",
-    "typescript-eslint": "^8.2.0"
+    "typescript-eslint": "^8.7.0"
+  },
+  "overrides": {
+    "@typescript-eslint/utils": "^8.7.0"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
   }
 }
