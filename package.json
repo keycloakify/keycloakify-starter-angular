@@ -8,7 +8,6 @@
     "ng": "ng",
     "prebuild": "keycloakify update-kc-gen",
     "build": "ng build",
-    "postbuild": "rimraf build/keycloakify-dev-resources",
     "preserve": "keycloakify update-kc-gen && keycloakify copy-keycloak-resources-to-public",
     "serve": "ng serve",
     "build-keycloak-theme": "ng build && keycloakify build",

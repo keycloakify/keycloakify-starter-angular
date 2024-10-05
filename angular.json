@@ -40,11 +40,6 @@
                     "glob": "favicon-32x32.png",
                     "input": "./",
                     "output": "./static/media/"
-                  },
-                  {
-                    "glob": "**/*",
-                    "input": "./public",
-                    "output": "./static/media"
                   }
                 ]
             },
