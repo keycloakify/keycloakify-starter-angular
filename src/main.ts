@@ -1,6 +1,6 @@
 import '@angular/compiler';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app.config';
 import { bootstrapKcApplication } from './kc.gen';
 
 // The following block can be uncommented to test a specific page with `ng serve`
@@ -19,9 +19,7 @@ if (isDevMode()) {
   if (window.kcContext === undefined) {
     const { NoContextComponent } = await import('./no-context.component');
 
-    bootstrapApplication(NoContextComponent, {
-      providers: [provideExperimentalZonelessChangeDetection()],
-    });
+    bootstrapApplication(NoContextComponent, appConfig);
 
     return;
   }
@@ -30,7 +28,8 @@ if (isDevMode()) {
     kcContext: window.kcContext,
     bootstrapApplication: ({ KcRootComponent, kcProvider }) =>
       bootstrapApplication(KcRootComponent, {
-        providers: [provideExperimentalZonelessChangeDetection(), kcProvider],
+        ...appConfig,
+        providers: [...appConfig.providers, kcProvider],
       }),
   });
 })();
