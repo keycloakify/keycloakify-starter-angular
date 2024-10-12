@@ -6,6 +6,7 @@ import { bootstrapKcApplication } from './kc.gen';
 // The following block can be uncommented to test a specific page with `ng serve`
 // Don't forget to comment back or your bundle size will increase
 /*
+import { isDevMode } from '@angular/core';
 import { getKcContextMock } from './login/KcContextMock';
 
 if (isDevMode()) {
