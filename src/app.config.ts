@@ -1,5 +1,8 @@
-import { type ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+    provideExperimentalZonelessChangeDetection,
+    type ApplicationConfig
+} from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection()],
+    providers: [provideExperimentalZonelessChangeDetection()]
 };

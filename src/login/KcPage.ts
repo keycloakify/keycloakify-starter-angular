@@ -9,15 +9,15 @@ const doUseDefaultCss = true;
 const doMakeUserConfirmPassword = true;
 
 export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
-  switch (pageId) {
-    default:
-      return {
-        PageComponent: await getDefaultPageComponent(pageId),
-        TemplateComponent,
-        UserProfileFormFieldsComponent,
-        doMakeUserConfirmPassword,
-        doUseDefaultCss,
-        classes,
-      };
-  }
+    switch (pageId) {
+        default:
+            return {
+                PageComponent: await getDefaultPageComponent(pageId),
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+    }
 }

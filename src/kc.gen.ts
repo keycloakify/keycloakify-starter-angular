@@ -8,9 +8,9 @@
 
 import type { ComponentRef, EnvironmentProviders, Type } from '@angular/core';
 
-export type ThemeName = 'keycloakify-starter-angular-vite';
+export type ThemeName = 'keycloakify-starter-angular';
 
-export const themeNames: ThemeName[] = ['keycloakify-starter-angular-vite'];
+export const themeNames: ThemeName[] = ['keycloakify-starter-angular'];
 
 export type KcEnvName = never;
 
@@ -21,66 +21,71 @@ export const kcEnvDefaults: Record<KcEnvName, string> = {};
 export type KcContext = import('./login/KcContext').KcContext;
 
 declare global {
-  interface Window {
-    kcContext?: KcContext;
-  }
+    interface Window {
+        kcContext?: KcContext;
+    }
 }
 
 type ApplicationRefLike = {
-  components: ComponentRef<any>[];
+    components: ComponentRef<any>[];
 };
 
 export async function bootstrapKcApplication(params: {
-  kcContext: KcContext;
-  bootstrapApplication: (params: {
-    KcRootComponent: Type<unknown>;
-    kcProvider: EnvironmentProviders;
-  }) => Promise<ApplicationRefLike>;
+    kcContext: KcContext;
+    bootstrapApplication: (params: {
+        KcRootComponent: Type<unknown>;
+        kcProvider: EnvironmentProviders;
+    }) => Promise<ApplicationRefLike>;
 }) {
-  const { kcContext, bootstrapApplication } = params;
+    const { kcContext, bootstrapApplication } = params;
 
-  switch (kcContext.themeType) {
-    case 'login':
-      {
-        const [
-          { provideKeycloakifyAngular },
-          { getI18n },
-          {
-            PageComponent,
-            TemplateComponent,
-            doUseDefaultCss,
-            classes,
-            UserProfileFormFieldsComponent,
-            doMakeUserConfirmPassword,
-          },
-        ] = await Promise.all([
-          import('@keycloakify/angular/login/providers/keycloakify-angular'),
-          import('./login/i18n'),
-          import('./login/KcPage').then(({ getKcPage }) => getKcPage(kcContext.pageId)),
-        ] as const);
+    switch (kcContext.themeType) {
+        case 'login':
+            {
+                const [
+                    { provideKeycloakifyAngular },
+                    { getI18n },
+                    {
+                        PageComponent,
+                        TemplateComponent,
+                        doUseDefaultCss,
+                        classes,
+                        UserProfileFormFieldsComponent,
+                        doMakeUserConfirmPassword
+                    }
+                ] = await Promise.all([
+                    import('@keycloakify/angular/login/providers/keycloakify-angular'),
+                    import('./login/i18n'),
+                    import('./login/KcPage').then(({ getKcPage }) =>
+                        getKcPage(kcContext.pageId)
+                    )
+                ] as const);
 
-        const appRef = await bootstrapApplication({
-          KcRootComponent: TemplateComponent,
-          kcProvider: provideKeycloakifyAngular({
-            classes,
-            getI18n,
-            doUseDefaultCss,
-            doMakeUserConfirmPassword,
-            kcContext,
-          }),
-        });
+                const appRef = await bootstrapApplication({
+                    KcRootComponent: TemplateComponent,
+                    kcProvider: provideKeycloakifyAngular({
+                        kcContext,
+                        classes,
+                        getI18n,
+                        doUseDefaultCss,
+                        doMakeUserConfirmPassword
+                    })
+                });
 
-        appRef.components.forEach((componentRef) => {
-          if ('page' in componentRef.instance) {
-            componentRef.setInput('page', PageComponent);
-          }
-          if ('userProfileFormFields' in componentRef.instance) {
-            componentRef.setInput('userProfileFormFields', UserProfileFormFieldsComponent);
-          }
-        });
-      }
-      break;
-  }
+                appRef.components.forEach(componentRef => {
+                    if ('page' in componentRef.instance) {
+                        componentRef.setInput('page', PageComponent);
+                    }
+                    if ('userProfileFormFields' in componentRef.instance) {
+                        componentRef.setInput(
+                            'userProfileFormFields',
+                            UserProfileFormFieldsComponent
+                        );
+                    }
+                });
+            }
+            break;
+    }
 }
 
 /* prettier-ignore-end */
