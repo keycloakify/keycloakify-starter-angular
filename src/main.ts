@@ -9,6 +9,10 @@ import { isDevMode } from '@angular/core';
 import { getKcContextMock } from './login/KcContextMock';
 
 if (isDevMode()) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).process = {
+        env: { NODE_ENV: 'development', PUBLIC_URL: './' }
+    };
     window.kcContext = getKcContextMock({
         pageId: 'register.ftl',
         overrides: {}
