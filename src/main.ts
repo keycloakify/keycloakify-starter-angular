@@ -4,7 +4,6 @@ import { appConfig } from './app.config';
 import { bootstrapKcApplication } from './kc.gen';
 // The following block can be uncommented to test a specific page with `ng serve`
 // Don't forget to comment back or your bundle size will increase
-/*
 import { isDevMode } from '@angular/core';
 import { getKcContextMock } from './login/KcContextMock';
 
@@ -14,11 +13,11 @@ if (isDevMode()) {
         env: { NODE_ENV: 'development', PUBLIC_URL: './' }
     };
     window.kcContext = getKcContextMock({
-        pageId: 'register.ftl',
+        pageId: 'login.ftl',
         overrides: {}
     });
 }
-*/
+
 (async () => {
     if (window.kcContext === undefined) {
         const { NoContextComponent } = await import('./no-context.component');
