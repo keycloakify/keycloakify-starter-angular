@@ -41,6 +41,12 @@
                                 "glob": "**/*",
                                 "input": "./assets",
                                 "output": "./static/media"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "./public",
+                                "output": "./",
+                                "ignore": ["keycloakify-dev-resources/**"]
                             }
                         ]
                     },
