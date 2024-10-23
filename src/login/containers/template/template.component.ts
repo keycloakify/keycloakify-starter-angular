@@ -25,8 +25,8 @@ import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
 import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import { type ClassKey, getKcClsx } from 'keycloakify/login/lib/kcClsx';
-import { PUBLIC_URL } from 'keycloakify/PUBLIC_URL';
 import type { Observable } from 'rxjs';
+import { APP_BASE_HREF } from '../../../APP_BASE_HREF';
 import type { I18n } from '../../i18n';
 import { KcContext } from '../../KcContext';
 
@@ -162,6 +162,6 @@ export class TemplateComponent extends ComponentReference {
     }
 
     get publicPath() {
-        return PUBLIC_URL.endsWith('/') ? PUBLIC_URL : `${PUBLIC_URL}/`;
+        return APP_BASE_HREF;
     }
 }
