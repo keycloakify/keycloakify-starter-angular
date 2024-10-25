@@ -37,7 +37,8 @@
         "keycloakify": "^11.3.11",
         "rxjs": "~7.8.0",
         "tslib": "^2.7.0",
-        "@keycloakify/angular": "^0.0.9"
+        "@keycloakify/angular": "^0.0.9",
+        "zone.js": "~0.14.10"
     },
     "devDependencies": {
         "@angular-builders/custom-webpack": "^18.0.0",
@@ -50,10 +51,11 @@
         "angular-eslint": "^18.3.1",
         "eslint": "^9.11.1",
         "eslint-plugin-prettier": "^5.2.1",
-        "eslint-plugin-storybook": "^0.9.0",
         "prettier": "^3.3.3",
         "typescript": "~5.4.2",
-        "typescript-eslint": "^8.7.0"
+        "typescript-eslint": "^8.7.0",
+        "@angular-devkit/core": "^18.2.10",
+        "@angular-devkit/schematics": "^18.2.10"
     },
     "overrides": {
         "@typescript-eslint/utils": "^8.7.0"
