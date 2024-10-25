@@ -1,9 +1,9 @@
 {
-    "name": "keycloakify-starter-angular",
+    "name": "keycloakify-starter-angular-webpack",
     "version": "0.0.1",
     "license": "MIT",
     "type": "module",
-    "description": "Angular 18 Starter for Keycloakify",
+    "description": "Angular 18 Webpack Starter for Keycloakify",
     "scripts": {
         "ng": "ng",
         "prebuild": "keycloakify update-kc-gen",
