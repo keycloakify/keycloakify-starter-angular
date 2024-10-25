@@ -4,13 +4,13 @@
     <br/>
 </p>
 
-This starter is based on Angular with Webpack. There is also [a Vite based starter](https://github.com/luca-peruzzo/analog-keycloakify-starter/).
+This starter is based on Angular with Webpack. There is also [a Vite based starter](https://github.com/keycloakify/keycloakify-starter-angular-vite).
 
 # Quick start
 
 ```bash
-git clone https://github.com/kathari00/keycloakify-starter-angular-webpack
-cd keycloakify-starter-angular-webpack
+git clone https://github.com/kathari00/keycloakify-starter-angular
+cd keycloakify-starter-angular
 yarn install # Or use an other package manager, just be sure to delete the yarn.lock if you use another package manager.
 ```
 
