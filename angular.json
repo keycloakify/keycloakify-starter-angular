@@ -3,118 +3,144 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "angular_template": {
-            "projectType": "application",
-            "schematics": {
-                "@schematics/angular:component": {
-                    "changeDetection": "OnPush",
-                    "style": "css",
-                    "standalone": true
+      "angular_template": {
+        "projectType": "application",
+        "schematics": {
+          "@schematics/angular:component": {
+            "changeDetection": "OnPush",
+            "style": "css",
+            "standalone": true
+          },
+          "@schematics/angular:application": {
+            "strict": true
+          },
+          "@schematics/angular:directive": {
+            "standalone": true
+          },
+          "@schematics/angular:pipe": {
+            "standalone": true
+          },
+          "@schematics/angular:service": {
+            "flat": false
+          }
+        },
+        "root": "",
+        "sourceRoot": "src",
+        "prefix": "kc",
+        "architect": {
+          "build": {
+            "builder": "@angular-builders/custom-webpack:browser",
+            "options": {
+              "outputPath": "dist",
+              "index": "index.html",
+              "main": "src/main.ts",
+              "tsConfig": "tsconfig.app.json",
+              "styles": [
+                "src/styles.css"
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "./assets",
+                  "output": "./static/media"
                 },
-                "@schematics/angular:application": {
-                    "strict": true
-                },
-                "@schematics/angular:directive": {
-                    "standalone": true
-                },
-                "@schematics/angular:pipe": {
-                    "standalone": true
-                },
-                "@schematics/angular:service": {
-                    "flat": false
+                {
+                  "glob": "**/*",
+                  "input": "./public",
+                  "output": "./",
+                  "ignore": [
+                    "keycloakify-dev-resources/**"
+                  ]
                 }
+              ]
             },
-            "root": "",
-            "sourceRoot": "src",
-            "prefix": "kc",
-            "architect": {
-                "build": {
-                    "builder": "@angular-builders/custom-webpack:browser",
-                    "options": {
-                        "outputPath": "dist",
-                        "index": "index.html",
-                        "main": "src/main.ts",
-                        "tsConfig": "tsconfig.app.json",
-                        "styles": ["src/styles.css"],
-                        "assets": [
-                            {
-                                "glob": "**/*",
-                                "input": "./assets",
-                                "output": "./static/media"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "./public",
-                                "output": "./",
-                                "ignore": ["keycloakify-dev-resources/**"]
-                            }
-                        ]
-                    },
-
-                    "configurations": {
-                        "production": {
-                            "optimization": true,
-                            "indexTransform": "index-html-transform.js",
-                            "sourceMap": false,
-                            "customWebpackConfig": {
-                                "path": "extra-webpack.config.js",
-                                "mergeRules": {
-                                    "output": "replace",
-                                    "entry": "replace",
-                                    "plugins": "append"
-                                }
-                            }
-                        },
-                        "development": {
-                            "assets": [
-                                {
-                                    "glob": "favicon-32x32.png",
-                                    "input": "./",
-                                    "output": "./"
-                                },
-                                {
-                                    "glob": "**/*",
-                                    "input": "./public",
-                                    "output": "./"
-                                }
-                            ],
-                            "buildOptimizer": false,
-                            "optimization": false,
-                            "sourceMap": true,
-                            "namedChunks": true
-                        }
-                    },
-                    "defaultConfiguration": "production"
-                },
-                "serve": {
-                    "builder": "@angular-builders/custom-webpack:dev-server",
-                    "options": {
-                        "buildTarget": "angular_template:build"
-                    },
-                    "configurations": {
-                        "production": {
-                            "buildTarget": "angular_template:build:production"
-                        },
-                        "development": {
-                            "buildTarget": "angular_template:build:development"
-                        }
-                    },
-                    "defaultConfiguration": "development"
-                },
-                "lint": {
-                    "builder": "@angular-eslint/builder:lint",
-                    "options": {
-                        "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
-                    }
+            "configurations": {
+              "production": {
+                "optimization": true,
+                "indexTransform": "index-html-transform.js",
+                "sourceMap": false,
+                "customWebpackConfig": {
+                  "path": "extra-webpack.config.js",
+                  "mergeRules": {
+                    "output": "replace",
+                    "entry": "replace",
+                    "plugins": "append"
+                  }
                 }
+              },
+              "development": {
+                "assets": [
+                  {
+                    "glob": "favicon-32x32.png",
+                    "input": "./",
+                    "output": "./"
+                  },
+                  {
+                    "glob": "**/*",
+                    "input": "./public",
+                    "output": "./"
+                  }
+                ],
+                "buildOptimizer": false,
+                "optimization": false,
+                "sourceMap": true,
+                "namedChunks": true
+              }
+            },
+            "defaultConfiguration": "production"
+          },
+          "serve": {
+            "builder": "@angular-builders/custom-webpack:dev-server",
+            "options": {
+              "buildTarget": "angular_template:build"
+            },
+            "configurations": {
+              "production": {
+                "buildTarget": "angular_template:build:production"
+              },
+              "development": {
+                "buildTarget": "angular_template:build:development"
+              }
+            },
+            "defaultConfiguration": "development"
+          },
+          "lint": {
+            "builder": "@angular-eslint/builder:lint",
+            "options": {
+              "lintFilePatterns": [
+                "src/**/*.ts",
+                "src/**/*.html"
+              ]
             }
+          },
+          "storybook": {
+            "builder": "@storybook/angular:start-storybook",
+            "options": {
+              "configDir": ".storybook",
+              "browserTarget": "angular_template:build",
+              "compodoc": false,
+              "port": 6006
+            }
+          },
+          "build-storybook": {
+            "builder": "@storybook/angular:build-storybook",
+            "options": {
+              "configDir": ".storybook",
+              "browserTarget": "angular_template:build",
+              "compodoc": false,
+              "outputDir": "storybook-static"
+            }
+          }
         }
+      }
     },
     "cli": {
-        "analytics": false,
-        "schematicCollections": ["@angular-eslint/schematics"],
-        "cache": {
-            "enabled": false
-        }
+      "analytics": false,
+      "schematicCollections": [
+        "@angular-eslint/schematics"
+      ],
+      "cache": {
+        "enabled": false
+      }
     }
-}
+  }
