@@ -2008,10 +2008,10 @@
   resolved "https://registry.yarnpkg.com/@jsonjoy.com/util/-/util-1.5.0.tgz#6008e35b9d9d8ee27bc4bfaa70c8cbf33a537b4c"
   integrity sha512-ojoNsrIuPI9g6o8UxhraZQSyF2ByJanAY4cTFbc8Mf2AXEF4aQRGY1dJxyJpuyav8r9FGflEt/Ff3u5Nt6YMPA==
 
-"@keycloakify/angular@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@keycloakify/angular/-/angular-0.1.3.tgz#ac45128d191527158637473e8423c533caa15913"
-  integrity sha512-4U+o0zTR/Hm0vHB3iaQIZSnCoYOKnT7UnP8dsiyMcrX+h3QxXHgANKcTfTfMWM/FKu+51ybONHNvpWpCEu5YYQ==
+"@keycloakify/angular@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@keycloakify/angular/-/angular-0.1.4.tgz#fcc551e4454c00615d46c73049ea58345e72b15c"
+  integrity sha512-Jsf9zb7qer8h5/3kslj4LsA3ev9B2cSsGxEy2GlDQWH9Ku5MXX1oCBowtFd5jo+PgpEVEGNbBrZr0oxsR61I8g==
   dependencies:
     tsafe "^1.8.1"
     tslib "^2.3.0"
@@ -6728,7 +6728,7 @@ pathval@^2.0.0:
   resolved "https://registry.yarnpkg.com/pathval/-/pathval-2.0.0.tgz#7e2550b422601d4f6b8e26f1301bc8f15a741a25"
   integrity sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==
 
-picocolors@^1.0.0, picocolors@^1.0.1, picocolors@^1.1.0:
+picocolors@^1.0.0, picocolors@^1.0.1, picocolors@^1.1.0, picocolors@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.1.1.tgz#3d321af3eab939b083c8f929a1d12cda81c26b6b"
   integrity sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==
@@ -6839,12 +6839,12 @@ postcss@8.4.41:
     source-map-js "^1.2.0"
 
 postcss@^8.2.14, postcss@^8.4.23, postcss@^8.4.33, postcss@^8.4.43:
-  version "8.4.47"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.47.tgz#5bf6c9a010f3e724c503bf03ef7947dcb0fea365"
-  integrity sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==
+  version "8.4.48"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.48.tgz#765f3f8abaa2a2b065cdddbc57ad4cb5a76e515f"
+  integrity sha512-GCRK8F6+Dl7xYniR5a4FYbpBzU8XnZVeowqsQFYdcXuSbChgiks7qybSkbvnaeqv0G0B+dd9/jJgH8kkLDQeEA==
   dependencies:
     nanoid "^3.3.7"
-    picocolors "^1.1.0"
+    picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
 prelude-ls@^1.2.1:
@@ -7926,9 +7926,9 @@ ts-node@^10.0.0:
     yn "3.1.1"
 
 tsafe@^1.7.5, tsafe@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.8.1.tgz#69cf0c17ef8414123c08ce79e33e65fe1d6236e1"
-  integrity sha512-k2PQvnVin8FacLug5qHA57262zjp/T2zM8qlRLnYvVwgTT2VcwlG5latPiUhJn+TXL28cgVNgzoBvJYHKfj+XA==
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.8.4.tgz#ef2ecb21829eb5003d931de6a80b34303ed907ee"
+  integrity sha512-k1myNdDFEbqfq2hS7ln4qlgpvRlJq3wkOawQWieqVHu/K7dX+qQHTDkdzfvBBPNFrkIM7S/846JD6B3fm6MWHQ==
 
 tsconfig-paths-webpack-plugin@^4.0.1:
   version "4.1.0"
