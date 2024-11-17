@@ -5747,10 +5747,10 @@ karma-source-map-support@1.4.0:
   dependencies:
     source-map-support "^0.5.5"
 
-keycloakify@^11.3.20:
-  version "11.3.20"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.3.20.tgz#6cea0d4cfadaecb05ff9b7fb51dfd9e8b344aa8b"
-  integrity sha512-xMXTxjefzVYgZNeZMkZ3wIyKlJU4XAwyelMHzVDbH/GtO1xbGafQQVB75qBYpBf0VIVzRwD3aie8Wqlltc4H/Q==
+keycloakify@^11.3.21:
+  version "11.3.21"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.3.21.tgz#18486f27a638327c4386498b9949bec809748b92"
+  integrity sha512-cpQqEWs4Tvrf0HCD77aFvM27OBfghMFgpniz53BM+sFC1WZImY7VEcbEia4KPm7bGjNTVtef9ySZI5MdSW1eJw==
   dependencies:
     tsafe "^1.7.5"
 
