@@ -33,8 +33,8 @@
         "@angular/core": "^18.2.6",
         "@angular/forms": "^18.2.6",
         "@angular/platform-browser": "^18.2.6",
-        "@keycloakify/angular": "^0.1.7",
-        "keycloakify": "^11.3.22",
+        "@keycloakify/angular": "^0.1.8",
+        "keycloakify": "^11.3.24",
         "rxjs": "~7.8.0",
         "tslib": "^2.7.0",
         "zone.js": "~0.14.10"
