@@ -7,7 +7,7 @@
     "scripts": {
         "prebuild": "keycloakify update-kc-gen",
         "build": "ng build",
-        "preserve": "keycloakify update-kc-gen && keycloakify copy-keycloak-resources-to-public",
+        "preserve": "keycloakify update-kc-gen",
         "serve": "ng serve",
         "build-keycloak-theme": "ng build && keycloakify build",
         "storybook": "ng run angular_template:storybook",
@@ -34,7 +34,7 @@
         "@angular/forms": "^18.2.6",
         "@angular/platform-browser": "^18.2.6",
         "@keycloakify/angular": "^0.1.8",
-        "keycloakify": "^11.3.24",
+        "keycloakify": "^11.3.31",
         "rxjs": "~7.8.0",
         "tslib": "^2.7.0",
         "zone.js": "~0.14.10"
