@@ -45,7 +45,6 @@
         "@angular-devkit/schematics": "^18.2.10",
         "@angular/cli": "^18.2.0",
         "@angular/compiler-cli": "^18.2.6",
-        "@chromatic-com/storybook": "3.2.2",
         "@eslint/compat": "^1.1.1",
         "@storybook/addon-essentials": "8.4.2",
         "@storybook/addon-interactions": "8.4.2",
