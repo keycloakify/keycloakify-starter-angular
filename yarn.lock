@@ -2008,12 +2008,12 @@
   resolved "https://registry.yarnpkg.com/@jsonjoy.com/util/-/util-1.5.0.tgz#6008e35b9d9d8ee27bc4bfaa70c8cbf33a537b4c"
   integrity sha512-ojoNsrIuPI9g6o8UxhraZQSyF2ByJanAY4cTFbc8Mf2AXEF4aQRGY1dJxyJpuyav8r9FGflEt/Ff3u5Nt6YMPA==
 
-"@keycloakify/angular@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@keycloakify/angular/-/angular-0.1.8.tgz#f37f4247fdf592d9b41a7f115d118ee89a33d8bb"
-  integrity sha512-BfthcbPBacYBnskeevfC5AVVZKJqcjC0sIMM0UhGqHbFPPKp/SgpB7RaV53NcMrZ++l+TgbiRXz7iKaaOdW7HQ==
+"@keycloakify/angular@^0.2.12":
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/@keycloakify/angular/-/angular-0.2.12.tgz#77fbddbad6e52791fe0af7637c12eebb017b6c64"
+  integrity sha512-+lH/JSx/V8P3AW4J2agkZiw8m5+gzC+K70MMjQRi0UyrA54D1ZyIg59TACk9kgJyVcMDNiMahRRBQ7jMr4xMsQ==
   dependencies:
-    tsafe "^1.8.1"
+    tsafe "^1.8.5"
     tslib "^2.3.0"
 
 "@leichtgewicht/ip-codec@^2.0.1":
@@ -5747,10 +5747,10 @@ karma-source-map-support@1.4.0:
   dependencies:
     source-map-support "^0.5.5"
 
-keycloakify@^11.3.31:
-  version "11.3.31"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.3.31.tgz#eafbc15b9d07705a55cc4b64fd049a1cdf8c9f77"
-  integrity sha512-oZq1/MmLlt26EjQSfEyuyiQlXbrFjP2SjHiJXduMsfErwYXVW951CK4L1Rj3bnQYUMuaWSt0Zboo0ackCUZMCw==
+keycloakify@^11.7.0:
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.7.0.tgz#f95f7355ef0b57e4f0078a82e547dfebffedd171"
+  integrity sha512-FUYfrm0YuAXldIjSA9wS6+1r8v6qTzkWPV70OyC/mCM25uFKDuy0Kh7s5/03QgfDSoDOu0HW1Xv8iH4sVWY4hQ==
   dependencies:
     tsafe "^1.8.5"
 
@@ -7924,11 +7924,6 @@ ts-node@^10.0.0:
     make-error "^1.1.1"
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
-
-tsafe@^1.8.1:
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.8.4.tgz#ef2ecb21829eb5003d931de6a80b34303ed907ee"
-  integrity sha512-k1myNdDFEbqfq2hS7ln4qlgpvRlJq3wkOawQWieqVHu/K7dX+qQHTDkdzfvBBPNFrkIM7S/846JD6B3fm6MWHQ==
 
 tsafe@^1.8.5:
   version "1.8.5"
