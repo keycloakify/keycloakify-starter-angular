@@ -1997,10 +1997,10 @@
   resolved "https://registry.yarnpkg.com/@jsonjoy.com/util/-/util-1.5.0.tgz#6008e35b9d9d8ee27bc4bfaa70c8cbf33a537b4c"
   integrity sha512-ojoNsrIuPI9g6o8UxhraZQSyF2ByJanAY4cTFbc8Mf2AXEF4aQRGY1dJxyJpuyav8r9FGflEt/Ff3u5Nt6YMPA==
 
-"@keycloakify/angular@^0.2.12":
-  version "0.2.12"
-  resolved "https://registry.yarnpkg.com/@keycloakify/angular/-/angular-0.2.12.tgz#77fbddbad6e52791fe0af7637c12eebb017b6c64"
-  integrity sha512-+lH/JSx/V8P3AW4J2agkZiw8m5+gzC+K70MMjQRi0UyrA54D1ZyIg59TACk9kgJyVcMDNiMahRRBQ7jMr4xMsQ==
+"@keycloakify/angular@^0.2.14":
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/@keycloakify/angular/-/angular-0.2.14.tgz#21ac6d4cf4160e4310cf27c10c3022233684a0c4"
+  integrity sha512-ON2ia4p0Ub+TY53WF19lel5m8ct7iEI6NaAQM6cVyvOWmeHL7Q12v2i8Ah8zpLoURU8aDWv5/aOC/p0aGnawZQ==
   dependencies:
     tsafe "^1.8.5"
     tslib "^2.3.0"
@@ -5726,10 +5726,10 @@ karma-source-map-support@1.4.0:
   dependencies:
     source-map-support "^0.5.5"
 
-keycloakify@^11.7.0:
-  version "11.7.0"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.7.0.tgz#f95f7355ef0b57e4f0078a82e547dfebffedd171"
-  integrity sha512-FUYfrm0YuAXldIjSA9wS6+1r8v6qTzkWPV70OyC/mCM25uFKDuy0Kh7s5/03QgfDSoDOu0HW1Xv8iH4sVWY4hQ==
+keycloakify@^11.8.1:
+  version "11.8.1"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.8.1.tgz#d1ac82f8e8f52700785c4a08f2a2356d8dfc5b61"
+  integrity sha512-2YW9JXYhQbiMvRnev4VqDBBw1p/161TaBQ0BMZzEih9QlAVIgsccm/hY73YOsTpaizcCdBkPIbDu1fvLM/HXnA==
   dependencies:
     tsafe "^1.8.5"
 
