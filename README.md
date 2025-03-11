@@ -1,5 +1,5 @@
 <p align="center">
-    <i>🚀 <a href="https://keycloakify.dev">Angular 18 Keycloakify Starter</a> v11 starter 🚀</i>
+    <i>🚀 <a href="https://keycloakify.dev">Angular 19 Keycloakify Starter</a> v11 starter 🚀</i>
     <br/>
     <br/>
 </p>
