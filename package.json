@@ -5,6 +5,7 @@
     "type": "module",
     "description": "Angular 18 Webpack Starter for Keycloakify",
     "scripts": {
+        "ng": "ng",
         "prebuild": "keycloakify update-kc-gen",
         "build": "ng build",
         "preserve": "keycloakify update-kc-gen",
