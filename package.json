@@ -1,79 +1,79 @@
 {
-    "name": "keycloakify-starter-angular",
-    "version": "0.0.0",
-    "license": "MIT",
-    "type": "module",
-    "description": "Angular 18 Webpack Starter for Keycloakify",
-    "scripts": {
-        "ng": "ng",
-        "prebuild": "keycloakify update-kc-gen",
-        "build": "ng build",
-        "preserve": "keycloakify update-kc-gen",
-        "serve": "ng serve",
-        "build-keycloak-theme": "ng build && keycloakify build",
-        "storybook": "ng run angular_template:storybook",
-        "build-storybook": "ng run angular_template:build-storybook"
-    },
-    "keycloakify": {
-        "accountThemeImplementation": "none",
-        "projectBuildDirPath": "dist",
-        "staticDirPathInProjectBuildDirPath": "static",
-        "publicDirPath": "public"
-    },
-    "keywords": [
-        "angular",
-        "keycloakify",
-        "keycloak",
-        "webpack"
-    ],
-    "private": true,
-    "dependencies": {
-        "@angular/animations": "^18.2.6",
-        "@angular/common": "^18.2.6",
-        "@angular/compiler": "^18.2.6",
-        "@angular/core": "^18.2.6",
-        "@angular/forms": "^18.2.6",
-        "@angular/platform-browser": "^18.2.6",
-        "@keycloakify/angular": "^0.2.14",
-        "keycloakify": "^11.8.1",
-        "rxjs": "~7.8.0",
-        "tslib": "^2.7.0",
-        "zone.js": "~0.14.10"
-    },
-    "devDependencies": {
-        "@angular-builders/custom-webpack": "^18.0.0",
-        "@angular-devkit/core": "^18.2.10",
-        "@angular-devkit/schematics": "^18.2.10",
-        "@angular/cli": "^18.2.0",
-        "@angular/compiler-cli": "^18.2.6",
-        "@eslint/compat": "^1.1.1",
-        "@storybook/addon-essentials": "8.4.2",
-        "@storybook/addon-interactions": "8.4.2",
-        "@storybook/addon-onboarding": "8.4.2",
-        "@storybook/angular": "8.4.2",
-        "@storybook/blocks": "8.4.2",
-        "@storybook/test": "8.4.2",
-        "@types/node": "^20.0.0",
-        "@typescript-eslint/types": "^8.7.0",
-        "@typescript-eslint/utils": "^8.7.0",
-        "angular-eslint": "^18.3.1",
-        "eslint": "^9.11.1",
-        "eslint-plugin-prettier": "^5.2.1",
-        "eslint-plugin-storybook": "^0.11.0",
-        "prettier": "^3.3.3",
-        "storybook": "8.4.2",
-        "typescript": "~5.4.2",
-        "typescript-eslint": "^8.7.0"
-    },
-    "overrides": {
-        "@typescript-eslint/utils": "^8.7.0"
-    },
-    "engines": {
-        "node": "^18.0.0 || >=20.0.0"
-    },
-    "eslintConfig": {
-        "extends": [
-            "plugin:storybook/recommended"
-        ]
-    }
+  "name": "keycloakify-starter-angular",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "description": "Angular 18 Webpack Starter for Keycloakify",
+  "scripts": {
+    "ng": "ng",
+    "prebuild": "keycloakify update-kc-gen",
+    "build": "ng build",
+    "preserve": "keycloakify update-kc-gen",
+    "serve": "ng serve",
+    "build-keycloak-theme": "ng build && keycloakify build",
+    "storybook": "ng run angular_template:storybook",
+    "build-storybook": "ng run angular_template:build-storybook"
+  },
+  "keycloakify": {
+    "accountThemeImplementation": "none",
+    "projectBuildDirPath": "dist",
+    "staticDirPathInProjectBuildDirPath": "static",
+    "publicDirPath": "public"
+  },
+  "keywords": [
+    "angular",
+    "keycloakify",
+    "keycloak",
+    "webpack"
+  ],
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^18.2.6",
+    "@angular/common": "^18.2.6",
+    "@angular/compiler": "^18.2.6",
+    "@angular/core": "^18.2.6",
+    "@angular/forms": "^18.2.6",
+    "@angular/platform-browser": "^18.2.6",
+    "@keycloakify/angular": "^0.2.14",
+    "keycloakify": "^11.8.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.7.0",
+    "zone.js": "~0.14.10"
+  },
+  "devDependencies": {
+    "@angular-builders/custom-webpack": "^18.0.0",
+    "@angular-devkit/core": "^18.2.10",
+    "@angular-devkit/schematics": "^18.2.10",
+    "@angular/cli": "^18.2.0",
+    "@angular/compiler-cli": "^18.2.6",
+    "@eslint/compat": "^1.1.1",
+    "@storybook/addon-essentials": "^8.6.4",
+    "@storybook/addon-interactions": "^8.6.4",
+    "@storybook/addon-onboarding": "^8.6.4",
+    "@storybook/angular": "^8.6.4",
+    "@storybook/blocks": "^8.6.4",
+    "@storybook/test": "^8.6.4",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/types": "^8.7.0",
+    "@typescript-eslint/utils": "^8.7.0",
+    "angular-eslint": "^18.3.1",
+    "eslint": "^9.11.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-storybook": "^0.11.0",
+    "prettier": "^3.3.3",
+    "storybook": "^8.6.4",
+    "typescript": "~5.4.2",
+    "typescript-eslint": "^8.7.0"
+  },
+  "overrides": {
+    "@typescript-eslint/utils": "^8.7.0"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  }
 }
