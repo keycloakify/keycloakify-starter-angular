@@ -5,25 +5,6 @@
     "projects": {
       "angular_template": {
         "projectType": "application",
-        "schematics": {
-          "@schematics/angular:component": {
-            "changeDetection": "OnPush",
-            "style": "css",
-            "standalone": true
-          },
-          "@schematics/angular:application": {
-            "strict": true
-          },
-          "@schematics/angular:directive": {
-            "standalone": true
-          },
-          "@schematics/angular:pipe": {
-            "standalone": true
-          },
-          "@schematics/angular:service": {
-            "flat": false
-          }
-        },
         "root": "",
         "sourceRoot": "src",
         "prefix": "kc",
@@ -57,10 +38,12 @@
             "configurations": {
               "production": {
                 "optimization": true,
-                "indexTransform": "index-html-transform.js",
+                "indexTransform": "index-html-transform.mjs",
                 "sourceMap": false,
                 "customWebpackConfig": {
-                  "path": "extra-webpack.config.js",
+                  "path": "extra-webpack.config.mjs",
+                  "libraryName": "default",
+
                   "mergeRules": {
                     "output": "replace",
                     "entry": "replace",
