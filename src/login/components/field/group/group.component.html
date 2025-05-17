@@ -1,0 +1,26 @@
+<div [kcClass]="'kcFormGroupClass'">
+  <div [kcClass]="'kcFormGroupLabelClass'">
+    <label [for]="name()" [kcClass]="'kcFormLabelClass'">
+      <span [kcClass]="'kcFormLabelTextClass'">
+        {{ label() }}
+      </span>
+      @if (required()) {
+        <span [kcClass]="'kcInputRequiredClass'" aria-hidden="true">&#42;</span>
+      }
+    </label>
+  </div>
+  <ng-content></ng-content>
+  <div id="input-error-container-{{name}}">
+    @if (error()) {
+      <div [kcClass]="'kcFormHelperTextClass'" aria-live="polite">
+        <div [kcClass]="'kcInputHelperTextClass'">
+          <div [kcClass]="{'kcInputHelperTextItemClass': true, 'kcError': true}" id="input-error-${name}">
+            <span [kcClass]="'kcInputErrorMessageClass'">
+              {{ error() }}
+            </span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

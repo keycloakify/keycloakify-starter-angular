@@ -1,0 +1,7 @@
+<div [kcClass]="'kcFormGroupClass'">
+  <ng-content></ng-content>
+  <div [kcClass]="'kcFormActionGroupClass'" [ngClass]="{ horizontal: horizontal() ? 'd-flex flex-nowrap' : 'd-flex flex-wrap',
+  }">
+    <ng-content></ng-content>
+  </div>
+</div>

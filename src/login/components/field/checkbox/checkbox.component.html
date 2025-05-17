@@ -1,0 +1,17 @@
+<div [kcClass]="'kcCheckboxClass'">
+  <label [for]="name()" [kcClass]="'kcCheckboxClass'">
+    <input
+      [kcClass]="'kcCheckboxInputClass'"
+      type="checkbox"
+      [id]="name()"
+      [name]="name()"
+      [checked]="value()"
+      [required]="required()"
+    />
+    <span [kcClass]="'kcCheckboxLabelClass'"> {{ label() }}</span>
+    @if (required()) {
+      <span [kcClass]="'kcCheckboxLabelRequiredClass'" aria-hidden="true">&#42;</span>
+    }
+  </label>
+
+</div>

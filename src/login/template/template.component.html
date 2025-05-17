@@ -1,0 +1,186 @@
+@let realm = kcContext.realm;
+@let message = kcContext.message;
+@let auth = kcContext.auth;
+@let isAppInitiatedAction = kcContext.isAppInitiatedAction;
+@let url = kcContext.url;
+@let locale = kcContext.locale;
+
+<ng-template #username>
+  <kc-group name="username" [label]="usernameLabel">
+    <div [kcClass]="'kcInputGroup'">
+      <div [kcClass]="{'kcInputGroupItemClass': true, 'kcFill': true}">
+        <span [kcClass]="{'kcInputClass': true, 'kcFormReadOnlyClass': true}">
+          <input id="kc-attempted-username" [value]="auth?.attemptedUsername" readonly>
+        </span>
+
+      </div>
+      <div [kcClass]="'kcInputGroupItemClass'">
+        <button id="reset-login" [kcClass]="'kcFormPasswordVisibilityButtonClass'" class="kc-login-tooltip"
+                type="button"
+                [attr.aria-label]="i18n.msgStr('restartLoginTooltip')"
+                (click)="location.href = url.loginRestartFlowUrl">
+          <i class="fa-sync-alt fas" aria-hidden="true"></i>
+          <span class="kc-tooltip-text">{{ i18n.msgStr('restartLoginTooltip') }}</span>
+        </button>
+      </div>
+    </div>
+  </kc-group>
+</ng-template>
+
+@let isReadyToRender = isReadyToRender$ | async;
+
+@if (isReadyToRender) {
+  <div [kcClass]="'kcLogin'">
+    <div [kcClass]="'kcLoginContainer'">
+
+      <header id="kc-header" class="pf-v5-c-login__header">
+        <div
+          id="kc-header-wrapper"
+          class="pf-v5-c-brand"
+          [innerHTML]="i18n.msgStr('loginTitleHtml', realm?.displayNameHtml ?? '') | kcSanitize: 'html'">
+        </div>
+      </header>
+
+      <main [kcClass]="'kcLoginMain'">
+        <div [kcClass]="'kcLoginMainHeader'">
+          <h1 [kcClass]="'kcLoginMainTitle'" id="kc-page-title">
+            @let header = headerNode && headerNode();
+            @if (header) {
+              <ng-container [ngTemplateOutlet]="header"/>
+            }
+          </h1>
+
+          @if (realm.internationalizationEnabled && i18n.enabledLanguages.length > 1) {
+            <div [kcClass]="'kcLoginMainHeaderUtilities'">
+              <div [kcClass]="'kcInputClass'">
+                <select
+                  [attr.aria-label]="i18n.msgStr('languages')"
+                  id="login-select-toggle"
+                  onchange="if (this.value) { window.location.href = this.value; }">
+                  @for (entry of i18n.enabledLanguages; track entry; let idx = $index) {
+                    <option [value]="entry.href" [selected]="entry.languageTag === locale?.currentLanguageTag">
+                      {{ entry.label }}
+                    </option>
+                  }
+                </select>
+                <span [kcClass]="'kcFormControlUtilClass'">
+                  <span [kcClass]="'kcFormControlToggleIcon'">
+                    <svg
+                      class="pf-v5-svg"
+                      viewBox="0 0 320 512"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      role="img"
+                      width="1em"
+                      height="1em"
+                    >
+                      <path
+                        d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                      ></path>
+                    </svg>
+                  </span>
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div [kcClass]="'kcLoginMainBody'">
+
+          @if (!(auth && auth.showUsername && !auth.showResetCredentials)) {
+            @if (displayRequiredFields) {
+              <div [kcClass]="'kcContentWrapperClass'">
+                <div [kcClass]="'kcLabelWrapperClass'" class="subtitle">
+                          <span [kcClass]="'kcInputHelperTextItemTextClass'">
+                            <span [kcClass]="'kcInputRequiredClass'">*</span> {{ i18n.msgStr('requiredFields') }}
+                          </span>
+                </div>
+              </div>
+            }
+          } @else {
+            @if (displayRequiredFields) {
+              <div [kcClass]="'kcContentWrapperClass'">
+                <div [kcClass]="'kcLabelWrapperClass'" class="subtitle">
+                  <span [kcClass]="'kcInputHelperTextItemTextClass'">
+                    <span [kcClass]="'kcInputRequiredClass'">*</span> {{ i18n.msgStr('requiredFields') }}
+                  </span>
+                </div>
+                <div [kcClass]="{'kcContentWrapperClass': true, 'kcFormClass':true}">
+                  <ng-container [ngTemplateOutlet]="username"></ng-container>
+                </div>
+              </div>
+
+            } @else {
+              <div [kcClass]="{'kcContentWrapperClass': true, 'kcFormClass':true}">
+                <ng-container [ngTemplateOutlet]="username"></ng-container>
+              </div>
+            }
+          }
+
+          <!-- App-initiated actions should not see warning messages about the need to complete the action -->
+          <!-- during login.                                                                               -->
+          @if (displayMessage && message && (message.type !== 'warning' || !isAppInitiatedAction)) {
+            <div
+              [kcClass]="'kcAlertClass'"
+              [ngClass]="'pf-m-' + (message.type === 'error' ? 'danger' : message.type)">
+              <div [kcClass]="'kcAlertIconClass'">
+                @switch (message.type) {
+                  @case ('success') {
+                    <span [kcClass]="'kcFeedbackSuccessIcon'"></span>
+                  }
+                  @case ('warning') {
+                    <span [kcClass]="'kcFeedbackWarningIcon'"></span>
+                  }
+                  @case ('error') {
+                    <span [kcClass]="'kcFeedbackErrorIcon'"></span>
+                  }
+                  @case ('info') {
+                    <span [kcClass]="'kcFeedbackInfoIcon'"></span>
+                  }
+                }
+              </div>
+              <span [kcClass]="'kcAlertTitleClass'" class="kc-feedback-text"
+                    [innerHTML]="message.summary | kcSanitize: 'html'"></span>
+            </div>
+
+          }
+          <!-- Content -->
+          <ng-template #pageRef></ng-template>
+
+          @if (auth && auth.showTryAnotherWayLink) {
+            <form id="kc-select-try-another-way-form" method="post" [action]="url?.loginAction" #tryAnotherWayForm>
+              <input type="hidden" name="tryAnotherWay" value="on"/>
+              <a id="try-another-way" href="#" (click)="$event.preventDefault(); tryAnotherWay()"
+                 [kcClass]="['kcButtonSecondaryClass', 'kcButtonBlockClass', 'kcMarginTopClass']">
+                {{ i18n.msgStr('doTryAnotherWay') }}
+              </a>
+            </form>
+          }
+
+          <div [kcClass]="'kcLoginMainFooter'">
+            @let socialProviders = socialProvidersNode && socialProvidersNode();
+            @if (socialProviders) {
+              <ng-container [ngTemplateOutlet]="socialProviders"/>
+            }
+
+            @if (displayInfo) {
+              <div id="kc-info">
+                <div id="kc-info-wrapper" [kcClass]="'kcLoginMainFooterBandItem'">
+                  @let info = infoNode && infoNode();
+                  @if (info) {
+                    <ng-container [ngTemplateOutlet]="info"/>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+
+        </div>
+
+        <div [kcClass]="'kcLoginMainFooter'">
+          <kc-footer></kc-footer>
+        </div>
+      </main>
+    </div>
+  </div>
+}
