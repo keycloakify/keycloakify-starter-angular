@@ -6,7 +6,7 @@ import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import { createGetKcContextMock } from 'keycloakify/login/KcContext';
 import { kcEnvDefaults, themeNames } from '../kc.gen';
 import type { KcContextExtension, KcContextExtensionPerPage } from './KcContext';
-import { getKcPage } from './KcPage';
+import { classes, doMakeUserConfirmPassword, doUseDefaultCss, getKcPage } from './KcPage';
 import { getI18n } from './i18n';
 
 const kcContextExtension: KcContextExtension = {
@@ -33,8 +33,9 @@ export const decorators = (_: unknown, context: StoryContextLike) => ({
     applicationConfig: {
         providers: [
             provideKeycloakifyAngular({
-                doUseDefaultCss: true,
-                classes: {},
+                doMakeUserConfirmPassword: doMakeUserConfirmPassword,
+                doUseDefaultCss: doUseDefaultCss,
+                classes: classes,
                 kcContext: getKcContextMock({
                     pageId: context.globals['pageId'],
                     overrides: context.globals['kcContext']
@@ -48,7 +49,10 @@ export const decorators = (_: unknown, context: StoryContextLike) => ({
 @Component({
     selector: 'kc-page-story',
     template: `@if (pageComponent) {
-        <kc-root [page]="pageComponent"></kc-root>
+        <kc-root
+            [page]="pageComponent"
+            [userProfileFormFields]="userProfileFormFieldsComponent"
+        ></kc-root>
     }`,
     standalone: true,
     imports: [TemplateComponent]
@@ -56,9 +60,11 @@ export const decorators = (_: unknown, context: StoryContextLike) => ({
 export class KcPageStory implements OnInit {
     pageComponent: Type<unknown> | undefined;
     kcContext = inject(KC_LOGIN_CONTEXT);
+    userProfileFormFieldsComponent: Type<unknown> | undefined;
     ngOnInit() {
         getKcPage(this.kcContext.pageId).then(kcPage => {
             this.pageComponent = kcPage.PageComponent;
+            this.userProfileFormFieldsComponent = kcPage.UserProfileFormFieldsComponent;
         });
     }
 }
