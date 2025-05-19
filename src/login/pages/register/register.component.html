@@ -1,0 +1,79 @@
+@let url = kcContext.url;
+@let recaptchaRequired = kcContext.recaptchaRequired;
+@let recaptchaVisible = kcContext.recaptchaVisible;
+@let recaptchaSiteKey = kcContext.recaptchaSiteKey;
+@let recaptchaAction = kcContext.recaptchaAction;
+@let termsAcceptanceRequired = kcContext.termsAcceptanceRequired;
+
+<ng-template #headerNode>
+    @let messageHeader = kcContext.messageHeader;
+    {{ messageHeader ?? i18n.advancedMsgStr('registerTitle') }}
+</ng-template>
+<form
+    id="kc-register-form"
+    method="post"
+    [kcClass]="'kcFormClass'"
+    [action]="url.registrationAction"
+    novalidate="novalidate"
+>
+    <ng-container [ngComponentOutlet]="userProfileFormFields() ?? null" />
+    <kc-terms-acceptance (areTermsAccepted)="areTermsAccepted.set($event)"></kc-terms-acceptance>
+
+    @if (recaptchaRequired && (recaptchaVisible || recaptchaAction === undefined)) {
+        <div class="form-group">
+            <div [kcClass]="'kcInputWrapperClass'">
+                <div
+                    class="g-recaptcha"
+                    data-size="compact"
+                    [attr.data-sitekey]="recaptchaSiteKey"
+                    [attr.data-action]="recaptchaAction"
+                ></div>
+            </div>
+        </div>
+    }
+
+    @if (recaptchaRequired && !recaptchaVisible && recaptchaAction !== undefined) {
+        <div
+            id="kc-form-buttons"
+            [kcClass]="'kcFormButtonsClass'"
+        >
+            <button
+                class="g-recaptcha"
+                type="submit"
+                [kcClass]="['kcButtonClass', 'kcButtonPrimaryClass', 'kcButtonBlockClass', 'kcButtonLargeClass']"
+                [attr.data-sitekey]="recaptchaSiteKey"
+                [attr.data-callback]="onCallback"
+                [attr.data-action]="recaptchaAction"
+            >
+                {{ i18n.msgStr('doRegister') }}
+            </button>
+        </div>
+    } @else {
+        <div
+            id="kc-form-buttons"
+            [kcClass]="'kcFormButtonsClass'"
+        >
+            <input
+                type="submit"
+                [disabled]="!isFormSubmittable() || (termsAcceptanceRequired && !areTermsAccepted())"
+                [kcClass]="['kcButtonClass', 'kcButtonPrimaryClass', 'kcButtonBlockClass', 'kcButtonLargeClass']"
+                [value]="i18n.msgStr('doRegister')"
+            />
+        </div>
+    }
+    <div [kcClass]="'kcFormGroupClass'">
+        <div
+            id="kc-form-options"
+            [kcClass]="'kcFormOptionsClass'"
+        >
+            <div [kcClass]="'kcFormOptionsWrapperClass'">
+                <span>
+                    <a
+                        [href]="url.loginUrl"
+                        [innerHTML]="i18n.msgStr('backToLogin') | kcSanitize: 'html'"
+                    ></a>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>

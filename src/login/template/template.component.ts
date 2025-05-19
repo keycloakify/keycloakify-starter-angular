@@ -74,7 +74,6 @@ export class TemplateComponent extends ComponentReference {
 
     constructor() {
         super();
-
         this.isReadyToRender$ = this.loginResourceInjectorService.injectResource(this.doUseDefaultCss);
         this.#effectRef = effect(
             () => {
@@ -153,12 +152,6 @@ export class TemplateComponent extends ComponentReference {
         this.applyKcIndexClasses();
         this.#cdr.markForCheck();
         this.#effectRef.destroy();
-    }
-
-    navigateToLocale(value: any) {
-        if (value) {
-            window.location.href = value;
-        }
     }
 
     get usernameLabel(): string {
