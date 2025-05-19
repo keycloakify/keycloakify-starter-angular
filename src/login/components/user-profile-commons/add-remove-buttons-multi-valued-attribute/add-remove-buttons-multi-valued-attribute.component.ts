@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, output } f
 import { getButtonToDisplayForMultivaluedAttributeField, type FormAction } from '@keycloakify/angular/login/services/user-profile-form';
 import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { type Attribute } from 'keycloakify/login/KcContext';
-import type { I18n } from '../../i18n';
+import { I18n } from '../../../i18n';
 
 @Component({
     styles: [

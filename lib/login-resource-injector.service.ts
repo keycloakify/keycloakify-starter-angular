@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
+import { type Script } from '@keycloakify/angular/lib/models/script';
 import { ResourceInjectorService } from '@keycloakify/angular/lib/services/resource-injector';
 import type { KcContext } from '@keycloakify/angular/login/KcContext';
+import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import { catchError, forkJoin, of, switchMap } from 'rxjs';
-import { type Script } from '@keycloakify/angular/lib/models/script';
 
 @Injectable({
     providedIn: 'root'
@@ -22,9 +22,9 @@ export class LoginResourceInjectorService {
         //reversed order of stylesheets to accomodate prepending to head
         const stylesheets = [
             `${this.kcContext.url.resourcesPath}/css/styles.css`,
-            `${this.kcContext.url.resourcesPath}/css/patternfly.min.css`,
-            `${this.kcContext.url.resourcesPath}/css/patternfly-addons.css`,
-            `${this.kcContext.url.resourcesPath}/css/pficon.css`
+            `${this.kcContext.url.resourcesCommonPath}/node_modules/@patternfly-v5/patternfly/patternfly-addons.css`,
+            `${this.kcContext.url.resourcesCommonPath}/node_modules/@patternfly-v5/patternfly/patternfly.min.css`,
+            `${this.kcContext.url.resourcesCommonPath}/lib/pficon/pficon.css`
         ];
 
         return forkJoin(

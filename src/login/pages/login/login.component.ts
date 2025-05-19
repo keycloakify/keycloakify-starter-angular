@@ -3,17 +3,17 @@ import { ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, 
 import { USE_DEFAULT_CSS } from '@keycloakify/angular/lib/tokens/use-default-css';
 import { ComponentReference } from '@keycloakify/angular/login/classes/component-reference';
 import { KcClassDirective } from '@keycloakify/angular/login/directives/kc-class';
-import type { I18n } from '../../i18n';
-import type { KcContext } from '../../KcContext';
 import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
 import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import type { ClassKey } from 'keycloakify/login/lib/kcClsx';
-import { SocialProvidersComponent } from '../../components/social-providers/social-providers.component';
+import { LoginButtonComponent } from '../../components/buttons/login-button/login-button.component';
+import { CheckboxComponent } from '../../components/field/checkbox/checkbox.component';
 import { InputComponent } from '../../components/field/input/input.component';
 import { PasswordComponent } from '../../components/field/password/password.component';
-import { CheckboxComponent } from '../../components/field/checkbox/checkbox.component';
-import { LoginButtonComponent } from '../../components/login-button/login-button.component';
+import { SocialProvidersComponent } from '../../components/social-providers/social-providers.component';
+import type { I18n } from '../../i18n';
+import type { KcContext } from '../../KcContext';
 
 @Component({
     selector: 'kc-login',

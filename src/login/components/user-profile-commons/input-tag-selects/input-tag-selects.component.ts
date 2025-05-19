@@ -7,7 +7,7 @@ import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
 import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { type Attribute } from 'keycloakify/login/KcContext';
 import type { ClassKey } from 'keycloakify/login/lib/kcClsx';
-import type { I18n } from '../../i18n';
+import type { I18n } from '../../../i18n';
 
 @Component({
     styles: [
