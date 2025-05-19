@@ -20,17 +20,17 @@ import { Meta, Title } from '@angular/platform-browser';
 import { KcSanitizePipe } from '@keycloakify/angular/lib/pipes/kc-sanitize';
 import { USE_DEFAULT_CSS } from '@keycloakify/angular/lib/tokens/use-default-css';
 import { ComponentReference } from '@keycloakify/angular/login/classes/component-reference';
-import { KcClassDirective } from '../../../lib/kc-class.directive';
-import type { I18n } from '../i18n';
-import { KcContext } from '../KcContext';
+import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
 import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import type { Observable } from 'rxjs';
+import { KcClassDirective } from '../../../lib/kc-class.directive';
 import { ClassKey, getKcClsx } from '../../../lib/kcClsx';
-import { GroupComponent } from '../components/field/group/group.component';
-import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
 import { LoginResourceInjectorService } from '../../../lib/login-resource-injector.service';
+import { GroupComponent } from '../components/field/group/group.component';
 import { FooterComponent } from '../components/footer/footer.component';
+import type { I18n } from '../i18n';
+import { KcContext } from '../KcContext';
 
 @Component({
     selector: 'kc-root',
@@ -71,43 +71,6 @@ export class TemplateComponent extends ComponentReference {
     headerNode: Signal<TemplateRef<HTMLElement>> | undefined;
     infoNode: Signal<TemplateRef<HTMLElement>> | undefined;
     socialProvidersNode: Signal<TemplateRef<HTMLElement>> | undefined;
-
-    sortedLocales: {
-        languageTag:
-            | 'ar'
-            | 'ca'
-            | 'cs'
-            | 'da'
-            | 'de'
-            | 'el'
-            | 'en'
-            | 'es'
-            | 'fa'
-            | 'fi'
-            | 'fr'
-            | 'hu'
-            | 'it'
-            | 'ja'
-            | 'ka'
-            | 'lt'
-            | 'lv'
-            | 'nl'
-            | 'no'
-            | 'pl'
-            | 'pt'
-            | 'pt-BR'
-            | 'ru'
-            | 'sk'
-            | 'sv'
-            | 'th'
-            | 'tr'
-            | 'uk'
-            | 'zh-CN'
-            | 'zh-TW'
-            | string;
-        label: string;
-        href: string;
-    }[] = [];
 
     constructor() {
         super();
@@ -196,20 +159,6 @@ export class TemplateComponent extends ComponentReference {
         if (value) {
             window.location.href = value;
         }
-    }
-
-    get sortedLocals(): any {
-        const supportedLocales = this.i18n.enabledLanguages;
-
-        if (Array.isArray(supportedLocales)) {
-            this.sortedLocales = [...supportedLocales].sort((a, b) => {
-                console.log(this.sortedLocales);
-                return a.label.localeCompare(b.label);
-            });
-        } else {
-            this.sortedLocales = [];
-        }
-        return this.sortedLocales;
     }
 
     get usernameLabel(): string {
