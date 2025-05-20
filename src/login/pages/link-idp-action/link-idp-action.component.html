@@ -1,0 +1,34 @@
+@let idpDisplayName = kcContext.idpDisplayName;
+@let url = kcContext.url;
+<ng-template #headerNode>
+    @let idpDisplayName = kcContext.idpDisplayName;
+    {{ i18n.msgStr('linkIdpActionTitle', idpDisplayName) }}
+</ng-template>
+
+<div
+    id="kc-link-text"
+    [kcClass]="'kcContentWrapperClass'"
+>
+    {{ i18n.msgStr('linkIdpActionMessage', idpDisplayName) }}
+</div>
+<form
+    class="form-actions"
+    method="post"
+    [kcClass]="'kcFormClass'"
+    [action]="url.loginAction"
+>
+    <kc-action-group>
+        <kc-button
+            name="continue"
+            id="kc-continue"
+            classList="kcButtonPrimaryClass"
+            label="doContinue"
+        ></kc-button>
+        <kc-button
+            name="cancel-aia"
+            id="kc-cancel"
+            classList="kcButtonSecondaryClass"
+            label="doCancel"
+        ></kc-button>
+    </kc-action-group>
+</form>

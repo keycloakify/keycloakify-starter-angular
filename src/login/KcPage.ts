@@ -20,6 +20,73 @@ export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
                 doUseDefaultCss,
                 classes
             };
+        case 'login-username.ftl':
+            return {
+                PageComponent: (
+                    await import('./pages/login-username/login-username.component')
+                ).LoginUsernameComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'login-password.ftl':
+            return {
+                PageComponent: (
+                    await import('./pages/login-password/login-password.component')
+                ).LoginPasswordComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'code.ftl':
+            return {
+                PageComponent: (await import('./pages/code/code.component'))
+                    .CodeComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'delete-account-confirm.ftl':
+            return {
+                PageComponent: (
+                    await import(
+                        './pages/delete-account-confirm/delete-account-confirm.component'
+                    )
+                ).DeleteAccountConfirmComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'delete-credential.ftl':
+            return {
+                PageComponent: (
+                    await import('./pages/delete-credential/delete-credential.component')
+                ).DeleteCredentialComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'link-idp-action.ftl':
+            return {
+                PageComponent: (
+                    await import('./pages/link-idp-action/link-idp-action.component')
+                ).LinkIdpActionComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
         default:
             return {
                 PageComponent: await getDefaultPageComponent(pageId),

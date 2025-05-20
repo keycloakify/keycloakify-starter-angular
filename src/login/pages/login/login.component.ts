@@ -5,8 +5,8 @@ import { ComponentReference } from '@keycloakify/angular/login/classes/component
 import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
 import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
-import type { ClassKey } from 'keycloakify/login/lib/kcClsx';
 import { KcClassDirective } from '../../../../lib/kc-class.directive';
+import { ClassKey } from '../../../../lib/kcClsx';
 import { LoginButtonComponent } from '../../components/buttons/login-button/login-button.component';
 import { CheckboxComponent } from '../../components/field/checkbox/checkbox.component';
 import { InputComponent } from '../../components/field/input/input.component';

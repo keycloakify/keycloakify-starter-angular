@@ -15,7 +15,11 @@ const kcContextExtension: KcContextExtension = {
         ...kcEnvDefaults
     }
 };
-const kcContextExtensionPerPage: KcContextExtensionPerPage = {};
+const kcContextExtensionPerPage: KcContextExtensionPerPage = {
+    'link-idp-action.ftl': {
+        idpDisplayName: 'IDP Display Name'
+    }
+};
 
 export const { getKcContextMock } = createGetKcContextMock({
     kcContextExtension,
