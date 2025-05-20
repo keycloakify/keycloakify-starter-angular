@@ -1,0 +1,62 @@
+@let url = kcContext.url;
+@let usernameHidden = kcContext.usernameHidden;
+@let realm = kcContext.realm;
+@let login = kcContext.login;
+<ng-template #headerNode>
+    {{ i18n.msgStr('loginAccountTitle') }}
+</ng-template>
+<ng-template #infoNode>
+    @let url = kcContext.url;
+    <div id="kc-registration">
+        <span>
+            {{ i18n.msgStr('noAccount') }}
+            <a [href]="url?.registrationUrl">
+                {{ i18n.msgStr('doRegister') }}
+            </a>
+        </span>
+    </div>
+</ng-template>
+<ng-template #socialProvidersNode>
+    @let realm = kcContext.realm;
+    @let social = kcContext.social;
+    @if (!!realm?.password && !!social?.providers) {
+        <kc-social-providers [social]="social"></kc-social-providers>
+    }
+</ng-template>
+
+<div id="kc-form">
+    <div id="kc-form-wrapper">
+        @if (realm.password) {
+            <form
+                id="kc-form-login"
+                method="post"
+                [action]="url?.loginAction"
+                [kcClass]="'kcFormClass'"
+                (onsubmit)="isLoginButtonDisabled.set(true)"
+            >
+                @if (!usernameHidden) {
+                    <div [kcClass]="'kcFormGroupClass'">
+                        <kc-input
+                            name="username"
+                            [label]="usernameLabel"
+                            [autofocus]="true"
+                            [value]="login.username ?? ''"
+                            autocomplete="username"
+                        >
+                        </kc-input>
+                    </div>
+                }
+                <div [kcClass]="'kcFormGroupClass'">
+                    @if (realm.rememberMe && !usernameHidden) {
+                        <kc-checkbox
+                            name="rememberMe"
+                            [label]="i18n.msgStr('rememberMe')"
+                            [value]="!!login.rememberMe"
+                        ></kc-checkbox>
+                    }
+                </div>
+                <kc-login-button></kc-login-button>
+            </form>
+        }
+    </div>
+</div>
