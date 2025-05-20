@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, ElementRef, forwardRef, inject, input, Renderer2 } from '@angular/core';
+import { KcSanitizePipe } from '@keycloakify/angular/lib/pipes/kc-sanitize';
 import { ComponentReference } from '@keycloakify/angular/login/classes/component-reference';
-import { ClassKey } from '../../../../../lib/kcClsx';
+import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KcClassDirective } from '../../../../../lib/kc-class.directive';
+import { ClassKey } from '../../../../../lib/kcClsx';
+import { I18n } from '../../../i18n';
 
 @Component({
     selector: 'kc-button',
-    imports: [KcClassDirective],
+    imports: [KcClassDirective, KcSanitizePipe],
     templateUrl: './button.component.html',
     styles: [
         `
@@ -22,6 +25,7 @@ import { KcClassDirective } from '../../../../../lib/kc-class.directive';
     ]
 })
 export class ButtonComponent extends ComponentReference implements AfterViewInit {
+    i18n = inject<I18n>(LOGIN_I18N);
     label = input<string>('Submit');
     id = input<string | undefined>(undefined);
     name = input<string | undefined>(undefined);

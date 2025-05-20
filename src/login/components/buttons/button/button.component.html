@@ -1,8 +1,8 @@
 <button
-  [id]="id()"
-  [name]="name()"
-  [type]="type()"
-  [kcClass]="classList()"
-  [disabled]="disabled()">
-  {{ label() }}
-</button>
+    [id]="id()"
+    [name]="name()"
+    [type]="type()"
+    [kcClass]="classList()"
+    [disabled]="disabled()"
+    [innerHTML]="i18n.advancedMsgStr(label()) | kcSanitize: 'html'"
+></button>
