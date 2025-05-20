@@ -110,6 +110,31 @@ export class TemplateComponent extends ComponentReference {
         });
     }
 
+    private initializeDarkMode(): void {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        this.updateDarkMode(mediaQuery.matches);
+        mediaQuery.addEventListener('change', event => this.updateDarkMode(event.matches));
+    }
+
+    private updateDarkMode(isEnabled: boolean): void {
+        const kcClsx = getKcClsx({
+            doUseDefaultCss: this.doUseDefaultCss,
+            classes: this.classes
+        }).kcClsx;
+        const kcDarkModeClass = kcClsx('kcDarkModeClass');
+        const kcDarkModeClasses = kcDarkModeClass.split(/\s+/);
+
+        if (isEnabled) {
+            kcDarkModeClasses.forEach((klass: string) => {
+                this.renderer.addClass(document.documentElement, klass);
+            });
+        } else {
+            kcDarkModeClasses.forEach((klass: string) => {
+                this.renderer.removeClass(document.documentElement, klass);
+            });
+        }
+    }
+
     tryAnotherWay() {
         document.forms['kc-select-try-another-way-form' as never].submit();
     }
@@ -150,6 +175,7 @@ export class TemplateComponent extends ComponentReference {
         }
         this.title.setTitle(this.documentTitle ?? this.i18n.msgStr('loginTitle', this.kcContext.realm.displayName));
         this.applyKcIndexClasses();
+        this.initializeDarkMode();
         this.#cdr.markForCheck();
         this.#effectRef.destroy();
     }
