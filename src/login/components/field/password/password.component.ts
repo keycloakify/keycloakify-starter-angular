@@ -1,15 +1,15 @@
-import { AfterViewInit, Component, computed, ElementRef, forwardRef, inject, input, viewChild } from '@angular/core';
-import { ComponentReference } from '@keycloakify/angular/login/classes/component-reference';
-import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
-import { I18n } from '../../../i18n';
+import { AfterViewInit, Component, ElementRef, forwardRef, inject, input, viewChild } from '@angular/core';
 import { USE_DEFAULT_CSS } from '@keycloakify/angular/lib/tokens/use-default-css';
-import { ClassKey } from '../../../../../lib/kcClsx';
+import { ComponentReference } from '@keycloakify/angular/login/classes/component-reference';
 import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
-import { GroupComponent } from '../group/group.component';
-import { KcClassDirective } from '../../../../../lib/kc-class.directive';
-import { ErrorIconComponent } from '../error-icon/error-icon.component';
-import type { KcContext } from '../../../KcContext';
+import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
+import { KcClassDirective } from '../../../../../lib/kc-class.directive';
+import { ClassKey } from '../../../../../lib/kcClsx';
+import { I18n } from '../../../i18n';
+import type { KcContext } from '../../../KcContext';
+import { ErrorIconComponent } from '../error-icon/error-icon.component';
+import { GroupComponent } from '../group/group.component';
 
 @Component({
     selector: 'kc-password',
@@ -41,8 +41,8 @@ export class PasswordComponent extends ComponentReference implements AfterViewIn
     value = input<string>('');
     required = input<boolean>(false);
     forgotPassword = input<boolean>(false);
-    fieldName = computed(() => this.name);
-    error = computed(() => this.kcContext.messagesPerField.get(this.name() ?? ''));
+    fieldName = input<string>(this.name() ?? '');
+    error = input<string | undefined>(this.kcContext?.messagesPerField?.get(this.name() ?? ''));
     autocomplete = input<string>('off');
     autofocus = input<boolean>(false);
 

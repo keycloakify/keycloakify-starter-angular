@@ -204,7 +204,7 @@ export const { getKcClsx } = createGetKcClsx<ClassKey>({
         kcFeedbackSuccessIcon: 'fa fa-fw fa-check-circle',
         kcFeedbackWarningIcon: 'fa fa-fw fa-exclamation-triangle',
         kcFill: 'pf-m-fill',
-        kcFormActionGroupClass: 'pf-v5-c-form__actions pf-v5-u-pt-xs',
+        kcFormActionGroupClass: 'pf-v5-c-form__actions pf-v5-u-pt-xs  pf-v5-u-gap-md',
         kcFormAreaClass:
             'col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2',
         kcFormButtonsClass: 'col-xs-12 col-sm-12 col-md-12 col-lg-12',

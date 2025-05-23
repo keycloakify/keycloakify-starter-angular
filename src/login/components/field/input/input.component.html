@@ -1,15 +1,19 @@
-<kc-group [name]="name()" [label]="label()" [error]="error()" [required]="required()">
-  <span [kcClass]="{ 'kcInputClass': true, 'kcError': !!error() }">
-    <input
-      [id]="name()"
-      [name]="name()"
-      [value]="value()"
-      type="text"
-      [autocomplete]="autocomplete()"
-      [required]="required()"
-      [attr.aria-invalid]="!!error()"
-    />
-    <kc-error-icon [error]="error()"></kc-error-icon>
-  </span>
-
+<kc-group
+    [name]="name()"
+    [label]="label()"
+    [error]="error()"
+    [required]="required()"
+>
+    <span [kcClass]="{ kcInputClass: true, kcError: !!error() }">
+        <input
+            [id]="name()"
+            [name]="name()"
+            [value]="value()"
+            type="text"
+            [autocomplete]="autocomplete()"
+            [required]="required()"
+            [attr.aria-invalid]="!!error()"
+        />
+        <kc-error-icon [error]="error()"></kc-error-icon>
+    </span>
 </kc-group>

@@ -4,7 +4,7 @@ import { ComponentReference } from '@keycloakify/angular/login/classes/component
 import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
 import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
-import type { ClassKey } from 'keycloakify/login/lib/kcClsx';
+import { ClassKey } from '../../../../lib/kcClsx';
 import { InputComponent } from '../../components/field/input/input.component';
 import type { I18n } from '../../i18n';
 import type { KcContext } from '../../KcContext';

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, inject, signal, type TemplateRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, type TemplateRef, viewChild } from '@angular/core';
+import { KcSanitizePipe } from '@keycloakify/angular/lib/pipes/kc-sanitize';
 import { USE_DEFAULT_CSS } from '@keycloakify/angular/lib/tokens/use-default-css';
 import { ComponentReference } from '@keycloakify/angular/login/classes/component-reference';
 import { LOGIN_CLASSES } from '@keycloakify/angular/login/tokens/classes';
@@ -6,27 +7,27 @@ import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import { KcClassDirective } from '../../../../lib/kc-class.directive';
 import { ClassKey } from '../../../../lib/kcClsx';
-import { LoginButtonComponent } from '../../components/buttons/login-button/login-button.component';
-import { PasswordComponent } from '../../components/field/password/password.component';
+import { ButtonComponent } from '../../components/buttons/button/button.component';
+import { ErrorIconComponent } from '../../components/field/error-icon/error-icon.component';
+import { LogoutOtherSessionsComponent } from '../../components/logout-other-sessions/logout-other-sessions.component';
 import type { I18n } from '../../i18n';
 import type { KcContext } from '../../KcContext';
 
 @Component({
-    imports: [KcClassDirective, PasswordComponent, LoginButtonComponent],
-    selector: 'kc-login-password',
-    templateUrl: 'login-password.component.html',
+    imports: [KcClassDirective, KcSanitizePipe, LogoutOtherSessionsComponent, ErrorIconComponent, ButtonComponent],
+    selector: 'kc-login-config-totp',
+    templateUrl: 'login-config-totp.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: ComponentReference,
-            useExisting: forwardRef(() => LoginPasswordComponent)
+            useExisting: forwardRef(() => LoginConfigTotpComponent)
         }
     ]
 })
-export class LoginPasswordComponent extends ComponentReference {
-    kcContext = inject<Extract<KcContext, { pageId: 'login-password.ftl' }>>(KC_LOGIN_CONTEXT);
+export class LoginConfigTotpComponent extends ComponentReference {
+    kcContext = inject<Extract<KcContext, { pageId: 'login-config-totp.ftl' }>>(KC_LOGIN_CONTEXT);
     i18n = inject<I18n>(LOGIN_I18N);
-
     override doUseDefaultCss = inject<boolean>(USE_DEFAULT_CSS);
     override classes = inject<Partial<Record<ClassKey, string>>>(LOGIN_CLASSES);
 
@@ -35,11 +36,9 @@ export class LoginPasswordComponent extends ComponentReference {
 
     displayRequiredFields = false;
     displayInfo = false;
-    displayMessage = this.kcContext.messagesPerField.existsError('password');
+    displayMessage = this.kcContext.messagesPerField.existsError('totp', 'userLabel');
 
     headerNode = viewChild<TemplateRef<HTMLElement>>('headerNode');
     infoNode = viewChild<TemplateRef<HTMLElement>>('infoNode');
     socialProvidersNode = viewChild<TemplateRef<HTMLElement>>('socialProvidersNode');
-
-    isLoginButtonDisabled = signal(false);
 }

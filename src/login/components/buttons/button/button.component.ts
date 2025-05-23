@@ -31,7 +31,7 @@ export class ButtonComponent extends ComponentReference implements AfterViewInit
     name = input<string | undefined>(undefined);
     type = input<'button' | 'submit' | 'reset'>('submit');
     disabled = input<boolean>(false);
-    classList = input<ClassKey | ClassKey[] | undefined>('kcButtonClass');
+    classList = input<ClassKey | ClassKey[] | undefined>('kcButtonPrimaryClass');
 
     private readonly elementRef = inject(ElementRef<HTMLElement>);
     private readonly renderer = inject(Renderer2);
