@@ -98,6 +98,17 @@ export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
                 doUseDefaultCss,
                 classes
             };
+        case 'login-oauth-grant.ftl':
+            return {
+                PageComponent: (
+                    await import('./pages/login-oauth-grant/login-oauth-grant.component')
+                ).LoginOauthGrantComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
         default:
             return {
                 PageComponent: await getDefaultPageComponent(pageId),
