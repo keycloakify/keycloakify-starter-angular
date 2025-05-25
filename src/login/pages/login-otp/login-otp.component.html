@@ -1,0 +1,51 @@
+@let url = kcContext.url;
+@let otpLogin = kcContext.otpLogin;
+<ng-template #headerNode>
+    {{ i18n.msgStr('doLogIn') }}
+</ng-template>
+<form
+    id="kc-otp-login-form"
+    [kcClass]="'kcFormClass'"
+    [action]="url.loginAction"
+    method="post"
+    onsubmit="isLoginButtonDisabled.set(true); return true;"
+>
+    <input
+        id="selectedCredentialId"
+        type="hidden"
+        name="selectedCredentialId"
+        [value]="otpLogin.selectedCredentialId || ''"
+    />
+    @if (otpLogin.userOtpCredentials.length > 1) {
+        <div [kcClass]="'kcFormGroupClass'">
+            <div [kcClass]="'kcInputWrapperClass'">
+                @for (otpCredential of otpLogin.userOtpCredentials; track otpCredential; let i = $index) {
+                    <div
+                        id="kc-otp-credential-{{ i }}"
+                        [kcClass]="'kcLoginOTPListClass'"
+                        (click)="toggleOTP(i, otpCredential.id)"
+                    >
+                        <span [kcClass]="'kcLoginOTPListItemHeaderClass'">
+                            <span [kcClass]="'kcLoginOTPListItemIconBodyClass'">
+                                <i
+                                    [kcClass]="'kcLoginOTPListItemIconClass'"
+                                    aria-hidden="true"
+                                ></i>
+                            </span>
+                            <span [kcClass]="'kcLoginOTPListItemTitleClass'">{{ otpCredential.userLabel }}</span>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <kc-input
+        name="otp"
+        [label]="i18n.msgStr('loginOtpOneTime')"
+        autocomplete="one-time-code"
+        fieldName="totp"
+        [autofocus]="true"
+    ></kc-input>
+    <kc-login-button></kc-login-button>
+</form>
