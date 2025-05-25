@@ -109,6 +109,29 @@ export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
                 doUseDefaultCss,
                 classes
             };
+        case 'login-otp.ftl':
+            return {
+                PageComponent: (await import('./pages/login-otp/login-otp.component'))
+                    .LoginOtpComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'login-reset-password.ftl':
+            return {
+                PageComponent: (
+                    await import(
+                        './pages/login-reset-password/login-reset-password.component'
+                    )
+                ).LoginResetPasswordComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
         default:
             return {
                 PageComponent: await getDefaultPageComponent(pageId),

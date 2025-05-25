@@ -1,4 +1,5 @@
 import { Component, forwardRef, inject, input } from '@angular/core';
+import { KcSanitizePipe } from '@keycloakify/angular/lib/pipes/kc-sanitize';
 import { ComponentReference } from '@keycloakify/angular/login/classes/component-reference';
 import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KcClassDirective } from '../../../../../lib/kc-class.directive';
@@ -8,7 +9,7 @@ import type { I18n } from '../../../i18n';
 @Component({
     selector: 'kc-button-link',
     standalone: true,
-    imports: [KcClassDirective],
+    imports: [KcClassDirective, KcSanitizePipe],
     templateUrl: './button-link.component.html',
     styles: [
         `
