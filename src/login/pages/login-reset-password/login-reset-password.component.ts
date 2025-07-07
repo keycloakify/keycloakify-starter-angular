@@ -7,14 +7,12 @@ import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import { KcClassDirective } from '../../../../lib/kc-class.directive';
 import { ClassKey } from '../../../../lib/kcClsx';
 import { ActionGroupComponent } from '../../components/buttons/action-group/action-group.component';
-import { ButtonLinkComponent } from '../../components/buttons/button-link/button-link.component';
-import { ButtonComponent } from '../../components/buttons/button/button.component';
 import { InputComponent } from '../../components/field/input/input.component';
 import type { I18n } from '../../i18n';
 import type { KcContext } from '../../KcContext';
 
 @Component({
-    imports: [KcClassDirective, ActionGroupComponent, ButtonComponent, ButtonLinkComponent, InputComponent],
+    imports: [KcClassDirective, ActionGroupComponent, InputComponent],
     selector: 'kc-login-reset-password',
     templateUrl: 'login-reset-password.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

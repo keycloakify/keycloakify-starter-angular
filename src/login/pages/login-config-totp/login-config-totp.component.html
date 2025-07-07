@@ -5,218 +5,219 @@
 @let isAppInitiatedAction = kcContext.isAppInitiatedAction;
 
 <ng-template #headerNode>
-    {{ i18n.msgStr('loginTotpTitle') }}
+  {{ i18n.msgStr('loginTotpTitle') }}
 </ng-template>
 
 <ol
-    id="kc-totp-settings"
-    class="pf-v5-c-list pf-v5-u-mb-md"
+  id="kc-totp-settings"
+  class="pf-v5-c-list pf-v5-u-mb-md"
 >
+  <li>
+    <p>{{ i18n.msgStr('loginTotpStep1') }}</p>
+    <ul id="kc-totp-supported-apps">
+      @for (app of totp.supportedApplications; track app) {
+        <li>{{ i18n.advancedMsgStr(app) }}</li>
+      }
+    </ul>
+  </li>
+  @if (kcContext.mode === 'manual') {
     <li>
-        <p>{{ i18n.msgStr('loginTotpStep1') }}</p>
-        <ul id="kc-totp-supported-apps">
-            @for (app of totp.supportedApplications; track app) {
-                <li>{{ i18n.advancedMsgStr(app) }}</li>
-            }
-        </ul>
+      <p>{{ i18n.msgStr('loginTotpManualStep2') }}</p>
+      <p>
+        <span id="kc-totp-secret-key">{{ totp.totpSecretEncoded }}</span>
+      </p>
+      <p>
+        <a
+          id="mode-barcode"
+          [href]="totp.qrUrl"
+        >
+          {{ i18n.msgStr('loginTotpScanBarcode') }}
+        </a>
+      </p>
     </li>
-    @if (kcContext.mode === 'manual') {
-        <li>
-            <p>{{ i18n.msgStr('loginTotpManualStep2') }}</p>
-            <p>
-                <span id="kc-totp-secret-key">{{ totp.totpSecretEncoded }}</span>
-            </p>
-            <p>
-                <a
-                    id="mode-barcode"
-                    [href]="totp.qrUrl"
-                >
-                    {{ i18n.msgStr('loginTotpScanBarcode') }}
-                </a>
-            </p>
-        </li>
 
-        <li>
-            <p>{{ i18n.msgStr('loginTotpManualStep3') }}</p>
-            <ul>
-                <li id="kc-totp-type">
-                    {{ i18n.msgStr('loginTotpType') }}:
-                    {{ i18n.advancedMsgStr('loginTotp.' + totp.policy.type) }}
-                </li>
-                <li id="kc-totp-algorithm">
-                    {{ i18n.msgStr('loginTotpAlgorithm') }}:
-                    {{ totp.policy.getAlgorithmKey() }}
-                </li>
-                <li id="kc-totp-digits">{{ i18n.msgStr('loginTotpDigits') }}: {{ totp.policy.digits }}</li>
-                @if (totp.policy.type === 'totp') {
-                    <li id="kc-totp-period">
-                        {{ i18n.msgStr('loginTotpInterval') }}:
-                        {{ totp.policy.period }}
-                    </li>
-                } @else {
-                    <li id="kc-totp-counter">
-                        {{ i18n.msgStr('loginTotpCounter') }}:
-                        {{ totp.policy.initialCounter }}
-                    </li>
-                }
-            </ul>
-        </li>
-    } @else {
-        <li>
-            <p>{{ i18n.msgStr('loginTotpStep2') }}</p>
-            <img
-                id="kc-totp-secret-qr-code"
-                alt="Figure: Barcode"
-                [src]="'data:image/png;base64, ' + totp.totpSecretQrCode"
-            />
-            <br />
-            <p>
-                <a
-                    id="mode-manual"
-                    [href]="totp.manualUrl"
-                >
-                    {{ i18n.msgStr('loginTotpUnableToScan') }}
-                </a>
-            </p>
-        </li>
-    }
     <li>
-        <p>{{ i18n.msgStr('loginTotpStep3') }}</p>
-        <p>{{ i18n.msgStr('loginTotpStep3DeviceName') }}</p>
+      <p>{{ i18n.msgStr('loginTotpManualStep3') }}</p>
+      <ul>
+        <li id="kc-totp-type">
+          {{ i18n.msgStr('loginTotpType') }}:
+          {{ i18n.advancedMsgStr('loginTotp.' + totp.policy.type) }}
+        </li>
+        <li id="kc-totp-algorithm">
+          {{ i18n.msgStr('loginTotpAlgorithm') }}:
+          {{ totp.policy.getAlgorithmKey() }}
+        </li>
+        <li id="kc-totp-digits">{{ i18n.msgStr('loginTotpDigits') }}: {{ totp.policy.digits }}</li>
+        @if (totp.policy.type === 'totp') {
+          <li id="kc-totp-period">
+            {{ i18n.msgStr('loginTotpInterval') }}:
+            {{ totp.policy.period }}
+          </li>
+        } @else {
+          <li id="kc-totp-counter">
+            {{ i18n.msgStr('loginTotpCounter') }}:
+            {{ totp.policy.initialCounter }}
+          </li>
+        }
+      </ul>
     </li>
+  } @else {
+    <li>
+      <p>{{ i18n.msgStr('loginTotpStep2') }}</p>
+      <img
+        id="kc-totp-secret-qr-code"
+        alt="Figure: Barcode"
+        [src]="'data:image/png;base64, ' + totp.totpSecretQrCode"
+      />
+      <br/>
+      <p>
+        <a
+          id="mode-manual"
+          [href]="totp.manualUrl"
+        >
+          {{ i18n.msgStr('loginTotpUnableToScan') }}
+        </a>
+      </p>
+    </li>
+  }
+  <li>
+    <p>{{ i18n.msgStr('loginTotpStep3') }}</p>
+    <p>{{ i18n.msgStr('loginTotpStep3DeviceName') }}</p>
+  </li>
 </ol>
 <form
-    id="kc-totp-settings-form"
-    method="post"
-    [action]="url.loginAction"
-    [kcClass]="'kcFormClass'"
-    novalidate="novalidate"
+  id="kc-totp-settings-form"
+  method="post"
+  [action]="url.loginAction"
+  [kcClass]="'kcFormClass'"
+  novalidate="novalidate"
 >
-    <div [kcClass]="'kcFormGroupClass'">
-        <div [kcClass]="'kcLabelClass'">
-            <label
-                class="pf-v5-c-form__label"
-                for="form-vertical-name"
-            >
+  <div [kcClass]="'kcFormGroupClass'">
+    <div [kcClass]="'kcLabelClass'">
+      <label
+        class="pf-v5-c-form__label"
+        for="form-vertical-name"
+      >
                 <span class="pf-v5-c-form__label-text">
                     {{ i18n.msgStr('authenticatorCode') }}
                 </span>
-                &nbsp;
-                <span
-                    class="pf-v5-c-form__label-required"
-                    aria-hidden="true"
-                    >&#42;</span
-                >
-            </label>
-        </div>
-        <div
-            [kcClass]="'kcInputClass'"
-            [ngClass]="{ 'pf-m-error': messagesPerField.existsError('totp') }"
+        &nbsp;
+        <span
+          class="pf-v5-c-form__label-required"
+          aria-hidden="true"
+        >&#42;</span
         >
-            <input
-                type="text"
-                required
-                id="totp"
-                name="totp"
-                autoComplete="off"
-                [attr.aria-invalid]="messagesPerField.existsError('totp')"
-            />
-            <kc-error-icon [error]="messagesPerField.get('totp')"></kc-error-icon>
-        </div>
-        @if (messagesPerField.existsError('totp')) {
-            <span
-                id="input-error-otp-code"
-                aria-live="polite"
-                [kcClass]="'kcInputErrorMessageClass'"
-                [innerHTML]="messagesPerField.get('totp')"
-            ></span>
-        }
-        <input
-            type="hidden"
-            id="totpSecret"
-            name="totpSecret"
-            [value]="totp.totpSecret"
-        />
-        @if (mode) {
-            <input
-                type="hidden"
-                id="mode"
-                name="mode"
-                [value]="mode"
-            />
-        }
+      </label>
     </div>
+    <div
+      [kcClass]="'kcInputClass'"
+      [ngClass]="{ 'pf-m-error': messagesPerField.existsError('totp') }"
+    >
+      <input
+        type="text"
+        required
+        id="totp"
+        name="totp"
+        autoComplete="off"
+        [attr.aria-invalid]="messagesPerField.existsError('totp')"
+      />
+      <kc-error-icon [error]="messagesPerField.get('totp')"></kc-error-icon>
+    </div>
+    @if (messagesPerField.existsError('totp')) {
+      <span
+        id="input-error-otp-code"
+        aria-live="polite"
+        [kcClass]="'kcInputErrorMessageClass'"
+        [innerHTML]="messagesPerField.get('totp')"
+      ></span>
+    }
+    <input
+      type="hidden"
+      id="totpSecret"
+      name="totpSecret"
+      [value]="totp.totpSecret"
+    />
+    @if (mode) {
+      <input
+        type="hidden"
+        id="mode"
+        name="mode"
+        [value]="mode"
+      />
+    }
+  </div>
 
-    <div [kcClass]="'kcFormGroupClass'">
-        <div [kcClass]="'kcLabelClass'">
-            <label
-                class="pf-v5-c-form__label"
-                for="form-vertical-name"
-            >
+  <div [kcClass]="'kcFormGroupClass'">
+    <div [kcClass]="'kcLabelClass'">
+      <label
+        class="pf-v5-c-form__label"
+        for="form-vertical-name"
+      >
                 <span class="pf-v5-c-form__label-text">
                     {{ i18n.msgStr('loginTotpDeviceName') }}
                 </span>
-                @if (totp.otpCredentials.length >= 1) {
-                    &nbsp;
-                    <span
-                        class="pf-v5-c-form__label-required"
-                        aria-hidden="true"
-                        >&#42;</span
-                    >
-                }
-            </label>
-        </div>
-
-        <div [kcClass]="'kcInputClass'">
-            <input
-                type="text"
-                id="userLabel"
-                name="userLabel"
-                autoComplete="off"
-                [attr.aria-invalid]="messagesPerField.existsError('userLabel')"
-            />
-            <kc-error-icon [error]="messagesPerField.get('userLabel')"></kc-error-icon>
-        </div>
-        @if (messagesPerField.existsError('userLabel')) {
-            <span
-                id="input-error-otp-label"
-                aria-live="polite"
-                [kcClass]="'kcInputErrorMessageClass'"
-                [innerHTML]="messagesPerField.get('userLabel') | kcSanitize: 'html'"
-            ></span>
+        @if (totp.otpCredentials.length >= 1) {
+          &nbsp;
+          <span
+            class="pf-v5-c-form__label-required"
+            aria-hidden="true"
+          >&#42;</span
+          >
         }
+      </label>
     </div>
 
-    <div [kcClass]="'kcFormGroupClass'">
-        <kc-logout-other-sessions></kc-logout-other-sessions>
+    <div [kcClass]="'kcInputClass'">
+      <input
+        type="text"
+        id="userLabel"
+        name="userLabel"
+        autoComplete="off"
+        [attr.aria-invalid]="messagesPerField.existsError('userLabel')"
+      />
+      <kc-error-icon [error]="messagesPerField.get('userLabel')"></kc-error-icon>
     </div>
+    @if (messagesPerField.existsError('userLabel')) {
+      <span
+        id="input-error-otp-label"
+        aria-live="polite"
+        [kcClass]="'kcInputErrorMessageClass'"
+        [innerHTML]="messagesPerField.get('userLabel') | kcSanitize: 'html'"
+      ></span>
+    }
+  </div>
 
-    <div class="pf-v5-c-form__group pf-m-action">
-        <div class="pf-v5-c-form__actions">
-            @if (isAppInitiatedAction) {
-                <input
-                    type="submit"
-                    [kcClass]="['kcButtonClass', 'kcButtonPrimaryClass', 'kcButtonLargeClass']"
-                    id="saveTOTPBtn"
-                    value="{{ i18n.msgStr('doSubmit') }}"
-                />
-                <button
-                    type="submit"
-                    [kcClass]="['kcButtonClass', 'kcButtonDefaultClass', 'kcButtonLargeClass', 'kcButtonLargeClass']"
-                    id="cancelTOTPBtn"
-                    name="cancel-aia"
-                    value="true"
-                >
-                    {{ i18n.msgStr('doCancel') }}
-                </button>
-            } @else {
-                <input
-                    type="submit"
-                    [kcClass]="['kcButtonClass', 'kcButtonPrimaryClass', 'kcButtonBlockClass', 'kcButtonLargeClass']"
-                    id="saveTOTPBtn"
-                    value="{{ i18n.msgStr('doSubmit') }}"
-                />
-            }
-        </div>
+  <div [kcClass]="'kcFormGroupClass'">
+    <kc-logout-other-sessions></kc-logout-other-sessions>
+  </div>
+
+  <div class="pf-v5-c-form__group pf-m-action">
+    <div class="pf-v5-c-form__actions">
+      @if (isAppInitiatedAction) {
+        <input
+          type="submit"
+          [kcClass]="['kcButtonClass', 'kcButtonPrimaryClass', 'kcButtonBlockClass', 'kcButtonLargeClass']"
+          id="saveTOTPBtn"
+          value="{{ i18n.msgStr('doSubmit') }}"
+        />
+        <button
+          type="submit"
+          [kcClass]="['kcButtonClass', 'kcButtonDefaultClass', 'kcButtonBlockClass', 'kcButtonLargeClass']"
+          id="cancelTOTPBtn"
+          name="cancel-aia"
+          value="true"
+        >
+
+          {{ i18n.msgStr('doCancel') }}
+        </button>
+      } @else {
+        <input
+          type="submit"
+          [kcClass]="['kcButtonClass', 'kcButtonPrimaryClass', 'kcButtonBlockClass', 'kcButtonLargeClass']"
+          id="saveTOTPBtn"
+          value="{{ i18n.msgStr('doSubmit') }}"
+        />
+      }
     </div>
+  </div>
 </form>

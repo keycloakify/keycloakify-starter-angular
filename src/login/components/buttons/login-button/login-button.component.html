@@ -1,9 +1,10 @@
 <kc-action-group>
-    <kc-button
-        id="kc-login"
-        name="login"
-        type="submit"
-        [classList]="['kcButtonPrimaryClass', 'kcButtonBlockClass']"
-        [label]="i18n.msgStr('doLogIn')"
-    ></kc-button>
+  <button
+    id="kc-login"
+    name="login"
+    type="submit"
+    [kcClass]="['kcButtonPrimaryClass', 'kcButtonBlockClass']"
+  >
+    {{ i18n.msgStr('doLogIn') }}
+  </button>
 </kc-action-group>

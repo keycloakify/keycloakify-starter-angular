@@ -4,12 +4,12 @@ import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import { KcClassDirective } from '../../../../lib/kc-class.directive';
 import { ActionGroupComponent } from '../../components/buttons/action-group/action-group.component';
-import { ButtonComponent } from '../../components/buttons/button/button.component';
 import type { I18n } from '../../i18n';
 import type { KcContext } from '../../KcContext';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-    imports: [KcClassDirective, ActionGroupComponent, ButtonComponent],
+    imports: [KcClassDirective, ActionGroupComponent, NgOptimizedImage],
     selector: 'kc-login-oauth-grant',
     templateUrl: 'login-oauth-grant.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

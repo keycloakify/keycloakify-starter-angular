@@ -2,48 +2,50 @@
 @let triggered_from_aia = kcContext.triggered_from_aia;
 
 <ng-template #headerNode>
-    {{ i18n.msgStr('deleteAccountConfirm') }}
+  {{ i18n.msgStr('deleteAccountConfirm') }}
 </ng-template>
 <form
-    method="post"
-    [kcClass]="'kcFormClass'"
-    id="kc-deleteaccount-form"
-    [action]="url.loginAction"
+  method="post"
+  [kcClass]="'kcFormClass'"
+  id="kc-deleteaccount-form"
+  [action]="url.loginAction"
 >
-    <div
-        [kcClass]="'kcAlertClass'"
-        class="pf-m-warning"
-    >
-        <div [kcClass]="'kcAlertIconClass'">
-            <i
-                [kcClass]="'kcFeedbackWarningIcon'"
-                aria-hidden="true"
-            ></i>
-        </div>
-        <span [kcClass]="'kcAlertTitleClass'">
+  <div
+    [kcClass]="'kcAlertClass'"
+    class="pf-m-warning"
+  >
+    <div [kcClass]="'kcAlertIconClass'">
+      <i
+        [kcClass]="'kcFeedbackWarningIcon'"
+        aria-hidden="true"
+      ></i>
+    </div>
+    <span [kcClass]="'kcAlertTitleClass'">
             {{ i18n.msgStr('irreversibleAction') }}
         </span>
-    </div>
-    <p>{{ i18n.msgStr('deletingImplies') }}</p>
-    <ul
-        class="pf-v5-c-list"
-        role="list"
+  </div>
+  <p>{{ i18n.msgStr('deletingImplies') }}</p>
+  <ul
+    class="pf-v5-c-list"
+    role="list"
+  >
+    <li>{{ i18n.msgStr('loggingOutImmediately') }}</li>
+    <li>{{ i18n.msgStr('errasingData') }}</li>
+  </ul>
+  <p class="delete-account-text">{{ i18n.msgStr('finalDeletionConfirmation') }}</p>
+  <kc-action-group>
+    <button
+      kcClass="kcButtonPrimaryClass"
     >
-        <li>{{ i18n.msgStr('loggingOutImmediately') }}</li>
-        <li>{{ i18n.msgStr('errasingData') }}</li>
-    </ul>
-    <p class="delete-account-text">{{ i18n.msgStr('finalDeletionConfirmation') }}</p>
-    <kc-action-group>
-        <kc-button
-            label="doConfirmDelete"
-            classList="kcButtonPrimaryClass"
-        ></kc-button>
-        @if (triggered_from_aia) {
-            <kc-button
-                name="cancel-aia"
-                label="doCancel"
-                classList="kcButtonSecondaryClass"
-            ></kc-button>
-        }
-    </kc-action-group>
+      {{ i18n.msgStr('doConfirmDelete') }}
+    </button>
+    @if (triggered_from_aia) {
+      <button
+        name="cancel-aia"
+        kcClass="kcButtonSecondaryClass"
+      >
+        {{ i18n.msgStr('doCancel') }}
+      </button>
+    }
+  </kc-action-group>
 </form>

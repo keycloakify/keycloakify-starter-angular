@@ -7,12 +7,11 @@ import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import { KcClassDirective } from '../../../../lib/kc-class.directive';
 import { ClassKey } from '../../../../lib/kcClsx';
 import { ActionGroupComponent } from '../../components/buttons/action-group/action-group.component';
-import { ButtonComponent } from '../../components/buttons/button/button.component';
 import type { I18n } from '../../i18n';
 import type { KcContext } from '../../KcContext';
 
 @Component({
-    imports: [KcClassDirective, ActionGroupComponent, ButtonComponent],
+    imports: [KcClassDirective, ActionGroupComponent],
     selector: 'kc-delete-account-confirm',
     templateUrl: 'delete-account-confirm.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

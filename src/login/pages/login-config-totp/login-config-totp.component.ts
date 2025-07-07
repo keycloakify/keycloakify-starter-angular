@@ -7,14 +7,13 @@ import { LOGIN_I18N } from '@keycloakify/angular/login/tokens/i18n';
 import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
 import { KcClassDirective } from '../../../../lib/kc-class.directive';
 import { ClassKey } from '../../../../lib/kcClsx';
-import { ButtonComponent } from '../../components/buttons/button/button.component';
 import { ErrorIconComponent } from '../../components/field/error-icon/error-icon.component';
 import { LogoutOtherSessionsComponent } from '../../components/logout-other-sessions/logout-other-sessions.component';
 import type { I18n } from '../../i18n';
 import type { KcContext } from '../../KcContext';
 
 @Component({
-    imports: [KcClassDirective, KcSanitizePipe, LogoutOtherSessionsComponent, ErrorIconComponent, ButtonComponent],
+    imports: [KcClassDirective, KcSanitizePipe, LogoutOtherSessionsComponent, ErrorIconComponent],
     selector: 'kc-login-config-totp',
     templateUrl: 'login-config-totp.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

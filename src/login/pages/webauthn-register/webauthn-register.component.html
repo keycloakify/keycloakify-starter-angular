@@ -3,71 +3,73 @@
 @let isAppInitiatedAction = kcContext.isAppInitiatedAction;
 
 <ng-template #headerNode>
-    <span [kcClass]="'kcWebAuthnKeyIcon'"></span>
-    {{ i18n.msgStr('webauthn-registration-title') }}
+  <span [kcClass]="'kcWebAuthnKeyIcon'"></span>
+  {{ i18n.msgStr('webauthn-registration-title') }}
 </ng-template>
 
 <div [kcClass]="'kcFormGroupClass'">
-    <form
-        id="register"
-        method="post"
-        [kcClass]="'kcFormClass'"
-        [action]="url.loginAction"
-    >
-        <input
-            type="hidden"
-            id="clientDataJSON"
-            name="clientDataJSON"
-        />
-        <input
-            type="hidden"
-            id="attestationObject"
-            name="attestationObject"
-        />
-        <input
-            type="hidden"
-            id="publicKeyCredentialId"
-            name="publicKeyCredentialId"
-        />
-        <input
-            type="hidden"
-            id="authenticatorLabel"
-            name="authenticatorLabel"
-        />
-        <input
-            type="hidden"
-            id="transports"
-            name="transports"
-        />
-        <input
-            type="hidden"
-            id="error"
-            name="error"
-        />
-        <kc-logout-other-sessions />
-    </form>
+  <form
+    id="register"
+    method="post"
+    [kcClass]="'kcFormClass'"
+    [action]="url.loginAction"
+  >
+    <input
+      type="hidden"
+      id="clientDataJSON"
+      name="clientDataJSON"
+    />
+    <input
+      type="hidden"
+      id="attestationObject"
+      name="attestationObject"
+    />
+    <input
+      type="hidden"
+      id="publicKeyCredentialId"
+      name="publicKeyCredentialId"
+    />
+    <input
+      type="hidden"
+      id="authenticatorLabel"
+      name="authenticatorLabel"
+    />
+    <input
+      type="hidden"
+      id="transports"
+      name="transports"
+    />
+    <input
+      type="hidden"
+      id="error"
+      name="error"
+    />
+    <kc-logout-other-sessions/>
+  </form>
 
-    <kc-action-group [horizontal]="true">
-        <kc-button
-            id="registerWebAuthn"
-            [kcClass]="['kcButtonPrimaryClass', 'kcButtonBlockClass']"
-            [label]="i18n.msgStr('doRegisterSecurityKey')"
+  <kc-action-group [horizontal]="true">
+    <button
+      
+      id="registerWebAuthn"
+      [kcClass]="['kcButtonPrimaryClass', 'kcButtonBlockClass']"
+    >
+      {{ i18n.msgStr('doRegisterSecurityKey') }}
+    </button>
+    @if (isSetRetry && isAppInitiatedAction) {
+      <form
+        id="kc-webauthn-settings-form"
+        method="post"
+        [action]="url.loginAction"
+        [kcClass]="'kcFormClass'"
+      >
+        <button
+          id="cancelWebAuthnAIA"
+          name="cancel-aia"
+          [kcClass]="['kcButtonSecondaryClass', 'kcButtonBlockClass']"
         >
-        </kc-button>
-        @if (isSetRetry && isAppInitiatedAction) {
-            <form
-                id="kc-webauthn-settings-form"
-                method="post"
-                [action]="url.loginAction"
-                [kcClass]="'kcFormClass'"
-            >
-                <kc-button
-                    id="cancelWebAuthnAIA"
-                    name="cancel-aia"
-                    [kcClass]="['kcButtonSecondaryClass', 'kcButtonBlockClass']"
-                    [label]="i18n.msgStr('doCancel')"
-                ></kc-button>
-            </form>
-        }
-    </kc-action-group>
+          {{ i18n.msgStr('doCancel') }}
+        </button>
+      </form>
+    }
+  </kc-action-group>
 </div>

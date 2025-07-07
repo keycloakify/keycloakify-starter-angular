@@ -54,6 +54,10 @@ export class TemplateComponent extends ComponentReference {
     kcContext = inject<KcContext>(KC_LOGIN_CONTEXT);
     override doUseDefaultCss = inject<boolean>(USE_DEFAULT_CSS);
     override classes = inject<Partial<Record<ClassKey, string>>>(LOGIN_CLASSES);
+    kcClsx = getKcClsx({
+        doUseDefaultCss: this.doUseDefaultCss,
+        classes: this.classes
+    }).kcClsx;
     loginResourceInjectorService = inject(LoginResourceInjectorService);
 
     displayInfo = false;
@@ -94,12 +98,8 @@ export class TemplateComponent extends ComponentReference {
     }
 
     private applyKcIndexClasses() {
-        const kcClsx = getKcClsx({
-            doUseDefaultCss: this.doUseDefaultCss,
-            classes: this.classes
-        }).kcClsx;
-        const kcBodyClass = this.bodyClassName ?? kcClsx('kcBodyClass');
-        const kcHtmlClass = kcClsx('kcHtmlClass');
+        const kcBodyClass = this.bodyClassName ?? this.kcClsx('kcBodyClass');
+        const kcHtmlClass = this.kcClsx('kcHtmlClass');
         const kcBodyClasses = kcBodyClass.split(/\s+/);
         const kcHtmlClasses = kcHtmlClass.split(/\s+/);
         kcBodyClasses.forEach((klass: string) => {
@@ -117,11 +117,7 @@ export class TemplateComponent extends ComponentReference {
     }
 
     private updateDarkMode(isEnabled: boolean): void {
-        const kcClsx = getKcClsx({
-            doUseDefaultCss: this.doUseDefaultCss,
-            classes: this.classes
-        }).kcClsx;
-        const kcDarkModeClass = kcClsx('kcDarkModeClass');
+        const kcDarkModeClass = this.kcClsx('kcDarkModeClass');
         const kcDarkModeClasses = kcDarkModeClass.split(/\s+/);
 
         if (isEnabled) {

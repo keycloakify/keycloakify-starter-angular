@@ -1,34 +1,37 @@
 @let idpDisplayName = kcContext.idpDisplayName;
 @let url = kcContext.url;
 <ng-template #headerNode>
-    @let idpDisplayName = kcContext.idpDisplayName;
-    {{ i18n.msgStr('linkIdpActionTitle', idpDisplayName) }}
+  @let idpDisplayName = kcContext.idpDisplayName;
+  {{ i18n.msgStr('linkIdpActionTitle', idpDisplayName) }}
 </ng-template>
 
 <div
-    id="kc-link-text"
-    [kcClass]="'kcContentWrapperClass'"
+  id="kc-link-text"
+  [kcClass]="'kcContentWrapperClass'"
 >
-    {{ i18n.msgStr('linkIdpActionMessage', idpDisplayName) }}
+  {{ i18n.msgStr('linkIdpActionMessage', idpDisplayName) }}
 </div>
 <form
-    class="form-actions"
-    method="post"
-    [kcClass]="'kcFormClass'"
-    [action]="url.loginAction"
+  class="form-actions"
+  method="post"
+  [kcClass]="'kcFormClass'"
+  [action]="url.loginAction"
 >
-    <kc-action-group>
-        <kc-button
-            name="continue"
-            id="kc-continue"
-            classList="kcButtonPrimaryClass"
-            label="doContinue"
-        ></kc-button>
-        <kc-button
-            name="cancel-aia"
-            id="kc-cancel"
-            classList="kcButtonSecondaryClass"
-            label="doCancel"
-        ></kc-button>
-    </kc-action-group>
+  <kc-action-group>
+    <button
+      name="continue"
+      id="kc-continue"
+      kcClass="kcButtonPrimaryClass"
+    >
+      {{ i18n.msgStr('doContinue') }}
+    </button>
+
+    <button
+      name="cancel-aia"
+      id="kc-cancel"
+      kcClass="kcButtonSecondaryClass"
+    >
+      {{ i18n.msgStr('doCancel') }}
+    </button>
+  </kc-action-group>
 </form>

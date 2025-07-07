@@ -11,7 +11,13 @@ import type { I18n } from '../../../i18n';
     selector: 'kc-action-group',
     imports: [KcClassDirective],
     templateUrl: './action-group.component.html',
-
+    styles: [
+        `
+            :host {
+                display: contents;
+            }
+        `
+    ],
     providers: [
         {
             provide: ComponentReference,
