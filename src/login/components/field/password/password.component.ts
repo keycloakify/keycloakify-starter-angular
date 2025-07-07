@@ -37,7 +37,9 @@ export class PasswordComponent extends ComponentReference implements AfterViewIn
     override classes = inject<Partial<Record<ClassKey, string>>>(LOGIN_CLASSES);
 
     name = input<string | undefined>();
-    label = input<string | undefined>();
+    label = input('', {
+        transform: (inputLabel?: string) => (inputLabel ? this.i18n.advancedMsgStr(inputLabel) : undefined)
+    });
     value = input<string>('');
     required = input<boolean>(false);
     forgotPassword = input<boolean>(false);

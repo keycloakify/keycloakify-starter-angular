@@ -168,6 +168,29 @@ export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
                 doUseDefaultCss,
                 classes
             };
+        case 'terms.ftl':
+            return {
+                PageComponent: (await import('./pages/terms/terms.component'))
+                    .TermsComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'login-update-password.ftl':
+            return {
+                PageComponent: (
+                    await import(
+                        './pages/login-update-password/login-update-password.component'
+                    )
+                ).LoginUpdatePasswordComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
 
         default:
             return {
