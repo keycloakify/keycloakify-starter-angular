@@ -132,6 +132,30 @@ export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
                 doUseDefaultCss,
                 classes
             };
+        case 'login-recovery-authn-code-config.ftl':
+            return {
+                PageComponent: (
+                    await import(
+                        './pages/login-recovery-authn-code-config/login-recovery-authn-code-config.component'
+                    )
+                ).LoginRecoveryAuthnCodeConfigComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'webauthn-register.ftl':
+            return {
+                PageComponent: (
+                    await import('./pages/webauthn-register/webauthn-register.component')
+                ).WebauthnRegisterComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
         default:
             return {
                 PageComponent: await getDefaultPageComponent(pageId),
