@@ -157,6 +157,17 @@ export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
                 doUseDefaultCss,
                 classes
             };
+        case 'webauthn-error.ftl':
+            return {
+                PageComponent: (
+                    await import('./pages/webauthn-error/webauthn-error.component')
+                ).WebauthnErrorComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
 
         default:
             return {
