@@ -1,0 +1,53 @@
+@let url = kcContext.url;
+@let auth = kcContext.auth;
+
+<ng-template #headerNode>
+  {{ i18n.msgStr('loginChooseAuthenticator') }}
+
+</ng-template>
+
+
+<ul [kcClass]="'kcSelectAuthListClass'" role="list">
+  @for (authenticationSelection of auth.authenticationSelections; track authenticationSelection; let i = $index) {
+    <li kcClass="kcSelectAuthListItemWrapperClass">
+      <form
+        id="kc-select-credential-form"
+        [kcClass]="'kcFormClass'"
+        [action]="url.loginAction"
+        method="post"
+      >
+        <input
+          type="hidden"
+          name="authenticationExecution"
+          [value]="authenticationSelection.authExecId"
+        />
+      </form>
+      <div
+        [kcClass]="'kcSelectAuthListItemClass'"
+        onclick="document.forms[i].requestSubmit()">
+        <div class="pf-v5-c-data-list__item-content">
+          <div [kcClass]="'kcSelectAuthListItemIconClass'">
+            <i
+              [kcClass]="['kcSelectAuthListItemIconPropertyClass', $any(authenticationSelection.iconCssClass)]"
+            ></i>
+          </div>
+          <div [kcClass]="'kcSelectAuthListItemBodyClass'">
+            <h2 [kcClass]="'kcSelectAuthListItemHeadingClass'">
+              {{ i18n.advancedMsgStr(authenticationSelection.displayName) }}
+            </h2>
+
+          </div>
+          <div [kcClass]="'kcSelectAuthListItemDescriptionClass'">
+            {{ i18n.advancedMsgStr(authenticationSelection.helpText) }}
+          </div>
+        </div>
+        <div [kcClass]="'kcSelectAuthListItemFillClass'">
+          <i [kcClass]="'kcSelectAuthListItemArrowIconClass'" aria-hidden="true"></i>
+        </div>
+      </div>
+    </li>
+  }
+</ul>
+
+
+

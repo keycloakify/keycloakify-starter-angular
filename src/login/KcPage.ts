@@ -144,6 +144,20 @@ export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
                 doUseDefaultCss,
                 classes
             };
+        case 'select-authenticator.ftl':
+            return {
+                PageComponent: (
+                    await import(
+                        './pages/select-authenticator/select-authenticator.component'
+                    )
+                ).SelectAuthenticatorComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+
         default:
             return {
                 PageComponent: await getDefaultPageComponent(pageId),
