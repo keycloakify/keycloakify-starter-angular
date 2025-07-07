@@ -1,0 +1,29 @@
+@let url = kcContext.url;
+
+<ng-template #headerNode>
+  {{ i18n.msgStr('termsTitle') }}
+</ng-template>
+<div kcClass="kcContentWrapperClass" [innerHTML]="i18n.msgStr('termsText') | kcSanitize : 'html'"></div>
+<form
+  class="form-actions"
+  method="POST"
+  [action]="url.loginAction"
+  kcClass="kcFormClass"
+>
+  <kc-action-group [horizontal]="true">
+    <button
+      name="accept"
+      id="kc-accept"
+      kcClass="kcButtonPrimaryClass"
+    >
+      {{ i18n.msgStr('doAccept') }}
+    </button>
+    <button
+      name="cancel"
+      id="kc-decline"
+      kcClass="kcButtonSecondaryClass">
+      {{ i18n.msgStr('doDecline') }}
+    </button>
+  </kc-action-group>
+</form>
+<div class="clearfix"></div>
