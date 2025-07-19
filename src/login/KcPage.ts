@@ -1,8 +1,8 @@
 import { getDefaultPageComponent, type KcPage } from '@keycloakify/angular/login';
-import type { ClassKey } from 'keycloakify/login';
 import type { KcContext } from './KcContext';
 import { UserProfileFormFieldsComponent } from './components/user-profile-commons/user-profile-form-fields/user-profile-form-fields.component';
 import { TemplateComponent } from './template/template.component';
+import { ClassKey } from '../../lib/kcClsx';
 
 const classes = {} satisfies Partial<Record<ClassKey, string>>;
 const doUseDefaultCss = false;
@@ -185,6 +185,46 @@ export async function getKcPage(pageId: KcContext['pageId']): Promise<KcPage> {
                         './pages/login-update-password/login-update-password.component'
                     )
                 ).LoginUpdatePasswordComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+
+        case 'select-organization.ftl':
+            return {
+                PageComponent: (
+                    await import(
+                        './pages/select-organization/select-organization.component'
+                    )
+                ).SelectOrganizationComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'login-recovery-authn-code-input.ftl':
+            return {
+                PageComponent: (
+                    await import(
+                        './pages/login-recovery-authn-code-input/login-recovery-authn-code-input.component'
+                    )
+                ).LoginRecoveryAuthnCodeInputComponent,
+                TemplateComponent,
+                UserProfileFormFieldsComponent,
+                doMakeUserConfirmPassword,
+                doUseDefaultCss,
+                classes
+            };
+        case 'login-recovery-authn-code-config.ftl':
+            return {
+                PageComponent: (
+                    await import(
+                        './pages/login-recovery-authn-code-config/login-recovery-authn-code-config.component'
+                    )
+                ).LoginRecoveryAuthnCodeConfigComponent,
                 TemplateComponent,
                 UserProfileFormFieldsComponent,
                 doMakeUserConfirmPassword,

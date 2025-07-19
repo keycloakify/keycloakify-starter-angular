@@ -1,0 +1,29 @@
+@let url = kcContext.url;
+@let user = kcContext.user;
+@let organization = kcContext.organization;
+
+
+<form [action]="url.loginAction" class="form-vertical" method="post">
+  <div id="kc-user-organizations" [kcClass]="'kcFormGroupClass'">
+    <h2>{{ i18n.advancedMsgStr(organization.select) }}</h2>
+    <ul [kcClass]="{
+      'kcFormSocialAccountListClass':true,
+      'kcFormSocialAccountListGridClass': user.organizations.length > 3
+    }">
+      @for (organization of user.organizations; track organization; let i = $index) {
+        <li>
+          <a [id]="'organization-' + organization.alias"
+             [kcClass]="{
+               'kcFormSocialAccountListButtonClass': true,
+               'kcFormSocialAccountGridItem': user.organizations.length > 3
+             }"
+             type="button"
+             (click)="document.forms[0]['kc.org'].value = organization.alias; document.forms[0].requestSubmit()">
+            <span [kcClass]="'kcFormSocialAccountNameClass'">{{ organization.name }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+  <input type="hidden" name="kc.org"/>
+</form>

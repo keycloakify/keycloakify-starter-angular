@@ -1,13 +1,13 @@
 /* eslint-disable @angular-eslint/component-class-suffix */
-import { Component, inject, OnInit, Type } from '@angular/core';
-import { provideKeycloakifyAngular } from '@keycloakify/angular/login/providers/keycloakify-angular';
-import { KC_LOGIN_CONTEXT } from '@keycloakify/angular/login/tokens/kc-context';
-import { createGetKcContextMock } from 'keycloakify/login/KcContext';
-import { kcEnvDefaults, themeNames } from '../kc.gen';
-import type { KcContextExtension, KcContextExtensionPerPage } from './KcContext';
-import { getKcPage } from './KcPage';
-import { getI18n } from './i18n';
-import { TemplateComponent } from './template/template.component';
+import {Component, inject, OnInit, Type} from '@angular/core';
+import {provideKeycloakifyAngular} from '@keycloakify/angular/login/providers/keycloakify-angular';
+import {KC_LOGIN_CONTEXT} from '@keycloakify/angular/login/tokens/kc-context';
+import {createGetKcContextMock} from 'keycloakify/login/KcContext';
+import {kcEnvDefaults, themeNames} from '../kc.gen';
+import type {KcContextExtension, KcContextExtensionPerPage} from './KcContext';
+import {getKcPage} from './KcPage';
+import {getI18n} from './i18n';
+import {TemplateComponent} from './template/template.component';
 
 const kcContextExtension: KcContextExtension = {
     themeName: themeNames[0],
@@ -18,6 +18,23 @@ const kcContextExtension: KcContextExtension = {
 const kcContextExtensionPerPage: KcContextExtensionPerPage = {
     'link-idp-action.ftl': {
         idpDisplayName: 'IDP Display Name'
+    },
+    'select-organization.ftl': {
+        organization: {
+            select: 'organizationScopeConsentText'
+        },
+        user: {
+            organizations: [
+                {
+                    alias: 'org1',
+                    name: 'Organization 1'
+                },
+                {
+                    alias: 'org2',
+                    name: 'Organization 2'
+                }
+            ]
+        }
     }
 };
 

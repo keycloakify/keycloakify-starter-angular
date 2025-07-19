@@ -13,6 +13,17 @@ export type KcContextExtensionPerPage = {
     'link-idp-action.ftl': {
         idpDisplayName: string;
     };
+    'select-organization.ftl': {
+        user: {
+            organizations: Array<{
+                name: string;
+                alias: string;
+            }>;
+        };
+        organization: {
+            select: string;
+        };
+    };
 };
 
 export type KcContext = ExtendKcContext<KcContextExtension, KcContextExtensionPerPage>;

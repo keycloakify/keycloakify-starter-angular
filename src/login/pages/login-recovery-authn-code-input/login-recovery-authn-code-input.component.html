@@ -1,0 +1,19 @@
+@let url = kcContext.url;
+@let recoveryAuthnCodesInputBean = kcContext.recoveryAuthnCodesInputBean;
+@let messagesPerField = kcContext.messagesPerField;
+
+<ng-template #headerNode>
+  {{ i18n.msgStr('auth-recovery-code-header') }}
+</ng-template>
+
+<form id="kc-recovery-code-login-form" [kcClass]="'kcFormClass'" onsubmit="login.disabled = true; return true;"
+      [action]="url.loginAction" method="post">
+  <kc-input
+    name="recoveryCodeInput"
+    [label]="i18n.advancedMsgStr('auth-recovery-code-prompt', recoveryAuthnCodesInputBean.codeNumber?.toString())"
+    [autofocus]="true"
+  ></kc-input>
+
+  <kc-login-button/>
+
+</form>
