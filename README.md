@@ -1,10 +1,10 @@
 <p align="center">
-    <i>🚀 <a href="https://keycloakify.dev">Angular 19 Keycloakify Starter</a> v11 starter 🚀</i>
+    <i>🚀 <a href="https://keycloakify.dev">Angular 20 Keycloakify Starter</a> v11 starter 🚀</i>
     <br/>
     <br/>
 </p>
 
-This starter is based on Angular with Webpack. There is also [a Vite based starter](https://github.com/keycloakify/keycloakify-starter-angular-vite).
+This starter is based on Angular with ESBuild. There is also [a Vite based starter](https://github.com/keycloakify/keycloakify-starter-angular-vite).
 
 # Quick start
 
