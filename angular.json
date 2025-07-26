@@ -19,7 +19,17 @@
             "outputPath": {
               "base": "dist/",
               "browser": ""
-            }
+            },
+            "styles": [
+              "src/styles.css"
+            ],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "./assets",
+                "output": "./static/media"
+              }
+            ]
           }
         },
         "serve": {
@@ -38,19 +48,17 @@
           }
         },
         "storybook": {
-          "builder": "@storybook/angular:start-storybook",
+          "builder": "@analogjs/storybook-angular:start-storybook",
           "options": {
-            "configDir": ".storybook",
-            "browserTarget": "angular_template:build",
+            "configDir": "./.storybook",
             "compodoc": false,
             "port": 6006
           }
         },
         "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
+          "builder": "@analogjs/storybook-angular:build-storybook",
           "options": {
-            "configDir": ".storybook",
-            "browserTarget": "angular_template:build",
+            "configDir": "./.storybook",
             "compodoc": false,
             "outputDir": "storybook-static"
           }
