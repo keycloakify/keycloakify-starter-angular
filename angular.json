@@ -27,7 +27,7 @@
               {
                 "glob": "**/*",
                 "input": "./assets",
-                "output": "./static/media"
+                "output": "./"
               }
             ]
           }
