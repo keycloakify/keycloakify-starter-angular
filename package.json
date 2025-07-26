@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "type": "module",
-  "description": "Angular 18 Webpack Starter for Keycloakify",
+  "description": "Angular 20 esbuild Starter for Keycloakify",
   "scripts": {
     "ng": "ng",
     "prebuild": "keycloakify update-kc-gen",
@@ -22,7 +22,7 @@
     "angular",
     "keycloakify",
     "keycloak",
-    "webpack"
+    "esbuild"
   ],
   "private": true,
   "dependencies": {
@@ -53,7 +53,8 @@
     "eslint-plugin-storybook": "^9.0.18",
     "prettier": "^3.6.2",
     "typescript": "~5.8.3",
-    "typescript-eslint": "^8.38.0"
+    "typescript-eslint": "^8.38.0",
+    "zone.js": "^0.15.1"
   },
   "overrides": {
     "@typescript-eslint/utils": "^8.38.0"

@@ -54,7 +54,6 @@ export const decorators = (_: unknown, context: StoryContextLike) => ({
             [userProfileFormFields]="userProfileFormFieldsComponent"
         ></kc-root>
     }`,
-    standalone: true,
     imports: [TemplateComponent]
 })
 export class KcPageStory implements OnInit {
