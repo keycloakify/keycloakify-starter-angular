@@ -20,14 +20,18 @@
               "base": "dist/",
               "browser": ""
             },
+            "loader": {
+              ".png": "text"
+            },
             "styles": [
               "src/styles.css"
             ],
+
             "assets": [
               {
                 "glob": "**/*",
                 "input": "./assets",
-                "output": "./"
+                "output": "./assets/"
               }
             ]
           }

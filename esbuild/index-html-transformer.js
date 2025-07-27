@@ -1,9 +1,19 @@
-//main.js must be loaded as a module in the index.html file
 export default function indexHtmlTransformer(indexHtml) {
+    let transformedHtml = indexHtml;
+
+    // main.js must be loaded as a module in the index.html file
     const scriptTag = '<script src="/static/js/main.js" type="module"></script>';
-    const bodyCloseIndex = indexHtml.indexOf('</body>');
+    const bodyCloseIndex = transformedHtml.indexOf('</body>');
     if (bodyCloseIndex !== -1) {
-        indexHtml = indexHtml.slice(0, bodyCloseIndex) + scriptTag + '\n' + indexHtml.slice(bodyCloseIndex);
+        transformedHtml = transformedHtml.slice(0, bodyCloseIndex) + scriptTag + '\n' + transformedHtml.slice(bodyCloseIndex);
     }
-    return indexHtml;
+    // Update script paths to be absolute
+    transformedHtml = transformedHtml.replace(/(href|src)="(?!(?:\/|#|\/\/|[a-zA-Z]+:))([^"]*)"/g, (match, attrName, attrValue) => {
+        if (attrValue === '') {
+            return match;
+        }
+        return `${attrName}="/${attrValue}"`;
+    });
+
+    return transformedHtml;
 }

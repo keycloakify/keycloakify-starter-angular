@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playwrite+NL:wght@100..400&family=Playwrite+PL:wght@100..400&display=swap');
+
+.kcHeaderWrapperClass {
+  /* NOTE: We would use `body {` if we'd like the font to be applied to everything. */
+  font-family: "Playwrite NL", cursive;
+}
+body.kcBodyClass {
+  background: url(../assets/background.png);
+  background-size: cover;
+}
