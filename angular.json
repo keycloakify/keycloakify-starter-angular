@@ -10,10 +10,8 @@
       "prefix": "kc",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-esbuild:application",
+          "builder": "@angular/build:application",
           "options": {
-            "plugins": ["./esbuild/plugins.js"],
-            "indexHtmlTransformer": "./esbuild/index-html-transformer.js",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "outputPath": {
@@ -26,18 +24,17 @@
             "styles": [
               "src/styles.css"
             ],
-
             "assets": [
               {
                 "glob": "**/*",
-                "input": "./assets",
-                "output": "./assets/"
+                "input": "./public",
+                "output": "./"
               }
             ]
           }
         },
         "serve": {
-          "builder": "@angular-builders/custom-esbuild:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
             "buildTarget": "angular_template:build"
           }
