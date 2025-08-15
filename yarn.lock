@@ -1871,10 +1871,10 @@
   resolved "https://registry.yarnpkg.com/@jsonjoy.com/util/-/util-1.8.0.tgz#3b5d276f8c7ebab0599d92a81c829e4874920ec8"
   integrity sha512-HeR0JQNEdBozt+FrfyM5T0X3R+fIN0D+BRDkxPP5o41fTWzHfeZEqtK16aTW8haU+h+SG7XYq9PP5kobvOmkSA==
 
-"@keycloakify/angular@^20.1.2":
-  version "20.1.2"
-  resolved "https://registry.yarnpkg.com/@keycloakify/angular/-/angular-20.1.2.tgz#5b95835872d5326b820b7ebf25d3b44eec309a80"
-  integrity sha512-1g2qRKM/f5vGm1YYykyBXr/oR7yuXovwa3XzeU30FL33tX5V+V5wb2f+v42dIUNgMPM2ZGdm/xdWR2vsvD7FLQ==
+"@keycloakify/angular@^20.1.5":
+  version "20.1.5"
+  resolved "https://registry.yarnpkg.com/@keycloakify/angular/-/angular-20.1.5.tgz#81228f157f435db9b0baf91258c4cbc6662ff046"
+  integrity sha512-i1QbdLZL0ZI+H+HTREbrF65LWYT+t85ko3ztjL3TkTSKST/uLMRkGOk/i0KL1Sc4AbABsbTnrcXG0VNwyzRVSQ==
   dependencies:
     tsafe "^1.8.5"
     tslib "^2.3.0"
