@@ -51,6 +51,7 @@
         "storybook": {
           "builder": "@analogjs/storybook-angular:start-storybook",
           "options": {
+            "experimentalZoneless": true,
             "configDir": "./.storybook",
             "compodoc": false,
             "port": 6006
@@ -59,6 +60,7 @@
         "build-storybook": {
           "builder": "@analogjs/storybook-angular:build-storybook",
           "options": {
+            "experimentalZoneless": true,
             "configDir": "./.storybook",
             "compodoc": false,
             "outputDir": "storybook-static"

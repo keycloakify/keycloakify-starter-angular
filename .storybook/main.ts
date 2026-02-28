@@ -5,7 +5,7 @@ const config: StorybookConfig = {
     addons: [],
     framework: {
         name: '@analogjs/storybook-angular',
-        options: {},
-    },
+        options: {}
+    }
 };
 export default config;
